@@ -25,3 +25,16 @@ User authentification model
 ---------------------------
 
 `AUTH_USER_MODEL` should be defined in your project settings.py.
+
+Icons static urls updating
+--------------------------
+
+Before using the forum (after the initial migration),
+and every time you add an icon to forum/static/forum/icons,
+you should execute, with `./manage.py shell` inside your project :
+
+```
+from forum import update_db
+update_db.update_icons_db()
+```
+
