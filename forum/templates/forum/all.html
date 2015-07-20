@@ -48,7 +48,11 @@
             href="{% url 'forum:message' msg.pk %}#forum-message"
             {% endif %}
             title="{{ msg.author.first_name }} {{ msg.author.last_name }} ({{ msg.author }})">
+                {% if msg.author.first_name %}
                 {{ msg.author.first_name }}
+                {% else %}
+                {{ msg.author }}
+                {% endif %}
             </a>
             <span class="text-muted">il y a {{ msg.pub_date|timesince }}</span>
         </small>
