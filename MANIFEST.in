@@ -1,0 +1,3 @@
+include README.md
+recursive-include forum/static *
+recursive-include forum/templates *
