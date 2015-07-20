@@ -17,7 +17,7 @@ Templates
 
 See `forum/templates/forum/base.html`.
 
-You should change the name of the template extended (line 1) to fit to your project.
+You should change the name of the extended template (line 1) to fit to your project.
 
 The extended template should have a "title" block, a "style" block to add a css file link, and a "content" block to show the main content.
 
