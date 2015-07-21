@@ -22,10 +22,10 @@
         {% endfor %}
     </div>
 
-    {% bootstrap_field form.title %}
-
-    {% bootstrap_field form.text %}
+    {% bootstrap_label _('Title') label_for='title' %}
+    {% bootstrap_field form.title show_label=False %}
     
+    {% bootstrap_label _('Text') label_for='text' %}
+    {% bootstrap_field form.text show_label=False %}
+
 </div>
-
-

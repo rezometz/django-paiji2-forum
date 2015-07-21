@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-21 11:52+0200\n"
+"POT-Creation-Date: 2015-07-21 15:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,6 +135,14 @@ msgstr "Gesprächsthemen"
 #: templates/forum/base.html:51
 msgid "new"
 msgstr "Neue"
+
+#: templates/forum/form.html:25
+msgid "Title"
+msgstr "Titel"
+
+#: templates/forum/form.html:28
+msgid "Text"
+msgstr "Text"
 
 #: templates/forum/new.html:18
 msgid "publish the message"
