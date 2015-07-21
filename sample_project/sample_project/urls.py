@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^', include('home.urls')),
     url(r'^', include('forum.urls', namespace='forum')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 ]

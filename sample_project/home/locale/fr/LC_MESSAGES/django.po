@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-21 09:54+0000\n"
+"POT-Creation-Date: 2015-07-21 14:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,25 +18,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: home/templates/home/layout_three_columns.html:4
+#: templates/home/layout_three_columns.html:4
 msgid "Sample Project"
 msgstr "Projet exemple"
 
-#: home/templates/home/layout_three_columns.html:11
-#: home/templates/home/login.html:6 home/templates/home/login.html.py:13
+#: templates/home/layout_three_columns.html:11 templates/home/login.html:6
+#: templates/home/login.html.py:13
 msgid "login"
 msgstr "se connecter"
 
-#: home/templates/home/layout_three_columns.html:13
+#: templates/home/layout_three_columns.html:13
 msgid "logout"
 msgstr "se déconnecter"
 
-#: home/templates/home/layout_three_columns.html:14
-#: home/templates/home/password_change.html:6
-#: home/templates/home/password_change.html:13
+#: templates/home/layout_three_columns.html:14
+#: templates/home/password_change.html:6
+#: templates/home/password_change.html:13
 msgid "change password"
 msgstr "modifier le mot de passe"
 
-#: home/templates/home/layout_three_columns.html:16
+#: templates/home/layout_three_columns.html:16
 msgid "admin"
 msgstr "admin"
+
+#: templates/home/layout_three_columns.html:19
+msgid "language"
+msgstr "langue"

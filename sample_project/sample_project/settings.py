@@ -48,6 +48,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'sample_project.urls'
@@ -68,9 +69,15 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-#LANGUAGE_CODE = 'fr-fr'
-#LANGUAGE_CODE = 'de-de'
+LANGUAGE_CODE = 'en'
+#LANGUAGE_CODE = 'fr'
+#LANGUAGE_CODE = 'de'
+
+LANGUAGES = (
+    ('en', 'english'),
+    ('fr', 'french'),
+    ('de', 'Deutsch'),
+)
 
 TIME_ZONE = 'UTC'
 
