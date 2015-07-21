@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-21 15:10+0200\n"
+"POT-Creation-Date: 2015-07-21 15:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,7 +113,7 @@ msgid "publish the answer"
 msgstr "antworten"
 
 #: templates/forum/all.html:105
-msgid "no messages"
+msgid "no message"
 msgstr "keine Nachricht"
 
 #: templates/forum/base.html:6 templates/forum/base.html.py:17
