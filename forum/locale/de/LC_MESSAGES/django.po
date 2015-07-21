@@ -122,11 +122,11 @@ msgstr "Forum"
 
 #: templates/forum/base.html:33
 msgid "recents"
-msgstr "neueste"
+msgstr "Neueste"
 
 #: templates/forum/base.html:39
 msgid "unread"
-msgstr "ungelesene"
+msgstr "Ungelesene"
 
 #: templates/forum/base.html:45
 msgid "topics"
@@ -134,7 +134,7 @@ msgstr "Gesprächsthemen"
 
 #: templates/forum/base.html:51
 msgid "new"
-msgstr "neue"
+msgstr "Neue"
 
 #: templates/forum/new.html:18
 msgid "publish the message"
