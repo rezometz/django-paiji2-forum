@@ -16,7 +16,7 @@
             <a class="btn btn-default pull-right" href='/admin' %}>{% trans 'admin' %}</a>
             
             <form class="btn btn-default" action="{% url 'set_language' %}" method="post">{% csrf_token %}
-                <label for="language">{% trans 'language' %}{% if LANGUAGE_CODE != 'en' %} (language){% endif %}</label>
+                <label class="label label-default" for="language">{% trans 'language' %}{% if LANGUAGE_CODE != 'en' %} (language){% endif %}</label>
                 <input name="next" type="hidden" value="{{ redirect_to }}" />
                 <select name="language">
                     {% get_current_language as LANGUAGE_CODE %}
@@ -28,7 +28,7 @@
                         </option>
                     {% endfor %}
                 </select>
-                <input type="submit" value="Go" />
+                <input type="submit" value="go"/>
             </form>
 
             {% block content %}{% endblock %}
