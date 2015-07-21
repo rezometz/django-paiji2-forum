@@ -38,7 +38,6 @@ class Message(models.Model):
     readers = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name='read_messages',
-        null=True,
         blank=True,
     )
 
