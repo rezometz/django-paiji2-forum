@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-21 11:52+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models.py:13
+msgid "message icon"
+msgstr "Nachricht Ikone"
+
+#: models.py:14
+msgid "message icons"
+msgstr "Nachricht Ikonen"
+
+#: models.py:16
+msgid "name"
+msgstr "Name"
+
+#: models.py:17
+msgid "filename"
+msgstr "Dateiname"
+
+#: models.py:31
+msgid "message"
+msgstr "Nachricht"
+
+#: models.py:32
+msgid "messages"
+msgstr "Nachrichten"
+
+#: models.py:36
+msgid "title"
+msgstr "Titel"
+
+#: models.py:40
+msgid "text"
+msgstr "Text"
+
+#: models.py:45
+msgid "publication date"
+msgstr "Erscheinungsdatum"
+
+#: models.py:51
+msgid "readers"
+msgstr "Leser"
+
+#: models.py:59
+msgid "question"
+msgstr "Frage"
+
+#: models.py:65
+msgid "author"
+msgstr "Autor"
+
+#: models.py:72
+msgid "icon"
+msgstr "Ikone"
+
+#: models.py:78
+msgid "Is it a topic?"
+msgstr "Ist sie ein Gesprächsthema ?"
+
+#: models.py:83
+msgid "Does it have answers?"
+msgstr "Hast sie Antworten ?"
+
+#: models.py:87
+msgid "number of answers"
+msgstr "Nummer den Antworten"
+
+#: models.py:94
+msgid "number of answers and answers answers (recursive)"
+msgstr "Nummer den Antworten und den Antworten den Antworten (rekursiv)"
+
+#: models.py:109
+msgid "depth level in the topic"
+msgstr "Niveau der Tiefe in der Gesprächsthema"
+
+#: models.py:116
+msgid "topic of the message"
+msgstr "Gesprächsthema der Nachricht"
+
+#: templates/forum/all.html:12 templates/forum/all.html.py:16
+#: templates/forum/all.html:61
+msgid "topic"
+msgstr "Gesprächsthema"
+
+#: templates/forum/all.html:57
+#, python-format
+msgid "%(TimeSince)s ago"
+msgstr "%(TimeSince)s vorher"
+
+#: templates/forum/all.html:73
+msgid "answer"
+msgstr "antworten"
+
+#: templates/forum/all.html:92
+msgid "publish the answer"
+msgstr "antworten"
+
+#: templates/forum/all.html:105
+msgid "no messages"
+msgstr "keine Nachricht"
+
+#: templates/forum/base.html:6 templates/forum/base.html.py:17
+msgid "Forum"
+msgstr "Forum"
+
+#: templates/forum/base.html:33
+msgid "recents"
+msgstr "neueste"
+
+#: templates/forum/base.html:39
+msgid "unread"
+msgstr "ungelesene"
+
+#: templates/forum/base.html:45
+msgid "topics"
+msgstr "Gesprächsthemen"
+
+#: templates/forum/base.html:51
+msgid "new"
+msgstr "neue"
+
+#: templates/forum/new.html:18
+msgid "publish the message"
+msgstr "veröffentlichen"
