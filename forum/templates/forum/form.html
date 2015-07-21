@@ -5,10 +5,15 @@
 
 <div class="form-group">
 
-    {{ form.non_field_errors }}
+    {% bootstrap_form_errors form %}
 
     <div class="forum-icon-selector">
-        {{ form.icon.errors }}
+        {% if form.icon.errors %} 
+        <div class="alert alert-danger alert-dismissable alert-link">
+            <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
+            {{ form.icon.errors }}
+        </div>
+        {% endif %}
         {% for radio in form.icon %}
             {{ radio.tag }}
             <label for="{{ radio.id_for_label }}">
@@ -17,11 +22,19 @@
         {% endfor %}
     </div>
 
-    <label for="title">{% trans 'Titre' %}</label>
+    {% comment %}
+    <label for="title">{% trans 'Title' %}</label>
     {% bootstrap_field form.title show_label=False %}
+    {% endcomment %}
 
-    <label for="text">{% trans 'Corps du message' %}</label>
+    {% bootstrap_field form.title %}
+
+    {% comment %}
+    <label for="text">{% trans 'Text' %}</label>
     {% bootstrap_field form.text show_label=False %}
+    {% endcomment %}
+
+    {% bootstrap_field form.text %}
 
 </div>
 

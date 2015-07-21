@@ -9,11 +9,11 @@
         <li {% if not prev_topic %}class="disabled"{% endif %}>
             <a {% if prev_topic %}href="{% url 'forum:message' prev_topic.pk %}#forum-message"{% endif %}>
             <span class="glyphicon glyphicon-arrow-left"></span>
-            topic
+            {% trans 'topic' %}
             </a>
         <li {% if not next_topic %}class="disabled"{% endif %}>
             <a {% if next_topic %}href="{% url 'forum:message' next_topic.pk %}#forum-message"{% endif %}>
-            topic
+            {% trans 'topic' %}
             <span class="glyphicon glyphicon-arrow-right"></span>
             </a>
         </li>
@@ -54,11 +54,11 @@
                 {{ msg.author }}
                 {% endif %}
             </a>
-            <span class="text-muted">il y a {{ msg.pub_date|timesince }}</span>
+            <span class="text-muted">{% blocktrans with TimeSince=msg.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
         </small>
 
         {% block topic-name %}
-        <span class="text-muted"> [topic : </span><span class="forum-message-title">{{ msg.topic }}</a><span class="text-muted"> ]</span>
+        <span class="text-muted"> [{% trans 'topic' %} : </span><span class="forum-message-title">{{ msg.topic }}</a><span class="text-muted"> ]</span>
         {% endblock %}
 
     {% endblock %}
@@ -70,7 +70,7 @@
         <a class="pull-right" href="{% url 'forum:answer' msg.pk %}#forum-answer">
         <small>
         <span class="glyphicon glyphicon-pencil"></span>
-        répondre
+        {% trans 'answer' %}
         </small>
         </a>
         {{ msg.text|urlize|linebreaks }}
@@ -89,7 +89,7 @@
         {% include 'forum/form.html' %}
 
         <button class="btn btn-primary btn-block" type="submit"/>
-            publier la réponse
+            {% trans 'publish the answer' %}
         </button>
 
         </form>
@@ -102,7 +102,7 @@
 
 {% empty %}
     
-    <span class="label label-default">{% trans 'aucun message' %}</span>
+    <span class="label label-default">{% trans 'no messages' %}</span>
 
 {% endfor %}
 

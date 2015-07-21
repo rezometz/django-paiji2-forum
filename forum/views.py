@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Message, MessageIcon
 from django.forms import ModelForm, RadioSelect, ModelChoiceField, TextInput, Textarea
+from django.utils.translation import ugettext as _
 
 PADDING = 30
 
