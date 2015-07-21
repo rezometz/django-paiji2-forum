@@ -106,7 +106,7 @@ msgstr "il y a %(TimeSince)s"
 
 #: templates/forum/all.html:73
 msgid "answer"
-msgstr "réponse"
+msgstr "répondre"
 
 #: templates/forum/all.html:92
 msgid "publish the answer"
