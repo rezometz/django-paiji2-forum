@@ -1,6 +1,11 @@
 Forum
 =====
 
+Requirements
+------------
+
+You must have django-bootstrap3 installed, and a user authentication model.
+
 URLconf
 -------
 
@@ -21,3 +26,7 @@ You should change the name of the extended template (line 1) to fit to your proj
 
 The extended template should have a "title" block, a "style" block to add a css file link, and a "content" block to show the main content.
 
+Translations
+------------
+
+The default language is english. French and german translations are provided. Please forgive my mistakes :-)
