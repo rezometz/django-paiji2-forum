@@ -1,8 +1,9 @@
 {% load i18n %}
+{% load static %}
 <html>
     <head>
         <title>{% trans 'Sample Project' %} | {% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.min.css" %}"/>
         {% block style %}{% endblock %}
     </head>
     <body>

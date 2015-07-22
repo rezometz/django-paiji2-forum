@@ -37,7 +37,7 @@
             {{ msg.title }}
         </a>
         <small> 
-            <span class="label label-default label-sm" title="{{ msg.readers.count }} lecture{{ msg.readers.count|pluralize }}">{{ msg.readers.count }}</span>
+            <span class="label label-default label-sm" title="{{ msg.readers.count }} {% trans 'reading' %}{{ msg.readers.count|pluralize }}">{{ msg.readers.count }}</span>
             {% if not msg.is_read %}
             <span class="label label-sm label-success">non lu</span>
             {% endif %}
