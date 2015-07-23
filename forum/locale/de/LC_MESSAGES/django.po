@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-21 15:18+0200\n"
+"POT-Creation-Date: 2015-07-23 22:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,6 +99,18 @@ msgstr "Gesprächsthema der Nachricht"
 msgid "topic"
 msgstr "Gesprächsthema"
 
+#: templates/forum/all.html:40
+#, python-format
+msgid "one reading"
+msgid_plural "%(nb)s readings"
+msgstr[0] "eine Lesung"
+msgstr[1] "%(nb)s Lesungen"
+
+#: templates/forum/all.html:42
+msgctxt "sing"
+msgid "unread"
+msgstr "ungelesen"
+
 #: templates/forum/all.html:57
 #, python-format
 msgid "%(TimeSince)s ago"
@@ -125,6 +137,7 @@ msgid "recents"
 msgstr "Neueste"
 
 #: templates/forum/base.html:39
+msgctxt "plur"
 msgid "unread"
 msgstr "Ungelesene"
 
