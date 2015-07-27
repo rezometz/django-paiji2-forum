@@ -56,8 +56,8 @@
 
 <div class="well">
 
-{% block forum-top-nav %}
-{% endblock %}
+    {% block forum-top-nav %}
+    {% endblock %}
 
     {% if is_paginated %}
     <div class="row">
@@ -76,6 +76,9 @@
         </div>
     </div>
     {% endif %}
+
+    {% block forum-bottom-nav %}
+    {% endblock %}
 
 </div>
 
