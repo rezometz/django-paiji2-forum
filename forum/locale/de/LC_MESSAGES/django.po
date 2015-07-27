@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-23 22:20+0200\n"
+"POT-Creation-Date: 2015-07-27 22:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,39 +94,48 @@ msgstr "Niveau der Tiefe in der Gesprächsthema"
 msgid "topic of the message"
 msgstr "Gesprächsthema der Nachricht"
 
-#: templates/forum/all.html:12 templates/forum/all.html.py:16
-#: templates/forum/all.html:61
+#: templates/forum/all.html:11 templates/forum/all.html.py:21
+#: templates/forum/all.html:64 templates/forum/all.html.py:122
+#: templates/forum/all.html:132
 msgid "topic"
 msgstr "Gesprächsthema"
 
-#: templates/forum/all.html:40
+#: templates/forum/all.html:16
+msgid "bottom"
+msgstr "unten"
+
+#: templates/forum/all.html:43
 #, python-format
 msgid "one reading"
 msgid_plural "%(nb)s readings"
 msgstr[0] "eine Lesung"
 msgstr[1] "%(nb)s Lesungen"
 
-#: templates/forum/all.html:42
+#: templates/forum/all.html:45
 msgctxt "sing"
 msgid "unread"
 msgstr "ungelesen"
 
-#: templates/forum/all.html:57
+#: templates/forum/all.html:60
 #, python-format
 msgid "%(TimeSince)s ago"
 msgstr "%(TimeSince)s vorher"
 
-#: templates/forum/all.html:73
+#: templates/forum/all.html:76
 msgid "answer"
 msgstr "antworten"
 
-#: templates/forum/all.html:92
+#: templates/forum/all.html:95
 msgid "publish the answer"
 msgstr "antworten"
 
-#: templates/forum/all.html:105
+#: templates/forum/all.html:108
 msgid "no message"
 msgstr "keine Nachricht"
+
+#: templates/forum/all.html:127
+msgid "top"
+msgstr "oben"
 
 #: templates/forum/base.html:6 templates/forum/base.html.py:17
 msgid "Forum"
