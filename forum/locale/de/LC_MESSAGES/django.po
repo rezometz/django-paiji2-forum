@@ -1,7 +1,7 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Translation of the "paiji-forum" application
+# Copyright (C) 2015 Louis-Guillaume DUBOIS
+# This file is distributed under the same license as the django-paiji-forum package.
+# Louis-Guillaume DUBOIS <contact@lgdubois.fr>, 2015.
 #
 #, fuzzy
 msgid ""

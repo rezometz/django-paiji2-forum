@@ -1,6 +1,11 @@
 Forum
 =====
 
+License
+-------
+
+Affero GPL v3
+
 Requirements
 ------------
 

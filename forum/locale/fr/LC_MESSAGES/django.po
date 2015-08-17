@@ -1,4 +1,4 @@
-# Translation of the "django-paiji-forum" application
+# Translation of the "paiji-forum" application
 # Copyright (C) 2015 Louis-Guillaume DUBOIS
 # This file is distributed under the same license as the django-paiji-forum package.
 # Louis-Guillaume DUBOIS <contact@lgdubois.fr>, 2015.
