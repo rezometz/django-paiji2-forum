@@ -28,29 +28,50 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </head>
     <body>
         <div class="container">
-            {% if not user.is_authenticated %}
-            <a class="btn btn-default" href={% url 'login' %}>{% trans 'login' %}</a>
-            {% else %}
-            <a class="btn btn-default" href={% url 'logout' %}>{% trans 'logout' %}</a>
-            <a class="btn btn-default" href={% url 'password_change' %}>{% trans 'change password' %}</a>
-            {% endif %}
-            <a class="btn btn-default pull-right" href='/admin' %}>{% trans 'admin' %}</a>
-            
-            <form class="btn btn-default" action="{% url 'set_language' %}" method="post">{% csrf_token %}
-                <label class="label label-default" for="language">{% trans 'language' %}{% if LANGUAGE_CODE != 'en' %} (language){% endif %}</label>
-                <input name="next" type="hidden" value="{{ redirect_to }}" />
-                <select name="language">
-                    {% get_current_language as LANGUAGE_CODE %}
-                    {% get_available_languages as LANGUAGES %}
-                    {% get_language_info_list for LANGUAGES as languages %}
-                    {% for language in languages %}
-                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-                            {{ language.name_local }} ({{ language.code }})
-                        </option>
-                    {% endfor %}
-                </select>
-                <input type="submit" value="go"/>
-            </form>
+            <div class="navbar navbar-default">
+                <ul class="nav nav-pills nav-justified">
+                    {% comment %}
+                    <li> 
+                        <span class="text-center">
+                            <form class="form-inline" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                                <div class="form-group">
+                                    <label for="language">{% trans 'language' %}{% if LANGUAGE_CODE != 'en' %} (language){% endif %}</label>
+                                    <select class="form-control" name="language">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                                                {{ language.name_local }} ({{ language.code }})
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                <input class="form-control" type="submit" value="go"/>
+                                </div>
+                            </form>
+                        </span>
+                    </li>
+                    {% endcomment %}
+                    <li>
+                        <a href="/">{% trans 'forum' %}</a>
+                    </li>
+                    {% if not user.is_authenticated %}
+                    <li>
+                        <a href={% url 'login' %}>{% trans 'login' %}</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href={% url 'logout' %}>{% trans 'logout' %}</a>
+                    </li>
+                    <li>
+                        <a href={% url 'password_change' %}>{% trans 'change password' %}</a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href='/admin' %}>{% trans 'admin' %}</a>
+                    </li>
+                 </ul>
+            </div>
 
             {% block content %}{% endblock %}
         </div>
