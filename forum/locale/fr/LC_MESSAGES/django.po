@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-27 22:29+0200\n"
+"POT-Creation-Date: 2015-08-18 15:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,154 +18,162 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models.py:13
+#: models.py:30
 msgid "message icon"
 msgstr "icône de messages"
 
-#: models.py:14
+#: models.py:31
 msgid "message icons"
 msgstr "icônes de messages"
 
-#: models.py:16
+#: models.py:33
 msgid "name"
 msgstr "nom"
 
-#: models.py:17
+#: models.py:34
 msgid "filename"
 msgstr "nom du fichier"
 
-#: models.py:31
+#: models.py:48
 msgid "message"
 msgstr "message"
 
-#: models.py:32
+#: models.py:49
 msgid "messages"
 msgstr "messages"
 
-#: models.py:36
+#: models.py:53
 msgid "title"
 msgstr "titre"
 
-#: models.py:40
+#: models.py:57
 msgid "text"
 msgstr "texte"
 
-#: models.py:45
+#: models.py:62
 msgid "publication date"
 msgstr "date de publication"
 
-#: models.py:51
+#: models.py:68
 msgid "readers"
 msgstr "lecteurs"
 
-#: models.py:59
+#: models.py:76
 msgid "question"
 msgstr "question"
 
-#: models.py:65
+#: models.py:82
 msgid "author"
 msgstr "auteur"
 
-#: models.py:72
+#: models.py:89
 msgid "icon"
 msgstr "icône"
 
-#: models.py:78
+#: models.py:95
 msgid "Is it a topic?"
 msgstr "Est-ce un topic ?"
 
-#: models.py:83
+#: models.py:100
 msgid "Does it have answers?"
 msgstr "A-t-il des réponses ?"
 
-#: models.py:87
+#: models.py:104
 msgid "number of answers"
 msgstr "nombre de réponses"
 
-#: models.py:94
+#: models.py:111
 msgid "number of answers and answers answers (recursive)"
 msgstr "nombre de réponses et de réponses de réponses (récursif)"
 
-#: models.py:109
+#: models.py:126
 msgid "depth level in the topic"
 msgstr "degré de profondeur dans le topic"
 
-#: models.py:116
+#: models.py:133
 msgid "topic of the message"
 msgstr "topic du message"
 
-#: templates/forum/all.html:11 templates/forum/all.html.py:21
-#: templates/forum/all.html:64 templates/forum/all.html.py:122
-#: templates/forum/all.html:132
+#: templates/forum/all.html:31 templates/forum/all.html.py:41
+#: templates/forum/all.html:84 templates/forum/all.html.py:142
+#: templates/forum/all.html:152
 msgid "topic"
 msgstr "topic"
 
-#: templates/forum/all.html:16
+#: templates/forum/all.html:36
 msgid "bottom"
 msgstr "bas"
 
-#: templates/forum/all.html:43
+#: templates/forum/all.html:63
 #, python-format
 msgid "one reading"
 msgid_plural "%(nb)s readings"
 msgstr[0] "une lecture"
 msgstr[1] "%(nb)s lectures"
 
-#: templates/forum/all.html:45
+#: templates/forum/all.html:65
 msgctxt "sing"
 msgid "unread"
 msgstr "non lu"
 
-#: templates/forum/all.html:60
+#: templates/forum/all.html:80
 #, python-format
 msgid "%(TimeSince)s ago"
 msgstr "il y a %(TimeSince)s"
 
-#: templates/forum/all.html:76
+#: templates/forum/all.html:96
 msgid "answer"
 msgstr "répondre"
 
-#: templates/forum/all.html:95
+#: templates/forum/all.html:115
 msgid "publish the answer"
 msgstr "publier la réponse"
 
-#: templates/forum/all.html:108
+#: templates/forum/all.html:128
 msgid "no message"
 msgstr "aucun message"
 
-#: templates/forum/all.html:127
+#: templates/forum/all.html:147
 msgid "top"
 msgstr "haut"
 
-#: templates/forum/base.html:6 templates/forum/base.html.py:17
+#: templates/forum/base.html:26 templates/forum/base.html.py:37
 msgid "Forum"
 msgstr "Forum"
 
-#: templates/forum/base.html:33
+#: templates/forum/base.html:52
 msgid "recents"
 msgstr "récents"
 
-#: templates/forum/base.html:39
+#: templates/forum/base.html:58
 msgctxt "plur"
 msgid "unread"
 msgstr "non lus"
 
-#: templates/forum/base.html:45
+#: templates/forum/base.html:64
 msgid "topics"
 msgstr "topics"
 
-#: templates/forum/base.html:51
+#: templates/forum/base.html:70
 msgid "new"
 msgstr "nouveau"
 
-#: templates/forum/form.html:25
+#: templates/forum/base.html:107
+msgid "forum source code"
+msgstr "code source du forum"
+
+#: templates/forum/base.html:110
+msgid "forum license"
+msgstr "licence du forum"
+
+#: templates/forum/form.html:45
 msgid "Title"
 msgstr "Titre"
 
-#: templates/forum/form.html:28
+#: templates/forum/form.html:48
 msgid "Text"
 msgstr "Texte"
 
-#: templates/forum/new.html:18
+#: templates/forum/new.html:38
 msgid "publish the message"
 msgstr "publier le message"
