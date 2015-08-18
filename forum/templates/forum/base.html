@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% block content %}
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
         <h3>
             {% trans 'Forum' %}
             <span class="forum-action">
@@ -44,9 +44,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </div>
 </div>{# row #}
 
-
-<nav class="navbar navbar-default navbar-forum">
-    <ul class="nav nav-tabs nav-justified nav-forum">
+<div class="navbar">
+    <ul class="nav nav-tabs nav-justified">
         <li class="{% block class-recent %}{% endblock %}">
             <a href="{% url 'forum:recent-list' %}">
                 <span class="glyphicon glyphicon-time"></span>
@@ -72,10 +71,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             </a>
         </li>
     </ul>
-</nav>
+</div>
 
-<div class="well">
-
+<div>
     {% block forum-top-nav %}
     {% endblock %}
 
@@ -101,5 +99,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     {% endblock %}
 
 </div>
+
+<footer>
+    <small class="text-center">
+        <ul class="list-inline">
+            <li>
+                <a href="https://github.com/rezometz/django-paiji-forum">{% trans 'forum source code' %}</a>
+            </li>
+            <li>
+                <a href="http://www.gnu.org/licenses/agpl-3.0.html">{% trans 'forum license' %}</a>
+            </li>
+        </ul>
+    </small>
+</footer>
 
 {% endblock %}
