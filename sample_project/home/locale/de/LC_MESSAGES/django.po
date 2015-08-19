@@ -1,46 +1,48 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Translation of the "Sample Project" in german
+# Copyright (C) 2015 Louis-Guillaume DUBOIS
+# This file is distributed under the same license as the django-paiji-forum package.
+# Louis-Guillaume DUBOIS <contact@lgdubois.fr>, 2015.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-21 14:24+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
+"POT-Creation-Date: 2015-08-19 12:52+0200\n"
+"PO-Revision-Date: 2015-08-19 13:00+0200\n"
+"Last-Translator: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
+"Language: german\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/home/layout_three_columns.html:4
+#: templates/home/layout_three_columns.html:30
 msgid "Sample Project"
 msgstr "Beispiel Projekt"
 
-#: templates/home/layout_three_columns.html:11 templates/home/login.html:6
-#: templates/home/login.html.py:13
+#: templates/home/layout_three_columns.html:76
+msgid "forum"
+msgstr "Forum"
+
+#: templates/home/layout_three_columns.html:80 templates/home/login.html:26
+#: templates/home/login.html.py:33
 msgid "login"
 msgstr "Anmelden"
 
-#: templates/home/layout_three_columns.html:13
+#: templates/home/layout_three_columns.html:84
 msgid "logout"
 msgstr "Abmelden"
 
-#: templates/home/layout_three_columns.html:14
-#: templates/home/password_change.html:6
-#: templates/home/password_change.html:13
+#: templates/home/layout_three_columns.html:87
+#: templates/home/password_change.html:26
+#: templates/home/password_change.html:33
 msgid "change password"
 msgstr "Passwort ändern"
 
-#: templates/home/layout_three_columns.html:16
+#: templates/home/layout_three_columns.html:91
 msgid "admin"
 msgstr "Verwaltung"
 
-#: templates/home/layout_three_columns.html:19
-msgid "language"
-msgstr "Sprache"
+#~ msgid "language"
+#~ msgstr "Sprache"
