@@ -23,7 +23,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
-] + i18n_patterns(
+] + i18n_patterns('',
     url(r'^', include('home.urls')),
     url(r'^', include('forum.urls', namespace='forum')),
     url(r'^admin/', include(admin.site.urls)),
