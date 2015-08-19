@@ -2,3 +2,4 @@
 **/*.pyc
 sample_project/db.sqlite3
 sample_project/static/*
+**/*.mo
