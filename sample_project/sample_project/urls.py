@@ -16,13 +16,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.conf.urls import include, url
+from django.conf.urls.i18n import i18n_patterns
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+] + i18n_patterns(
     url(r'^', include('home.urls')),
     url(r'^', include('forum.urls', namespace='forum')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
-]
+)

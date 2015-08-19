@@ -20,14 +20,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% endcomment %}
 {% load i18n %}
 {% load static %}
-<html>
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
     <head>
+        <meta charset="utf-8">
         <title>{% trans 'Sample Project' %} | {% block title %}{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.min.css" %}"/>
+        <!-- TRANSLATIONS -->
+        {% for language in languages %}{% if not language.code == LANGUAGE_CODE %}
+        <link rel="alternate" hreflang="{{ language.code }}" href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"/>
+        {% endif %}{% endfor %}
         {% block style %}{% endblock %}
     </head>
     <body>
         <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% for language in languages %}
+                        <form class="btn-group btn-group-xs" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                          <input  name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}" />
+                          {% comment %} why "slice: '3:'" ? for i18n_patterns is used {% endcomment %}
+                          <input name="language" type="hidden" value="{{ language.code }}" />
+                          <input title="{{ language.name_local }} ({{ language.name }})" class="btn btn-xs {% if language.code == LANGUAGE_CODE %}btn-success disabled{% else %}btn-default{% endif %}" type="submit" value="{{ language.name_local }} ({{ language.name }})" />
+                        </form>
+                    {% endfor %}
+                </div>
+            </div>
             <div class="navbar navbar-default">
                 <ul class="nav nav-pills nav-justified">
                     {% comment %}
@@ -37,9 +58,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 <div class="form-group">
                                     <label for="language">{% trans 'language' %}{% if LANGUAGE_CODE != 'en' %} (language){% endif %}</label>
                                     <select class="form-control" name="language">
-                                        {% get_current_language as LANGUAGE_CODE %}
-                                        {% get_available_languages as LANGUAGES %}
-                                        {% get_language_info_list for LANGUAGES as languages %}
                                         {% for language in languages %}
                                             <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
                                                 {{ language.name_local }} ({{ language.code }})
