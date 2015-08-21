@@ -1,4 +1,5 @@
 include README.md
-recursive-include forum/static *
-recursive-include forum/templates *
-recursive-include forum/locale *
+include LICENSE
+recursive-include paiji2_forum/static *
+recursive-include paiji2_forum/templates *
+recursive-include paiji2_forum/locale *

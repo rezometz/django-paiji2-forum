@@ -1,13 +1,13 @@
 # Copyright (C) 2015 Louis-Guillaume DUBOIS
 #
-# This file is part of Paiji-forum
+# This file is part of paiji2-forum
 #
-# Paiji-forum is free software: you can redistribute it and/or modify
+# paiji2-forum is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 # 
-# Paiji-forum is distributed in the hope that it will be useful,
+# paiji2-forum is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
@@ -27,18 +27,18 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 currentdir = os.getcwd()
-os.chdir(os.path.join(currentdir, 'forum'))
+os.chdir(os.path.join(currentdir, 'paiji2_forum'))
 management.call_command('compilemessages', stdout=sys.stdout)
 os.chdir(currentdir)
 
 setup(
-    name='django-paiji-forum',
+    name='django-paiji2-forum',
     version='0.1',
-    packages=['forum'],
+    packages=['paiji2_forum'],
     include_package_data=True,
     description='A simple forum app',
     long_description=README,
-    url='https://github.com/rezometz/django-paiji-forum',
+    url='https://github.com/rezometz/django-paiji2-forum',
     author='Louis-Guillaume DUBOIS',
     author_email='contact@lgdubois.fr',
     license='AGPLv3',
