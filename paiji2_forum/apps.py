@@ -22,5 +22,5 @@ class Paiji2_ForumConfig(AppConfig):
     verbose_name = 'paiji2 forum'
 
     def ready(self):
-       from forum import update_db
+       import update_db
        update_db.update_icons_db()
