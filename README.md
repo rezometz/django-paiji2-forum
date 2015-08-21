@@ -25,7 +25,7 @@ For instance, in your project urls.py :
 Templates
 ---------
 
-See `forum/templates/forum/base.html`.
+See `paiji2_forum/templates/forum/base.html`.
 
 You should change the name of the extended template (line 1) to fit to your project.
 
