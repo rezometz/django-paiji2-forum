@@ -1,5 +1,5 @@
-Paiji-forum
-=====
+paiji2-forum
+============
 
 License
 -------
@@ -17,7 +17,7 @@ URLconf
 For instance, in your project urls.py :
 
 ```
-  url(r'^forum/', include('forum.urls', namespace='forum')),
+  url(r'^forum/', include('paiji2_forum.urls', namespace='forum')),
 ```
 
 `namespace='forum'` is mandatory.
