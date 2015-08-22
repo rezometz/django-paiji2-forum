@@ -30,11 +30,11 @@ class MyTest(TestCase):
 
     def access(self, name, code):
         response = self.client.get(reverse(name))
-        self.assertEqual(response.status_code, code) 
+        self.assertEqual(response.status_code, code)
 
     def access_url(self, url, code):
         response = self.client.get(url)
-        self.assertEqual(response.status_code, code) 
+        self.assertEqual(response.status_code, code)
 
     def setUp(self):
         self.iseult = User.objects.create_user(
