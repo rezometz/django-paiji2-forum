@@ -1,6 +1,7 @@
 paiji2-forum
 ============
 [![Build Status](https://travis-ci.org/rezometz/django-paiji2-forum.svg?branch=ci)](https://travis-ci.org/rezometz/django-paiji2-forum)
+[![Code Climate](https://codeclimate.com/github/rezometz/django-paiji2-forum/badges/gpa.svg)](https://codeclimate.com/github/rezometz/django-paiji2-forum)
 
 License
 -------
