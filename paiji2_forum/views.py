@@ -6,27 +6,29 @@
 # it under the terms of the GNU Affero General Public License as
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
-# 
+#
 # paiji2-forum is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.shortcuts import render, get_object_or_404
-
-from django.views.generic import ListView, CreateView, TemplateView, RedirectView
+from django.views.generic import ListView, CreateView,\
+    TemplateView, RedirectView
 from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Message, MessageIcon
-from django.forms import ModelForm, RadioSelect, ModelChoiceField, TextInput, Textarea
+from django.forms import ModelForm, RadioSelect,\
+    ModelChoiceField, TextInput, Textarea
 from django.utils.translation import ugettext as _
 
 PADDING = 30
+
 
 def _depth_browse(arg, user):
     L = []
@@ -47,7 +49,10 @@ class TopicListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(TopicListView, self).get_context_data(**kwargs)
-        context['object_list'] = _depth_browse(context['object_list'], self.request.user)
+        context['object_list'] = _depth_browse(
+            context['object_list'],
+            self.request.user,
+            )
         return context
 
 
@@ -63,12 +68,18 @@ class NewMessagesView(ListView):
             msg.is_read = self.request.user in msg.readers.all()
         return context
 
+
 class UnreadMessagesView(NewMessagesView):
 
     template_name = 'forum/unread.html'
 
     def get_queryset(self):
-        return Message.objects.exclude(readers__pk=self.request.user.pk).order_by('-pub_date')
+        return Message.objects\
+            .exclude(
+                readers__pk=self.request.user.pk
+            ).order_by(
+                '-pub_date'
+            )
 
 
 def _get_message_context(pk, user):
@@ -77,11 +88,25 @@ def _get_message_context(pk, user):
     # previous and next topics
     topic = message.topic()
     try:
-        next_topic = Message.objects.filter(question=None).filter(pub_date__gt=topic.pub_date).earliest('pub_date')
+        next_topic = Message.objects\
+            .filter(
+                question=None
+            ).filter(
+                pub_date__gt=topic.pub_date
+            ).earliest(
+                'pub_date'
+            )
     except:
         next_topic = None
     try:
-        prev_topic = Message.objects.filter(question=None).filter(pub_date__lt=topic.pub_date).latest('pub_date')
+        prev_topic = Message.objects\
+            .filter(
+                question=None
+            ).filter(
+                pub_date__lt=topic.pub_date
+            ).latest(
+                'pub_date'
+            )
     except:
         prev_topic = None
 
@@ -97,10 +122,10 @@ def _get_message_context(pk, user):
         question=question,
         next_topic=next_topic,
         prev_topic=prev_topic,
-        #next=next,
-        #prev=prev,
-        #up=up,
-        #down=down,
+        # next=next,
+        # prev=prev,
+        # up=up,
+        # down=down,
     )
     return context
 
@@ -111,11 +136,16 @@ class TopicView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
-        context.update(_get_message_context(self.kwargs['pk'], self.request.user))
+        context.update(
+            _get_message_context(
+                self.kwargs['pk'],
+                self.request.user,
+                ),
+            )
         for msg in context['object_list']:
-            if not self.request.user in msg.readers.all():
+            if self.request.user not in msg.readers.all():
                 msg.readers.add(self.request.user)
-                msg.is_read = False # to display the label
+                msg.is_read = False  # to display the label
                 msg.save()
         return context
 
@@ -123,7 +153,7 @@ class TopicView(TemplateView):
 class IconField(ModelChoiceField):
 
     def label_from_instance(self, obj):
-        #return '<img class="icon" src="'+obj.url()+'" alt="'+obj.name+'"/>'
+        # return '<img class="icon" src="'+obj.url()+'" alt="'+obj.name+'"/>'
         return obj.url()
 
 
@@ -142,7 +172,6 @@ class AnswerForm(ModelForm):
             'title': TextInput(attrs={'class': 'form-control'}),
             'text': Textarea(attrs={'class': 'form-control'}),
         }
-            
 
 
 class AnswerCreate(CreateView):
@@ -163,7 +192,12 @@ class AnswerCreate(CreateView):
         context = super(AnswerCreate, self).get_context_data(**kwargs)
         try:
             # real answer
-            context.update(_get_message_context(self.kwargs['pk'], self.request.user))
+            context.update(
+                _get_message_context(
+                    self.kwargs['pk'],
+                    self.request.user,
+                    ),
+                )
         except:
             # new topic
             pass
@@ -172,9 +206,11 @@ class AnswerCreate(CreateView):
     def get_success_url(self):
         self.object.readers.add(self.request.user)
         self.object.save()
-        return reverse('forum:message', args=[self.object.pk])+ "#forum-message"
+        return reverse(
+                    'forum:message',
+                    args=[self.object.pk]
+               ) + "#forum-message"
 
-        
     def form_valid(self, form):
         form.instance.author = self.request.user
         form.instance.pub_date = timezone.now()
@@ -185,4 +221,3 @@ class AnswerCreate(CreateView):
             # new topic
             form.instance.question = None
         return super(AnswerCreate, self).form_valid(form)
-        
