@@ -18,7 +18,7 @@ before_script:
   - pyflakes paiji2_forum
 script:
   - coverage run --source=paiji2_forum manage.py test
-  - python setup.py test
+  - python manage.py test
 
 after_success:
   - coveralls

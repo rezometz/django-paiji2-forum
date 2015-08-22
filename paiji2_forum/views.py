@@ -15,7 +15,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 from django.views.generic import ListView, CreateView,\
     TemplateView
 from django.utils.decorators import method_decorator
@@ -198,9 +200,11 @@ class AnswerCreate(CreateView):
                     ),
                 )
         except:
+            # bad url
+            if 'pk' in self.kwargs:
+                raise Http404(_('message does not exist'))
             # new topic
-            pass
-        return context
+            return context
 
     def get_success_url(self):
         self.object.readers.add(self.request.user)

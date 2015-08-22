@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (C) 2015 Louis-Guillaume DUBOIS
 #
 # This file is part of paiji2-forum
@@ -19,13 +20,21 @@ from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 
-from .models import Message
+from .models import Message, MessageIcon
 from .views import TopicListView
 
 User = get_user_model()
 
 
 class MyTest(TestCase):
+
+    def access(self, name, code):
+        response = self.client.get(reverse(name))
+        self.assertEqual(response.status_code, code) 
+
+    def access_url(self, url, code):
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, code) 
 
     def setUp(self):
         self.iseult = User.objects.create_user(
@@ -38,21 +47,66 @@ class MyTest(TestCase):
             email='cesar@te.st',
             password='cesar_password',
         )
+        self.icon = MessageIcon.objects.create(
+            name='test icon',
+            filename='test_icon',
+        )
+        self.iseult_topic = Message.objects.create(
+            title=u'test title ®®',
+            text=u''' tstra auileæ~ǜß®\œù©þðĳþ’ù&æþiàn
+
+                auieiiausrecpiu t'yx.lmmd
+                =51476415678986451u4àuià,jl(è«épt,i.
+                ''',
+            question=None,
+            author=self.iseult,
+            icon=self.icon,
+        )
         self.client = Client(enforce_csrf_checkts=True)
 
 
 class ReadTestCase(MyTest):
 
-    def access(self, name, code):
-        response = self.client.get(reverse(name))
-        self.assertEqual(response.status_code, code) 
-
     def test_authentication(self):
+
         # unauthenticated user
         self.access('forum:topic-list', 302)
         self.access('forum:recent-list', 302)
         self.access('forum:unread', 302)
         self.access('forum:new', 302)
+        self.access_url(
+            self.iseult_topic.get_absolute_url(),
+            302,
+        )
+        self.access_url(
+            reverse(
+                'forum:message',
+                kwargs={'pk': self.iseult_topic.pk},
+            ),
+            302,
+        )
+        self.access_url(
+            reverse(
+                'forum:answer',
+                kwargs={'pk': self.iseult_topic.pk},
+            ),
+            302,
+        )
+        # nonexistant message
+        self.access_url(
+            reverse(
+                'forum:message',
+                kwargs={'pk': self.iseult_topic.pk + 1000},
+            ),
+            302,
+        )
+        self.access_url(
+            reverse(
+                'forum:answer',
+                kwargs={'pk': self.iseult_topic.pk + 1000},
+            ),
+            302,
+        )
 
         # authenticated user
         self.client.login(
@@ -63,4 +117,36 @@ class ReadTestCase(MyTest):
         self.access('forum:recent-list', 200)
         self.access('forum:unread', 200)
         self.access('forum:new', 200)
-
+        self.access_url(
+            self.iseult_topic.get_absolute_url(),
+            200,
+        )
+        self.access_url(
+            reverse(
+                'forum:message',
+                kwargs={'pk': self.iseult_topic.pk},
+            ),
+            200,
+        )
+        self.access_url(
+            reverse(
+                'forum:answer',
+                kwargs={'pk': self.iseult_topic.pk},
+            ),
+            200,
+        )
+        # nonexistant message
+        self.access_url(
+            reverse(
+                'forum:message',
+                kwargs={'pk': self.iseult_topic.pk + 1000},
+            ),
+            404,
+        )
+        self.access_url(
+            reverse(
+                'forum:answer',
+                kwargs={'pk': self.iseult_topic.pk + 1000},
+            ),
+            404,
+        )
