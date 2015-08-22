@@ -9,7 +9,7 @@ paiji2-forum
 License
 -------
 
-Affero GPL v3
+[![Affero GPL v3](http://www.gnu.org/graphics/agplv3-88x31.png)](http://www.gnu.org/licenses/agpl-3.0.html)
 
 Requirements
 ------------
