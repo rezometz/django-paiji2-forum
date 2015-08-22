@@ -21,7 +21,7 @@ INSTALLED_APPS = (
     'paiji2_forum',
 )
 
-ROOT_URLCONF = 'paiji2_carpooling.urls'
+ROOT_URLCONF = 'testurls'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

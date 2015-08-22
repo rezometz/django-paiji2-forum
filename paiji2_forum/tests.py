@@ -15,6 +15,52 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 
-# Create your tests here.
+from .models import Message
+from .views import TopicListView
+
+User = get_user_model()
+
+
+class MyTest(TestCase):
+
+    def setUp(self):
+        self.iseult = User.objects.create_user(
+            username='iseult',
+            email='iseult@te.st',
+            password='iseult_password',
+        )
+        self.cesar = User.objects.create_user(
+            username='cesar',
+            email='cesar@te.st',
+            password='cesar_password',
+        )
+        self.client = Client(enforce_csrf_checkts=True)
+
+
+class ReadTestCase(MyTest):
+
+    def access(self, name, code):
+        response = self.client.get(reverse(name))
+        self.assertEqual(response.status_code, code) 
+
+    def test_authentication(self):
+        # unauthenticated user
+        self.access('forum:topic-list', 302)
+        self.access('forum:recent-list', 302)
+        self.access('forum:unread', 302)
+        self.access('forum:new', 302)
+
+        # authenticated user
+        self.client.login(
+            username='iseult',
+            password='iseult_password',
+        )
+        self.access('forum:topic-list', 200)
+        self.access('forum:recent-list', 200)
+        self.access('forum:unread', 200)
+        self.access('forum:new', 200)
+
