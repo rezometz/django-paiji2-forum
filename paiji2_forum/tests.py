@@ -21,7 +21,6 @@ from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 
 from .models import Message, MessageIcon
-from .views import TopicListView
 
 User = get_user_model()
 
