@@ -1,5 +1,6 @@
 *.swp
 **/*.pyc
-sample_project/db.sqlite3
+**/db.sqlite3
 sample_project/static/*
 **/*.mo
+*.egg-info
