@@ -1,5 +1,6 @@
 paiji2-forum
 ============
+[![Build Status](https://travis-ci.org/rezometz/django-paiji2-forum.svg)](https://travis-ci.org/rezometz/django-paiji2-forum)
 
 License
 -------
