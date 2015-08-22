@@ -14,7 +14,7 @@ Affero GPL v3
 Requirements
 ------------
 
-You must have django-bootstrap3 installed, and a user authentication model.
+You must have django-bootstrap3 and django-mptt installed, and a user authentication model.
 
 URLconf
 -------
