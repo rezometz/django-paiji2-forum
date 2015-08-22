@@ -17,7 +17,8 @@
 
 from . import __path__
 from models import MessageIcon
-from django.core.exceptions import *
+from django.core.exceptions import ObjectDoesNotExist,\
+    MultipleObjectsReturned
 from glob import glob
 
 

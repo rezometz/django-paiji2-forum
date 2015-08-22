@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, CreateView,\
-    TemplateView, RedirectView
+    TemplateView
 from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.core.urlresolvers import reverse
@@ -25,7 +25,6 @@ from django.contrib.auth.decorators import login_required
 from .models import Message, MessageIcon
 from django.forms import ModelForm, RadioSelect,\
     ModelChoiceField, TextInput, Textarea
-from django.utils.translation import ugettext as _
 
 PADDING = 30
 
