@@ -28,33 +28,12 @@ from .models import Message, MessageIcon
 from django.forms import ModelForm, RadioSelect,\
     ModelChoiceField, TextInput, Textarea
 
-PADDING = 30
-
-
-def _depth_browse(arg, user):
-    L = []
-    for answer in arg:
-        answer.padding = PADDING * answer.level()
-        answer.is_read = user in answer.readers.all()
-        L.append(answer)
-        if not answer.is_leaf():
-            L += _depth_browse(answer.answers.all(), user)
-    return L
-
 
 class TopicListView(ListView):
 
     template_name = 'forum/index.html'
     paginate_by = 15
-    queryset = Message.objects.filter(question=None).order_by('-pub_date')
-
-    def get_context_data(self, **kwargs):
-        context = super(TopicListView, self).get_context_data(**kwargs)
-        context['object_list'] = _depth_browse(
-            context['object_list'],
-            self.request.user,
-            )
-        return context
+    queryset = Message.objects.root_nodes()
 
 
 class NewMessagesView(ListView):
@@ -65,14 +44,13 @@ class NewMessagesView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        for msg in context['object_list']:
-            msg.is_read = self.request.user in msg.readers.all()
         return context
 
 
 class UnreadMessagesView(NewMessagesView):
 
     template_name = 'forum/unread.html'
+    paginate_by = 30
 
     def get_queryset(self):
         return Message.objects\
@@ -83,71 +61,18 @@ class UnreadMessagesView(NewMessagesView):
             )
 
 
-def _get_message_context(pk, user):
-    message = get_object_or_404(Message, pk=pk)
-
-    # previous and next topics
-    topic = message.topic()
-    try:
-        next_topic = Message.objects\
-            .filter(
-                question=None
-            ).filter(
-                pub_date__gt=topic.pub_date
-            ).earliest(
-                'pub_date'
-            )
-    except:
-        next_topic = None
-    try:
-        prev_topic = Message.objects\
-            .filter(
-                question=None
-            ).filter(
-                pub_date__lt=topic.pub_date
-            ).latest(
-                'pub_date'
-            )
-    except:
-        prev_topic = None
-
-    # question answered
-    question = message.question
-
-    # message list
-    L = _depth_browse([topic], user)
-
-    context = dict(
-        object_list=L,
-        message=message,
-        question=question,
-        next_topic=next_topic,
-        prev_topic=prev_topic,
-        # next=next,
-        # prev=prev,
-        # up=up,
-        # down=down,
-    )
-    return context
-
-
 class TopicView(TemplateView):
 
     template_name = 'forum/topic.html'
 
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
-        context.update(
-            _get_message_context(
+        context.update({
+            'message': get_object_or_404(
+                Message,
                 self.kwargs['pk'],
-                self.request.user,
-                ),
-            )
-        for msg in context['object_list']:
-            if self.request.user not in msg.readers.all():
-                msg.readers.add(self.request.user)
-                msg.is_read = False  # to display the label
-                msg.save()
+             )
+        })
         return context
 
 
@@ -191,36 +116,31 @@ class AnswerCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(AnswerCreate, self).get_context_data(**kwargs)
-        try:
-            # real answer
-            context.update(
-                _get_message_context(
-                    self.kwargs['pk'],
-                    self.request.user,
-                    ),
-                )
-        except:
-            # bad url
-            if 'pk' in self.kwargs:
-                raise Http404(_('message does not exist'))
-            # new topic
-            return context
+        if 'pk' in self.kwargs:
+            context.update({
+                'message': get_object_or_404(
+                    Message,
+                    pk=self.kwargs['pk'],
+                ),
+            })
+        return context
 
     def get_success_url(self):
         self.object.readers.add(self.request.user)
         self.object.save()
         return reverse(
-                    'forum:message',
-                    args=[self.object.pk]
-               ) + "#forum-message"
+            'forum:message',
+            args=[self.object.pk],
+        ) + "#forum-message"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         form.instance.pub_date = timezone.now()
-        try:
-            # real answer
-            form.instance.question = Message.objects.get(pk=self.kwargs['pk'])
-        except:
-            # new topic
+        if 'pk' in self.kwargs:
+            form.instance.question = get_object_or_404(
+                Message,
+                pk=self.kwargs['pk'],
+             )
+        else:
             form.instance.question = None
         return super(AnswerCreate, self).form_valid(form)
