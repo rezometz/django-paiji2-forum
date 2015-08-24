@@ -20,6 +20,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {% endcomment %}
+{% load i18n %}
+{% load mptt_tags %}
 
 {% block class-topics %}active{% endblock %}
 {% block class-unread %}{% endblock %}
@@ -29,5 +31,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% block forum-top-nav %}{% endblock %}
 {% block forum-bottom-nav %}{% endblock %}
 
-{% block text %}{% endblock %}
-{% block topic-name %}{% endblock %}
+{% block forum-content %}
+
+{% for topic in object_list %}
+
+<ul class="topic">
+    {% recursetree topic.get_tree %}
+        {% include 'forum/recurseli.html' %}
+    {% endrecursetree %}
+</ul>
+
+{% empty %}
+
+<p>
+    <span class="label label-default">{% trans 'no message' %}</span>
+</p>
+
+{% endfor %}
+
+{% endblock %}

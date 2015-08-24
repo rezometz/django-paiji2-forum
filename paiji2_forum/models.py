@@ -20,6 +20,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class MessageIcon(models.Model):
@@ -32,6 +33,7 @@ class MessageIcon(models.Model):
     filename = models.CharField(max_length=100, verbose_name=_('filename'))
 
     def url(self):
+        """return the icon's url"""
         # return settings.STATIC_URL + 'forum/icons/' + self.filename
         return 'forum/icons/' + self.filename
 
@@ -39,11 +41,15 @@ class MessageIcon(models.Model):
         return self.name
 
 
-class Message(models.Model):
+class Message(MPTTModel):
 
     class Meta:
         verbose_name = _('message')
         verbose_name_plural = _('messages')
+
+    class MPTTMeta:
+        order_insertion_by = ['pub_date', ]
+        parent_attr = 'question'
 
     title = models.CharField(
         max_length=200,
@@ -66,12 +72,13 @@ class Message(models.Model):
         blank=True,
     )
 
-    question = models.ForeignKey(
+    question = TreeForeignKey(
         'self',
         null=True,
         blank=True,
         verbose_name=_('question'),
         related_name='answers',
+        db_index=True,
     )
 
     author = models.ForeignKey(
@@ -86,53 +93,36 @@ class Message(models.Model):
         verbose_name=_('icon'),
     )
 
-    def is_topic(self):
-        return self.question is None
-    is_topic.boolean = True
-    is_topic.short_description = _('Is it a topic?')
-
-    def is_leaf(self):
-        return self.answers.count() == 0
-    is_leaf.boolean = True
-    is_leaf.short_description = _('Does it have answers?')
-
-    def answers_nb(self):
-        return self.answers.count()
-    answers_nb.short_description = _('number of answers')
-
-    def childs_nb(self):
-        nb = 0
-        for answer in self.answers.all():
-            nb += answer.childs_nb()
-        return nb + self.answers.count()
-    childs_nb.short_description = _(
-        'number of answers and answers answers (recursive)'
-        )
-
-    def childs_depth(self):
-        if self.answers.count() == 0:
-            return 0
-        else:
-            return 1 + max(
-                [i.childs_depth() for i in self.answers.all()]
-            )
-
-    def level(self):
-        if self.question is None:
-            return 0
-        else:
-            return 1 + self.question.level()
-    level.short_description = _('depth level in the topic')
-
     def topic(self):
-        if self.question is None:
-            return self
-        else:
-            return self.question.topic()
-    topic.short_description = _('topic of the message')
+        """return the current topic's first message"""
+        return self.get_root()
+    topic.short_description = _('current topic')
+
+    def prev_topic(self):
+        """return the previous topic's first message"""
+        return self.topic().get_previous_sibling()
+    prev_topic.short_description = _('previous topic')
+
+    def next_topic(self):
+        """return the next topic's first message"""
+        return self.topic().get_next_sibling()
+    next_topic.short_description = _('next topic')
+
+    def get_tree(self):
+        """return all the messages of the current topic, in tree order"""
+        return self.topic().get_descendants(include_self=True)
+
+    def is_topic(self):
+        """return if the message is a topic's first message"""
+        return self.is_root_node()
+    is_topic.boolean = True
+    is_topic.short_description = _('Is it a topic ?')
 
     def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('forum:message', kwargs={'pk': self.pk})
+        return reverse(
+            'forum:message',
+            kwargs={'pk': self.pk},
+        )

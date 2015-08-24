@@ -21,12 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% endcomment %}
 {% load static %}
 {% load i18n %}
+{% load mptt_tags %}
 
 {% block forum-top-nav %}
 
 <ul class="pager">
-    <li class="previous {% if not prev_topic %}disabled{% endif %}">
-        <a {% if prev_topic %}href="{% url 'forum:message' prev_topic.pk %}#forum-message"{% endif %}>
+    <li class="previous {% if not message.prev_topic %}disabled{% endif %}">
+        <a {% if message.prev_topic %}href="{% url 'forum:message' message.prev_topic.pk %}#forum-message"{% endif %}>
         <span class="glyphicon glyphicon-arrow-left"></span>
         {% trans 'topic' %}
         </a>
@@ -36,8 +37,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             {% trans 'bottom' %}
         </a>
     </li>
-    <li class="next {% if not next_topic %}disabled{% endif %}">
-        <a {% if next_topic %}href="{% url 'forum:message' next_topic.pk %}#forum-message"{% endif %}>
+    <li class="next {% if not message.next_topic %}disabled{% endif %}">
+        <a {% if message.next_topic %}href="{% url 'forum:message' message.next_topic.pk %}#forum-message"{% endif %}>
         {% trans 'topic' %}
         <span class="glyphicon glyphicon-arrow-right"></span>
         </a>
@@ -61,7 +62,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </a>
         <small> 
             <span class="label label-default label-sm" title="{% blocktrans count nb=msg.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">{{ msg.readers.count }}</span>
-            {% if not msg.is_read %}
+            {% if request.user not in msg.readers.all %}
             <span class="label label-sm label-success">{% trans 'unread' context 'sing' %}</span>
             {% endif %}
             <a class="forum-author"
@@ -86,41 +87,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     {% endblock %}
 
-
-    {% block text %}
-
-    <div {% if msg == message %}id="forum-message-text"{% elif msg == question %}id="forum-question-text"{% endif %} class="well well-sm forum-text">
-        <a class="pull-right" href="{% url 'forum:answer' msg.pk %}#forum-answer">
-        <small>
-        <span class="glyphicon glyphicon-pencil"></span>
-        {% trans 'answer' %}
-        </small>
-        </a>
-        {{ msg.text|urlize|linebreaks }}
-    </div>
-
-    {% endblock %}
-
-    {% if msg == message %}
-
-    {% block form %}
-    
-        <form id="forum-answer" action="{% url 'forum:answer' msg.pk %}" method="post">
-
-        {% csrf_token %}
-
-        {% include 'forum/form.html' %}
-
-        <button class="btn btn-primary btn-block" type="submit"/>
-            {% trans 'publish the answer' %}
-        </button>
-
-        </form>
-            
-    {% endblock %}
-
-    {% endif %}
-
 </div>
 
 {% empty %}
@@ -136,8 +102,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% block forum-bottom-nav %}
 
 <ul class="pager">
-    <li class="previous {% if not prev_topic %}disabled{% endif %}">
-        <a {% if prev_topic %}href="{% url 'forum:message' prev_topic.pk %}#forum-message"{% endif %}>
+    <li class="previous {% if not message.prev_topic %}disabled{% endif %}">
+        <a {% if message.prev_topic %}href="{% url 'forum:message' message.prev_topic.pk %}#forum-message"{% endif %}>
         <span class="glyphicon glyphicon-arrow-left"></span>
         {% trans 'topic' %}
         </a>
@@ -147,8 +113,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             {% trans 'top' %}
         </a>
     </li>
-    <li class="next {% if not next_topic %}disabled{% endif %}">
-        <a {% if next_topic %}href="{% url 'forum:message' next_topic.pk %}#forum-message"{% endif %}>
+    <li class="next {% if not message.next_topic %}disabled{% endif %}">
+        <a {% if message.next_topic %}href="{% url 'forum:message' message.next_topic.pk %}#forum-message"{% endif %}>
         {% trans 'topic' %}
         <span class="glyphicon glyphicon-arrow-right"></span>
         </a>
@@ -156,5 +122,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 </ul>
 
 {% endblock %}
-
-
