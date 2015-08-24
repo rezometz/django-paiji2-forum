@@ -77,6 +77,7 @@ class Message(MPTTModel):
         blank=True,
         verbose_name=_('question'),
         related_name='answers',
+        db_index=True,
     )
     
     author = models.ForeignKey(
@@ -92,16 +93,16 @@ class Message(MPTTModel):
     )
     
     def topic(self):
-        return question.get_root()
+        return self.get_root()
 
     def prev_topic(self):
-        return question.topic().get_previous_sibling()
+        return self.question.topic().get_previous_sibling()
 
     def next_topic(self):
-        return question.topic().get_next_sibling()
+        return self.question.topic().get_next_sibling()
 
     def get_tree(self):
-        return question.topic().get_descendant(include_self=True)
+        return self.question.topic().get_descendant(include_self=True)
 
     def is_topic(self):
         return self.is_root_node()

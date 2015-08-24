@@ -33,7 +33,7 @@ class TopicListView(ListView):
 
     template_name = 'forum/index.html'
     paginate_by = 15
-    queryset = Message.objects.root_nodes()
+    queryset = [i for i in Message.objects.root_nodes()]
 
 
 class NewMessagesView(ListView):
@@ -70,7 +70,7 @@ class TopicView(TemplateView):
         context.update({
             'message': get_object_or_404(
                 Message,
-                self.kwargs['pk'],
+                pk=self.kwargs['pk'],
              )
         })
         return context
