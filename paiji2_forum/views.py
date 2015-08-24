@@ -32,7 +32,7 @@ from django.forms import ModelForm, RadioSelect,\
 class TopicListView(ListView):
 
     template_name = 'forum/index.html'
-    paginate_by = 3
+    paginate_by = 12
     queryset = Message.objects.root_nodes().order_by('-pub_date')
 
 
