@@ -66,7 +66,7 @@ a.forum-message-title:hover {
 }
 
 ul.topic {
-    list-style-type: square;
+    list-style-type: none;
     padding: 0.5em;
     margin: 0.5em;
     border-bottom-style: dashed;
