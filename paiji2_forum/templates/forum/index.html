@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {% endcomment %}
 {% load i18n %}
-{% load static %}
 {% load mptt_tags %}
 
 {% block class-topics %}active{% endblock %}
@@ -38,39 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <ul class="topic">
     {% recursetree topic.get_tree %}
-        <li>
-            <div {% if node == message %}id="forum-message"{% elif node == question %}id="forum-question"{% endif %}>
-                <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message">
-                    <img class="forum-icon" src="{% static node.icon.url %}" alt="{{ node.icon.name }}"/>
-                    {{ node.title }}
-                </a>
-                <small> 
-                    <span class="label label-default label-sm" title="{% blocktrans count nb=node.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">{{ node.readers.count }}</span>
-                    {% if not node.is_read %}
-                    <span class="label label-sm label-success">{% trans 'unread' context 'sing' %}</span>
-                    {% endif %}
-                    <a class="forum-author"
-                    {% if expand %}
-                    href="{% url 'forum:topic' node.pk %}#forum-message"
-                    {% else %}
-                    href="{% url 'forum:message' node.pk %}#forum-message"
-                    {% endif %}
-                    title="{{ node.author.first_name }} {{ node.author.last_name }} ({{ node.author }})">
-                        {% if node.author.first_name %}
-                        {{ node.author.first_name }}
-                        {% else %}
-                        {{ node.author }}
-                        {% endif %}
-                    </a>
-                    <span class="text-muted">{% blocktrans with TimeSince=node.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
-                </small>
-            </div>
-            {% if not node.is_leaf_node %}
-            <ul class="answers">
-                {{ children }}
-            </ul>
-            {% endif %}
-        </li>
+        {% include 'forum/recurseli.html' %}
     {% endrecursetree %}
 </ul>
 

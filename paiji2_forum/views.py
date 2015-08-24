@@ -113,18 +113,21 @@ class AnswerCreate(CreateView):
 
     def get_template_names(self):
         if 'pk' in self.kwargs:
-            return ['forum/answer.html']
+            return ['forum/topic.html']
         else:
             return ['forum/new.html']
 
     def get_context_data(self, **kwargs):
         context = super(AnswerCreate, self).get_context_data(**kwargs)
         if 'pk' in self.kwargs:
+            message = get_object_or_404(
+                Message,
+                pk=self.kwargs['pk'],
+            )
+            object_list = message.topic().get_tree()
             context.update({
-                'message': get_object_or_404(
-                    Message,
-                    pk=self.kwargs['pk'],
-                ),
+                'object_list': object_list,
+                'message': message,
             })
         return context
 
