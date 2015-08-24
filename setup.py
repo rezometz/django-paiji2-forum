@@ -33,7 +33,7 @@ os.chdir(currentdir)
 
 setup(
     name='django-paiji2-forum',
-    version='0.1',
+    version='0.2',
     packages=['paiji2_forum'],
     include_package_data=True,
     description='A simple forum app',
@@ -41,7 +41,11 @@ setup(
     url='https://github.com/rezometz/django-paiji2-forum',
     author='Louis-Guillaume DUBOIS',
     author_email='contact@lgdubois.fr',
-    license='AGPLv3',
+    license='Affero GPL v3+',
+    install_requires=[
+        'django-mptt',
+        'django-bootstrap3',
+    ],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
