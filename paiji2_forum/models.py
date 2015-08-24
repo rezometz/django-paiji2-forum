@@ -33,6 +33,7 @@ class MessageIcon(models.Model):
     filename = models.CharField(max_length=100, verbose_name=_('filename'))
 
     def url(self):
+        """return the icon's url"""
         # return settings.STATIC_URL + 'forum/icons/' + self.filename
         return 'forum/icons/' + self.filename
 
@@ -93,19 +94,29 @@ class Message(MPTTModel):
     )
     
     def topic(self):
+        """return the current topic's first message"""
         return self.get_root()
+    topic.short_description = _('current topic')
 
     def prev_topic(self):
+        """return the previous topic's first message"""
         return self.topic().get_previous_sibling()
+    prev_topic.short_description = _('previous topic')
 
     def next_topic(self):
+        """return the next topic's first message"""
         return self.topic().get_next_sibling()
+    next_topic.short_description = _('next topic')
 
     def get_tree(self):
+        """return all the messages of the current topic, in tree order"""
         return self.topic().get_descendants(include_self=True)
 
     def is_topic(self):
+        """return if the message is a topic's first message"""
         return self.is_root_node()
+    is_topic.boolean = True
+    is_topic.short_description = _('Is it a topic ?')
 
     def __unicode__(self):
         return self.title
