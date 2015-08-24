@@ -48,7 +48,7 @@ class Message(MPTTModel):
         verbose_name_plural = _('messages')
 
     class MPTTMeta:
-        order_insertion_by = ['pub_date',]
+        order_insertion_by = ['pub_date', ]
         parent_attr = 'question'
 
     title = models.CharField(
@@ -80,7 +80,7 @@ class Message(MPTTModel):
         related_name='answers',
         db_index=True,
     )
-    
+
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('author'),
@@ -92,7 +92,7 @@ class Message(MPTTModel):
         default=None,
         verbose_name=_('icon'),
     )
-    
+
     def topic(self):
         """return the current topic's first message"""
         return self.get_root()
