@@ -62,7 +62,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </a>
         <small> 
             <span class="label label-default label-sm" title="{% blocktrans count nb=msg.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">{{ msg.readers.count }}</span>
-            {% if not msg.is_read %}
+            {% if request.user not in msg.readers.all %}
             <span class="label label-sm label-success">{% trans 'unread' context 'sing' %}</span>
             {% endif %}
             <a class="forum-author"

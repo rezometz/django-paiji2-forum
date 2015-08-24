@@ -76,6 +76,10 @@ class TopicView(TemplateView):
             'object_list': object_list,
             'message': message,
         })
+        for msg in context['object_list']:
+            if self.request.user not in msg.readers.all():
+                msg.readers.add(self.request.user)
+                msg.not_read = True  # to show the label...
         return context
 
 

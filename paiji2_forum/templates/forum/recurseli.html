@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </a>
         <small> 
             <span class="label label-default label-sm" title="{% blocktrans count nb=node.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">{{ node.readers.count }}</span>
-            {% if not node.is_read %}
+            {% if node.not_read or request.user not in node.readers.all %}
             <span class="label label-sm label-success">{% trans 'unread' context 'sing' %}</span>
             {% endif %}
             <a class="forum-author"
