@@ -96,13 +96,13 @@ class Message(MPTTModel):
         return self.get_root()
 
     def prev_topic(self):
-        return self.question.topic().get_previous_sibling()
+        return self.topic().get_previous_sibling()
 
     def next_topic(self):
-        return self.question.topic().get_next_sibling()
+        return self.topic().get_next_sibling()
 
     def get_tree(self):
-        return self.question.topic().get_descendant(include_self=True)
+        return self.topic().get_descendants(include_self=True)
 
     def is_topic(self):
         return self.is_root_node()

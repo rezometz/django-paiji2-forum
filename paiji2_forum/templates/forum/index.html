@@ -34,8 +34,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {% block forum-content %}
 
+{% for topic in object_list %}
+
 <ul class="topic">
-    {% recursetree object_list %}
+    {% recursetree topic.get_tree %}
         <li>
             <div {% if node == message %}id="forum-message"{% elif node == question %}id="forum-question"{% endif %}>
                 <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message">
@@ -63,7 +65,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <span class="text-muted">{% blocktrans with TimeSince=node.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
                 </small>
             </div>
-            {% if node.is_leaf_node %}
+            {% if not node.is_leaf_node %}
             <ul class="answers">
                 {{ children }}
             </ul>
@@ -72,7 +74,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     {% endrecursetree %}
 </ul>
 
-{% endblock %}
+{% empty %}
 
-{% block text %}{% endblock %}
-{% block topic-name %}{% endblock %}
+<p>
+    <span class="label label-default">{% trans 'no message' %}</span>
+</p>
+
+{% endfor %}
+
+{% endblock %}

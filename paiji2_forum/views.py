@@ -32,8 +32,8 @@ from django.forms import ModelForm, RadioSelect,\
 class TopicListView(ListView):
 
     template_name = 'forum/index.html'
-    paginate_by = 15
-    queryset = [i for i in Message.objects.root_nodes()]
+    paginate_by = 3
+    queryset = Message.objects.root_nodes().order_by('-pub_date')
 
 
 class NewMessagesView(ListView):
@@ -67,11 +67,14 @@ class TopicView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
+        message = get_object_or_404(
+            Message,
+            pk=self.kwargs['pk'],
+        )
+        object_list = message.topic().get_tree()
         context.update({
-            'message': get_object_or_404(
-                Message,
-                pk=self.kwargs['pk'],
-             )
+            'object_list': object_list,
+            'message': message,
         })
         return context
 
