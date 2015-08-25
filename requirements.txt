@@ -1,2 +1,2 @@
-django-bootstrap3
-django-mptt
+django-bootstrap3>=6
+django-mptt>=0.7

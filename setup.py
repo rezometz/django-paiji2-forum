@@ -43,8 +43,8 @@ setup(
     author_email='contact@lgdubois.fr',
     license='Affero GPL v3+',
     install_requires=[
-        'django-mptt',
-        'django-bootstrap3',
+        'django-mptt>=0.7',
+        'django-bootstrap3>=6',
     ],
     classifiers=[
         'Environment :: Web Environment',
