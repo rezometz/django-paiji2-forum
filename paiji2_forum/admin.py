@@ -25,5 +25,18 @@ class MessageIconAdmin(admin.ModelAdmin):
     search_fields = ['name', 'filename']
 
 
+class MessageAdmin(MPTTModelAdmin):
+    list_display = (
+        'title',
+        'author',
+        'pub_date',
+        'text',
+    )
+    search_fields = [
+        'title',
+        'author',
+        'text',
+    ]
+
 admin.site.register(MessageIcon, MessageIconAdmin)
-admin.site.register(Message, MPTTModelAdmin)
+admin.site.register(Message, MessageAdmin)
