@@ -14,7 +14,7 @@ License
 Requirements
 ------------
 
-You must have django-bootstrap3 and django-mptt installed, and a user authentication model.
+You must have django-bootstrap3, django-mptt, and django-paiji2-utils installed, and a user authentication model.
 
 URLconf
 -------
