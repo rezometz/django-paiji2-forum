@@ -20,6 +20,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'mptt',
     'paiji2_forum',
+    'paiji2_utils',
 )
 
 ROOT_URLCONF = 'testurls'

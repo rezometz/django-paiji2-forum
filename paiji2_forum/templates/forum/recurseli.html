@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load i18n %}
 {% load static %}
 {% load mptt_tags %}
+{% load profile %}
 <li>
     <div {% if node == message %}id="forum-message"{% elif node == question %}id="forum-question"{% endif %}>
         <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message">
@@ -29,37 +30,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </a>
         <small> 
             <span class="label label-default label-sm" title="{% blocktrans count nb=node.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">{{ node.readers.count }}</span>
+        </small>
+        {% profile_link node.author %}
+        <small>
             {% if node.not_read or request.user not in node.readers.all %}
-            <span class="label label-sm label-success">{% trans 'unread' context 'sing' %}</span>
+                <span class="label label-sm label-success">{% trans 'unread' context 'sing' %}</span>
             {% endif %}
-            <a class="forum-author"
-            {% if expand %}
-            href="{% url 'forum:topic' node.pk %}#forum-message"
-            {% else %}
-            href="{% url 'forum:message' node.pk %}#forum-message"
-            {% endif %}
-            title="{{ node.author.first_name }} {{ node.author.last_name }} ({{ node.author }})">
-                {% if node.author.first_name %}
-                {{ node.author.first_name }}
-                {% else %}
-                {{ node.author }}
-                {% endif %}
-            </a>
             <span class="text-muted">{% blocktrans with TimeSince=node.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
         </small>
     </div>
 
     {% if message %}
-
-    <div {% if node == message %}id="forum-message-text"{% elif node == message.question %}id="forum-question-text"{% endif %} class="well well-sm forum-text">
-        <a class="pull-right" href="{% url 'forum:answer' node.pk %}#forum-answer">
-        <small>
-        <span class="glyphicon glyphicon-pencil"></span>
-        {% trans 'answer' %}
-        </small>
-        </a>
-        {{ node.text|urlize|linebreaks }}
-    </div>
+        <div {% if node == message %}id="forum-message-text"{% elif node == message.question %}id="forum-question-text"{% endif %} class="well well-sm forum-text">
+            <a class="pull-right" href="{% url 'forum:answer' node.pk %}#forum-answer">
+            <small>
+            <span class="glyphicon glyphicon-pencil"></span>
+            {% trans 'answer' %}
+            </small>
+            </a>
+            {{ node.text|urlize|linebreaks }}
+        </div>
     {% endif %}
 
     <ul class="answers">
