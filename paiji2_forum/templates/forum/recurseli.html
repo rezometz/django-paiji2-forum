@@ -56,13 +56,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         {% if form and node == message %}
         <li class="form">
-        <form id="forum-answer" action="{% url 'forum:answer' node.pk %}" method="post">
-        {% csrf_token %}
-        {% include 'forum/form.html' %}
-        <button class="btn btn-primary btn-block" type="submit"/>
-            {% trans 'publish the answer' %}
-        </button>
-        </form>
+            <form id="forum-answer" action="{% url 'forum:answer' node.pk %}" method="post">
+            {% csrf_token %}
+            {% include 'forum/form.html' %}
+            <button class="btn btn-primary btn-block" type="submit">
+                {% trans 'publish the answer' %}
+            </button>
+            </form>
         </li>
         {% endif %}
 

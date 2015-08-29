@@ -1,2 +1,26 @@
-{% block title %}{% endblock %}
-{% block content %}{% endblock %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Paiji2-Forum-Test | {% block title %}{% endblock %}</title>
+
+        <!-- TRANSLATIONS -->
+        {% for language in languages %}{% if not language.code == LANGUAGE_CODE %}
+        <link rel="alternate" hreflang="{{ language.code }}" href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"/>
+        {% endif %}{% endfor %}
+    </head>
+
+    <body>
+        <div id="main" class="container clearfix">
+            <div class="row">
+                <div class="col-md-6">
+                    {% block content %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
