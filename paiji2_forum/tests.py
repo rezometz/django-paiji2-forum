@@ -29,7 +29,7 @@ User = get_user_model()
 class MyTest(TestCase):
 
     def setUp(self):
-        self.client = ValidatingClient(enforce_csrf_checkts=True)
+        self.client = ValidatingClient()
         self.iseult = User.objects.create_user(
             username='iseult',
             email='iseult@te.st',
