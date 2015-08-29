@@ -1,5 +1,7 @@
 import django.conf.global_settings as DEFAULT_SETTINGS
+import os
 
+BASE_DIR = os.path.dirname(__file__)
 
 SECRET_KEY = 'oxkvjtm'
 
@@ -36,3 +38,22 @@ MIDDLEWARE_CLASSES = (
 )
 
 LANGUAGE_CODE = 'en'
+
+
+# html validation (django-html-validator)
+
+HTMLVALIDATOR_ENABLED = True
+
+HTMLVALIDATOR_FAILFAST = True
+
+try:
+    assert(os.getenv('HOSTNAME') == "lgdubois.rez")
+    HTMLVALIDATOR_VNU_JAR = '~/dev/dist/vnu.jar'
+    print("[html validation] using :" + HTMLVALIDATOR_VNU_JAR)
+except:
+    HTMLVALIDATOR_VNU_URL = 'http://validator.nu/'
+    print("[html validation] using :" + HTMLVALIDATOR_VNU_URL)
+
+HTMLVALIDATOR_DUMPDIR = os.path.join(BASE_DIR, 'validation_errors')
+
+HTMLVALIDATOR_OUTPUT = 'file'  # default is 'file'
