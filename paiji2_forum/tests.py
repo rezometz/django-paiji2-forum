@@ -16,7 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.test import TestCase, Client
+from django.test import TestCase
+from htmlvalidator.client import ValidatingClient
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 
@@ -27,15 +28,8 @@ User = get_user_model()
 
 class MyTest(TestCase):
 
-    def access(self, name, code):
-        response = self.client.get(reverse(name))
-        self.assertEqual(response.status_code, code)
-
-    def access_url(self, url, code):
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, code)
-
     def setUp(self):
+        self.client = ValidatingClient(enforce_csrf_checkts=True)
         self.iseult = User.objects.create_user(
             username='iseult',
             email='iseult@te.st',
@@ -61,7 +55,14 @@ class MyTest(TestCase):
             author=self.iseult,
             icon=self.icon,
         )
-        self.client = Client(enforce_csrf_checkts=True)
+
+    def access(self, name, code):
+        response = self.client.get(reverse(name))
+        self.assertEqual(response.status_code, code)
+
+    def access_url(self, url, code):
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, code)
 
 
 class ReadTestCase(MyTest):
