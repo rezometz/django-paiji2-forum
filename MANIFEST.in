@@ -1,5 +1,6 @@
 include README.md
 include LICENSE
+include COPYING
 recursive-include paiji2_forum/static *
 recursive-include paiji2_forum/templates/forum *
 recursive-include paiji2_forum/locale *
