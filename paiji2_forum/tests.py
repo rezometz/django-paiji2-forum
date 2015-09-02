@@ -83,7 +83,10 @@ class MyTest(TestCase):
         )
         self.assertEqual(
             self.path(response['Location']),
-            reverse('forum:message', args=[self.first_message.pk]) + '#forum-message',
+            reverse(
+                'forum:message',
+                args=[self.first_message.pk]
+            ) + '#forum-message',
         )
         self.access_url(self.first_message.get_absolute_url(), 200)
         self.client.logout()
