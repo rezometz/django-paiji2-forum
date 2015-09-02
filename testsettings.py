@@ -46,13 +46,13 @@ HTMLVALIDATOR_ENABLED = True
 
 HTMLVALIDATOR_FAILFAST = True
 
-try:
-    assert(os.getenv('HOSTNAME') == "lgdubois.rez")
-    HTMLVALIDATOR_VNU_JAR = '~/dev/dist/vnu.jar'
-    print("[html validation] using :" + HTMLVALIDATOR_VNU_JAR)
-except:
-    HTMLVALIDATOR_VNU_URL = 'http://validator.nu/'
-    print("[html validation] using :" + HTMLVALIDATOR_VNU_URL)
+# try:
+#     assert(os.getenv('HOSTNAME') == "lgdubois.rez")
+#     HTMLVALIDATOR_VNU_JAR = '~/dev/dist/vnu.jar'
+#     print("[html validation] using :" + HTMLVALIDATOR_VNU_JAR)
+# except:
+HTMLVALIDATOR_VNU_URL = 'https://validator.nu/'
+print("[html validation] using :" + HTMLVALIDATOR_VNU_URL)
 
 HTMLVALIDATOR_DUMPDIR = os.path.join(BASE_DIR, 'validation_errors')
 

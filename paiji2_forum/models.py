@@ -125,4 +125,4 @@ class Message(MPTTModel):
         return reverse(
             'forum:message',
             kwargs={'pk': self.pk},
-        )
+        ) + '#forum-message'
