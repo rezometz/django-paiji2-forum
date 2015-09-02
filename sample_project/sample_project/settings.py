@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'mptt',
     'paiji2_forum',
     'home',
+    'paiji2_utils',
 )
 
 MIDDLEWARE_CLASSES = (
