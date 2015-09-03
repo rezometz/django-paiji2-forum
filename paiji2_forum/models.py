@@ -20,7 +20,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
-from datetime import timedelta, datetime
+from datetime import timedelta
 from mptt.models import MPTTModel, TreeForeignKey
 
 

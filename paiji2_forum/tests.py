@@ -21,7 +21,7 @@ from django.utils import timezone
 from htmlvalidator.client import ValidatingClient
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-from datetime import timedelta, datetime
+from datetime import timedelta
 
 from .models import Message, MessageIcon
 
@@ -101,6 +101,7 @@ class NameTestCase(MyTest):
             self.first_message.__unicode__(),
             unicode(self.first_message.title),
         )
+
 
 class AccessTestCase(MyTest):
 
@@ -202,14 +203,14 @@ class DateTestCase(MyTest):
             self.first_message.is_burning(),
             True,
         )
-        
+
         hours = 24
         delta = timedelta(hours=hours)
 
         old_message = Message.objects.create(
             title='my old message',
             text="""My old text""",
-            pub_date= timezone.now() - delta - timedelta(hours=2),
+            pub_date=timezone.now() - delta - timedelta(hours=2),
             author=self.iseult,
             question=self.first_message,
             icon=self.icon,
