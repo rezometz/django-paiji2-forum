@@ -24,18 +24,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load profile %}
 <li>
     <div {% if node == message %}id="forum-message"{% elif node == question %}id="forum-question"{% endif %}>
-        <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message">
-            <img class="forum-icon" src="{% static node.icon.url %}" alt="{{ node.icon.name }}"/>
-            {{ node.title }}
-        </a>
+        <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message"
+            title="{{ node.text|truncatechars:30 }}"
+            ><img class="forum-icon" src="{% static node.icon.url %}" alt="{{ node.icon.name }}"/> {{ node.title }}</a>
+
         <small> 
-            <span class="label label-default label-sm" title="{% blocktrans count nb=node.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">{{ node.readers.count }}</span>
+            {% if request.user not in node.readers.all %}
+            <span class="label label-sm label-primary">{% trans 'unread' context 'sing' %}</span>
+            {% endif %}
+            <span
+             class="label label-sm{% if node.is_burning %} label-danger{% elif node.is_new %} label-warning {% endif %}"
+             title="{% blocktrans count nb=node.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}"
+            >{{ node.readers.count }}</span>
         </small>
         {% profile_link node.author %}
         <small>
-            {% if node.not_read or request.user not in node.readers.all %}
-                <span class="label label-sm label-success">{% trans 'unread' context 'sing' %}</span>
-            {% endif %}
             <span class="text-muted">{% blocktrans with TimeSince=node.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
         </small>
     </div>

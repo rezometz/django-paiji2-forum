@@ -27,52 +27,60 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <link property="stylesheet" rel="stylesheet" type="text/css" href="{% static 'forum/style.css' %}" />
 
 <div class="row">
-    <div class="col-xs-6">
-        <h3 class="text-center">
-            <a href="{% url 'forum:topic-list' %}">
-                {% trans 'Forum' %}
-            </a>
-        </h3>
-    </div>
-    <div class="col-xs-6">
-        <h3 class="text-center">
-            <a href="{% url 'forum:unread' %}">
-                {% trans 'Unread' %}
-            </a>
-        </h3>
-    </div>
+	<div class="col-xs-12">
+        <h3>{% trans 'Forum' %}</h3>
+	</div>
 </div>
 
 <div class="row">
-<ul class="list-unstyled">
-{% for msg in messages %}
-    <li>
+	<div class="col-xs-12">
+		<ul class="list-unstyled">
+		{% for msg in messages %}
+			<li>
 
-            <a class="forum-message-title" href="{% url 'forum:message' msg.pk %}#forum-message">
-                <img class="forum-icon" src="{% static msg.icon.url %}" alt="{{ msg.icon.name }}"/>
-                {{ msg.title }}
-            </a>
+					<a class="forum-message-title" href="{% url 'forum:message' msg.pk %}#forum-message" title="{{ msg.title }}{% if not msg.is_topic %}{{ ' ('|add:_('in')|add:': '|add:msg.topic.title|add:')' }}{% else %}{{ ' ('|add:_('new topic')|add:')' }}{% endif %}">
+						<img class="forum-icon" src="{% static msg.icon.url %}" alt="{{ msg.icon.name }}"/>
+						{{ msg.title|truncatechars:15 }}
+					</a>
 
-            {% profile_link msg.author %}
+                    <small> 
+                        <span
+                         class="label label-sm{% if msg.is_burning %} label-danger{% elif msg.is_new %} label-warning {% endif %}"
+                         title="{% blocktrans count nb=msg.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">
+                         {{ msg.readers.count }}</span>
+                    </small>
 
-        {% if not msg.is_topic %}
-            <span class="text-muted"> [
-                <span class="forum-message-title">
-                        {{ msg.topic }}
-                </span>
-            ]</span>
-        {% endif %}
+                    <span class="pull-right">
+                        {% profile_link msg.author %}
+                    </span>
 
-            <span class="text-muted">{% blocktrans with TimeSince=msg.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
+                {% comment %}
+                <span class="text-muted">{% blocktrans with TimeSince=msg.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
+                {% endcomment %}
 
-        <hr/>
-    </li>
-{% empty %}
-    <li class="text-center">
-        <span class="label label-default">
-            {% trans 'no unread message' %}
-        </span>
-    </li>
-{% endfor %}
-</ul>
+
+				<hr/>
+			</li>
+		{% empty %}
+			<li class="text-center">
+				<span class="label label-default">
+					{% trans 'no unread message' %}
+				</span>
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+</div>
+
+<div class="row text-center">
+	<div class="col-xs-6">
+		<a class="btn btn-default" href="{% url 'forum:unread' %}">
+			{% trans 'Unread' %}
+		</a>
+	</div>
+	<div class="col-xs-6">
+		<a class="btn btn-default" href="{% url 'forum:topic-list' %}">
+			{% trans 'topics' %}
+		</a>
+	</div>
 </div>

@@ -57,35 +57,44 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	<li>
     {% block message-title %}
 
-    <div {% if msg == message %}id="forum-message"{% elif msg == question %}id="forum-question"{% endif %} {% block entry-class %}class ="{%if msg.is_topic %}topic-entry {% endif %}forum-entry"{% endblock %} {% block padding %}style="margin-left: {{ msg.padding }}px;"{% endblock %}>
+    <div {% if msg == message %}id="forum-message"{% elif msg == question %}id="forum-question"{% endif %} {% block entry-class %}class ="{%if msg.is_topic %}topic-entry {% endif %}forum-entry"{% endblock %}
+    title="{{ msg.title }}">
         <a class="forum-message-title" href="{% url 'forum:message' msg.pk %}#forum-message">
             <img class="forum-icon" src="{% static msg.icon.url %}" alt="{{ msg.icon.name }}"/>
-            {{ msg.title }}
+            {{ msg.title|truncatechars:25 }}
         </a>
+
         <small> 
-            <span class="label label-default label-sm" title="{% blocktrans count nb=msg.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">{{ msg.readers.count }}</span>
+
             {% if request.user not in msg.readers.all %}
-            <span class="label label-sm label-success">{% trans 'unread' context 'sing' %}</span>
+            <span class="label label-sm label-primary">{% trans 'unread' context 'sing' %}</span>
             {% endif %}
+
+            <span
+             class="label label-sm{% if msg.is_burning %} label-danger{% elif msg.is_new %} label-warning {% endif %}"
+             title="{% blocktrans count nb=msg.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}"
+             >{{ msg.readers.count }}</span>
+
         </small>
 
-		<span class="text-center">
+		<span>
 			{% profile_link msg.author %}
 			<small>
 				<span class="text-muted">{% blocktrans with TimeSince=msg.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
 			</small>
 		</span>
 
+
         {% block topic-name %}
         {% if msg.is_topic %}
-            <span class="label label-default pull-right">
+            <span class="label label-sm label-info pull-right">
                 {% trans 'topic' %}
             </span>
         {% else %}
             <span class="pull-right"> [
-                <span class="forum-message-title">
+                <span class="forum-message-title" title="{{ msg.topic.title }}">
                 <img class="forum-icon" src="{% static msg.topic.icon.url %}" alt="{{ msg.topic.icon.name }}"/>
-                        {{ msg.topic }}
+                        {{ msg.topic.title|truncatechars:15 }}
                 </span>
             ]</span>
         {% endif %}
@@ -95,11 +104,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     {% endblock %}
 	<br/>
-	</li>
+  </li>
 
 {% empty %}
 	<li>
-		<span class="label label-default">{% trans 'no message' %}</span>
+    <span class="label label-default">{% trans 'no message' %}</span>
 	</li>
 {% endfor %}
 </ul>

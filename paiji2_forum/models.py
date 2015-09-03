@@ -20,6 +20,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
+from datetime import timedelta, datetime
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -109,7 +110,10 @@ class Message(MPTTModel):
     next_topic.short_description = _('next topic')
 
     def get_tree(self):
-        """return all the messages of the current topic, in tree order"""
+        """
+        return all the messages of the current topic,
+        in tree order
+        """
         return self.topic().get_descendants(include_self=True)
 
     def is_topic(self):
@@ -117,6 +121,27 @@ class Message(MPTTModel):
         return self.is_root_node()
     is_topic.boolean = True
     is_topic.short_description = _('Is it a topic ?')
+
+    def is_new(self, hours=48):
+        """
+        return if the message was published
+        less than the chosen number of hours ago
+        default: 48h
+        """
+        delta = timedelta(hours=hours)
+        return (timezone.now() - self.pub_date) < delta
+    is_new.boolean = True
+    is_new.short_description = _('Is it recent ?')
+
+    def is_burning(self, hours=12):
+        """
+        return if the message was published
+        less than the chosen number of hours ago
+        default: 12h
+        """
+        return self.is_new(hours=hours)
+    is_burning.boolean = True
+    is_burning.short_description = _('Is it very recent ?')
 
     def __unicode__(self):
         return self.title

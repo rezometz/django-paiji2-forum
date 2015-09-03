@@ -17,9 +17,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.test import TestCase
+from django.utils import timezone
 from htmlvalidator.client import ValidatingClient
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
+from datetime import timedelta, datetime
 
 from .models import Message, MessageIcon
 
@@ -91,6 +93,14 @@ class MyTest(TestCase):
         self.access_url(self.first_message.get_absolute_url(), 200)
         self.client.logout()
 
+
+class NameTestCase(MyTest):
+
+    def test_name(self):
+        self.assertEqual(
+            self.first_message.__unicode__(),
+            unicode(self.first_message.title),
+        )
 
 class AccessTestCase(MyTest):
 
@@ -176,6 +186,43 @@ class AccessTestCase(MyTest):
                 kwargs={'pk': self.first_message.pk + 1000},
             ),
             404,
+        )
+
+
+class DateTestCase(MyTest):
+
+    def test_is_new(self):
+
+        self.assertEqual(
+            self.first_message.is_new(),
+            True,
+        )
+
+        self.assertEqual(
+            self.first_message.is_burning(),
+            True,
+        )
+        
+        hours = 24
+        delta = timedelta(hours=hours)
+
+        old_message = Message.objects.create(
+            title='my old message',
+            text="""My old text""",
+            pub_date= timezone.now() - delta - timedelta(hours=2),
+            author=self.iseult,
+            question=self.first_message,
+            icon=self.icon,
+        )
+
+        self.assertEqual(
+            old_message.is_new(hours),
+            False,
+        )
+
+        self.assertEqual(
+            old_message.is_burning(hours),
+            False,
         )
 
 
