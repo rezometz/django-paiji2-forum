@@ -52,8 +52,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {% block forum-content %}
 
+<ul class="list-unstyled">
 {% for msg  in object_list %}
-
+	<li>
     {% block message-title %}
 
     <div {% if msg == message %}id="forum-message"{% elif msg == question %}id="forum-question"{% endif %} {% block entry-class %}class ="{%if msg.is_topic %}topic-entry {% endif %}forum-entry"{% endblock %} {% block padding %}style="margin-left: {{ msg.padding }}px;"{% endblock %}>
@@ -67,29 +68,41 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <span class="label label-sm label-success">{% trans 'unread' context 'sing' %}</span>
             {% endif %}
         </small>
-        {% profile_link msg.author %}
-        <small>
-            <span class="text-muted">{% blocktrans with TimeSince=msg.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
-        </small>
+
+		<span class="text-center">
+			{% profile_link msg.author %}
+			<small>
+				<span class="text-muted">{% blocktrans with TimeSince=msg.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
+			</small>
+		</span>
 
         {% block topic-name %}
-        <span class="text-muted"> [{% trans 'topic' %} : </span>
-        <span class="forum-message-title">
-                {{ msg.topic }}
-        </span>
-        <span class="text-muted">]</span>
+        {% if msg.is_topic %}
+            <span class="label label-default pull-right">
+                {% trans 'topic' %}
+            </span>
+        {% else %}
+            <span class="pull-right"> [
+                <span class="forum-message-title">
+                <img class="forum-icon" src="{% static msg.topic.icon.url %}" alt="{{ msg.topic.icon.name }}"/>
+                        {{ msg.topic }}
+                </span>
+            ]</span>
+        {% endif %}
         {% endblock %}
 
     </div>
 
     {% endblock %}
-
+	<br/>
+	</li>
 
 {% empty %}
-
-    <span class="label label-default">{% trans 'no message' %}</span>
-
+	<li>
+		<span class="label label-default">{% trans 'no message' %}</span>
+	</li>
 {% endfor %}
+</ul>
 
 {% endblock %}
 
