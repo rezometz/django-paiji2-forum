@@ -42,12 +42,12 @@ urlpatterns = [
         name='message',
     ),
     url(
-        '^message/(?P<pk>[0-9]+)/answer$',
+        '^message/(?P<pk>[0-9]+)/answer/$',
         login_required(views.AnswerCreate.as_view()),
         name='answer',
     ),
     url(
-        '^new$',
+        '^new/$',
         login_required(views.AnswerCreate.as_view()),
         name='new',
     ),
