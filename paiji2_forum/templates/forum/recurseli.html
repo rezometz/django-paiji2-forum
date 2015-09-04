@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             ><img class="forum-icon" src="{% static node.icon.url %}" alt="{{ node.icon.name }}"/> {{ node.title }}</a>
 
         <small> 
-            {% if request.user not in node.readers.all %}
+            {% if node.not_read or request.user not in node.readers.all %}
             <span class="label label-sm label-primary">{% trans 'unread' context 'sing' %}</span>
             {% endif %}
             <span
