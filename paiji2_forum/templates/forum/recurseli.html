@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <span class="label label-sm label-primary">{% trans 'unread' context 'sing' %}</span>
             {% endif %}
             <span
-             class="label label-sm{% if node.is_burning %} label-danger{% elif node.is_new %} label-warning {% endif %}"
+             class="label label-sm{% if node.is_burning %} label-danger{% elif node.is_new %} label-warning{% else %} label-default{% endif %}"
              title="{% blocktrans count nb=node.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}"
             >{{ node.readers.count }}</span>
         </small>

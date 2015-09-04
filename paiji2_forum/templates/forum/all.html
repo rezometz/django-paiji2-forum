@@ -71,7 +71,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             {% endif %}
 
             <span
-             class="label label-sm{% if msg.is_burning %} label-danger{% elif msg.is_new %} label-warning {% endif %}"
+             class="label label-sm{% if msg.is_burning %} label-danger{% elif msg.is_new %} label-warning{% else %} label-default{% endif %}"
              title="{% blocktrans count nb=msg.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}"
              >{{ msg.readers.count }}</span>
 
