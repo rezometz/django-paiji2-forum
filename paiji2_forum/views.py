@@ -73,23 +73,21 @@ class TopicView(TemplateView):
             pk=self.kwargs['pk'],
         )
         user = self.request.user
-        object_list = list(
-            message.topic()
-            .get_tree()
+        object_list = message.topic()\
+            .get_tree()\
             .select_related(
                 "author",
                 "icon",
             ).annotate(
                 readings=Count('readers'),
-            ).all()
-        )
+            )
         context.update({
             'message': message,
             'prev_topic': message.prev_topic,
             'next_topic': message.next_topic,
             'object_list': object_list,
         })
-        read_messages = list(user.read_messages.all())
+        read_messages = user.read_messages.filter(pk__in=object_list)
         for msg in context['object_list']:
             if msg not in read_messages:
                 msg.readers.add(user)
