@@ -25,10 +25,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load profile %}
 
 {% block forum-top-nav %}
+{% with prev_topic=prev_topic next_topic=next_topic %}
 
 <ul class="pager">
-    <li class="previous {% if not message.prev_topic %}disabled{% endif %}">
-        <a {% if message.prev_topic %}href="{% url 'forum:message' message.prev_topic.pk %}#forum-message"{% endif %}>
+    <li class="previous {% if not prev_topic %}disabled{% endif %}">
+        <a {% if prev_topic %}href="{% url 'forum:message' prev_topic.pk %}#forum-message"{% endif %}>
         <span class="glyphicon glyphicon-arrow-left"></span>
         {% trans 'topic' %}
         </a>
@@ -38,14 +39,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             {% trans 'bottom' %}
         </a>
     </li>
-    <li class="next {% if not message.next_topic %}disabled{% endif %}">
-        <a {% if message.next_topic %}href="{% url 'forum:message' message.next_topic.pk %}#forum-message"{% endif %}>
+    <li class="next {% if not next_topic %}disabled{% endif %}">
+        <a {% if next_topic %}href="{% url 'forum:message' next_topic.pk %}#forum-message"{% endif %}>
         {% trans 'topic' %}
         <span class="glyphicon glyphicon-arrow-right"></span>
         </a>
     </li>
 </ul>
 
+{% endwith %}
 {% endblock %}
 
 
@@ -120,23 +122,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% block forum-bottom-nav %}
 
 <ul class="pager">
-    <li class="previous {% if not message.prev_topic %}disabled{% endif %}">
-        <a {% if message.prev_topic %}href="{% url 'forum:message' message.prev_topic.pk %}#forum-message"{% endif %}>
+{% comment %}
+    <li class="previous {% if not prev_topic %}disabled{% endif %}">
+        <a {% if prev_topic %}href="{% url 'forum:message' prev_topic.pk %}#forum-message"{% endif %}>
         <span class="glyphicon glyphicon-arrow-left"></span>
         {% trans 'topic' %}
         </a>
+    </li>
+{% endcomment %}
     <li>
         <a id="forum-bottom" href="#forum-top">
             <span class="glyphicon glyphicon-arrow-up"></span>
             {% trans 'top' %}
         </a>
     </li>
-    <li class="next {% if not message.next_topic %}disabled{% endif %}">
-        <a {% if message.next_topic %}href="{% url 'forum:message' message.next_topic.pk %}#forum-message"{% endif %}>
+{% comment %}
+    <li class="next {% if not next_topic %}disabled{% endif %}">
+        <a {% if next_topic %}href="{% url 'forum:message' next_topic.pk %}#forum-message"{% endif %}>
         {% trans 'topic' %}
         <span class="glyphicon glyphicon-arrow-right"></span>
         </a>
     </li>
+{% endcomment %}
 </ul>
 
 {% endblock %}

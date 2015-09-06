@@ -25,6 +25,7 @@ from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Message, MessageIcon
+from django.db.models import Count
 from django.forms import ModelForm, RadioSelect,\
     ModelChoiceField, TextInput, Textarea
 
@@ -71,15 +72,29 @@ class TopicView(TemplateView):
             Message,
             pk=self.kwargs['pk'],
         )
-        object_list = message.topic().get_tree()
+        user = self.request.user
+        object_list = list(
+            message.topic()
+            .get_tree()
+            .select_related(
+                "author",
+                "icon",
+            ).annotate(
+                readings=Count('readers'),
+            ).all()
+        )
         context.update({
-            'object_list': object_list,
             'message': message,
+            'prev_topic': message.prev_topic,
+            'next_topic': message.next_topic,
+            'object_list': object_list,
         })
+        read_messages = list(user.read_messages.all())
         for msg in context['object_list']:
-            if self.request.user not in msg.readers.all():
-                msg.readers.add(self.request.user)
+            if msg not in read_messages:
+                msg.readers.add(user)
                 msg.not_read = True  # to show the label...
+            msg.is_message = (msg == message)
         return context
 
 
