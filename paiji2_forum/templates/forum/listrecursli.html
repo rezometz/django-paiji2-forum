@@ -22,11 +22,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load static %}
 {% load mptt_tags %}
 {% load profile %}
-{% with text=node.text readings=node.readings %}
 <li>
     <div {% if node.is_message %}id="forum-message"{% endif %}>
         <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message"
-            title="{{ text|truncatechars:30 }}"
+            title="{{ title }}"
             ><img class="forum-icon" src="{% static node.icon.url %}" alt="{{ node.icon.name }}"/> {{ node.title }}</a>
 
         <small> 
@@ -35,8 +34,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             {% endif %}
             <span
              class="label label-sm{% if node.is_burning %} label-danger{% elif node.is_new %} label-warning{% else %} label-default{% endif %}"
-             title="{% blocktrans count nb=readings %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}"
-            >{{ readings }}</span>
+             title="{% blocktrans count nb=node.readings %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}"
+            >{{ node.readings }}</span>
         </small>
         {% profile_link node.author %}
         <small>
@@ -44,35 +43,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </small>
     </div>
 
-    <div {% if node.is_message %}id="forum-message-text"{% endif %} class="well well-sm forum-text">
-        <a class="pull-right" href="{% url 'forum:answer' node.pk %}#forum-answer">
-        <small>
-        <span class="glyphicon glyphicon-pencil"></span>
-        {% trans 'answer' %}
-        </small>
-        </a>
-        {{ text|urlize|linebreaks }}
-    </div>
-
-    <ul class="answers">
-
-        {% if form and node.is_message %}
-        <li class="form">
-            <form id="forum-answer" action="{% url 'forum:answer' node.pk %}" method="post">
-            {% csrf_token %}
-            {% include 'forum/form.html' %}
-            <button class="btn btn-primary btn-block" type="submit">
-                {% trans 'publish the answer' %}
-            </button>
-            </form>
-        </li>
-        {% endif %}
-
-{% endwith %}
-
         {% if not node.is_leaf_node %}
+        <ul class="answers">
             {{ children }}
+        </ul>
         {% endif %}
-
-    </ul>
 </li>

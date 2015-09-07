@@ -38,7 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		{% for msg in messages %}
 			<li>
 
-					<a class="forum-message-title" href="{% url 'forum:message' msg.pk %}#forum-message" title="{{ msg.title }}{% if not msg.is_topic %}{{ ' ('|add:_('in')|add:': '|add:msg.topic.title|add:')' }}{% else %}{{ ' ('|add:_('new topic')|add:')' }}{% endif %}">
+					<a class="forum-message-title" href="{% url 'forum:message' msg.pk %}#forum-message" title="{{ msg.title }}">
 						<img class="forum-icon" src="{% static msg.icon.url %}" alt="{{ msg.icon.name }}"/>
 						{{ msg.title|truncatechars:15 }}
 					</a>
@@ -46,8 +46,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <small> 
                         <span
                          class="label label-sm{% if msg.is_burning %} label-danger{% elif msg.is_new %} label-warning {% endif %}"
-                         title="{% blocktrans count nb=msg.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">
-                         {{ msg.readers.count }}</span>
+                         title="{% blocktrans count nb=msg.readings %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}">
+                         {{ msg.readings }}</span>
                     </small>
 
                     <span class="pull-right">

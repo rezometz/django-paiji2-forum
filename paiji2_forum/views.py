@@ -33,32 +33,65 @@ from django.forms import ModelForm, RadioSelect,\
 class TopicListView(ListView):
 
     template_name = 'forum/index.html'
-    paginate_by = 12
-    queryset = Message.objects.root_nodes().order_by('-pub_date')
+    paginate_by = 10
+    queryset = Message.objects\
+        .root_nodes()\
+        .order_by('-pub_date')
+
+    def get_context_data(self, **kwargs):
+        context = super(TopicListView, self).get_context_data(**kwargs)
+        for msg in context['object_list']:
+            msg.tree = msg.get_tree(
+                user=self.request.user,
+            )
+
+        return context
 
 
 class NewMessagesView(ListView):
 
     template_name = 'forum/recents.html'
-    paginate_by = 30
-    queryset = Message.objects.order_by('-pub_date')
+    paginate_by = 15
 
-    def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
-        return context
+    def get_queryset(self):
+        qs = Message.objects\
+            .defer(
+                 'text',
+            ).order_by(
+                '-pub_date',
+            ).select_related(
+                'author',
+                'icon',
+            ).annotate(
+               readings=Count('readers'),
+            )
+
+        for i in qs:
+            if not i.readers.filter(
+                pk=self.request.user.pk
+            ).exists():
+                i.not_read = True
+        return qs
 
 
 class UnreadMessagesView(NewMessagesView):
 
     template_name = 'forum/unread.html'
-    paginate_by = 30
+    paginate_by = 20
 
     def get_queryset(self):
         return Message.objects\
-            .exclude(
+            .defer(
+                'text',
+            ).exclude(
                 readers__pk=self.request.user.pk
             ).order_by(
                 '-pub_date'
+            ).select_related(
+                'author',
+                'icon',
+            ).annotate(
+                readings=Count('readers'),
             )
 
 
@@ -68,31 +101,26 @@ class TopicView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
+
         message = get_object_or_404(
             Message,
             pk=self.kwargs['pk'],
         )
+
         user = self.request.user
-        object_list = message.topic()\
-            .get_tree()\
-            .select_related(
-                "author",
-                "icon",
-            ).annotate(
-                readings=Count('readers'),
-            )
+
+        object_list = message.get_tree(
+            user=user,
+            text=True,
+            read=True,
+        )
+
         context.update({
-            'message': message,
             'prev_topic': message.prev_topic,
             'next_topic': message.next_topic,
             'object_list': object_list,
         })
-        read_messages = user.read_messages.filter(pk__in=object_list)
-        for msg in context['object_list']:
-            if msg not in read_messages:
-                msg.readers.add(user)
-                msg.not_read = True  # to show the label...
-            msg.is_message = (msg == message)
+
         return context
 
 
@@ -141,10 +169,13 @@ class AnswerCreate(CreateView):
                 Message,
                 pk=self.kwargs['pk'],
             )
-            object_list = message.topic().get_tree()
+            object_list = message.get_tree(
+                user=self.request.user,
+                text=True,
+                read=False,
+            )
             context.update({
                 'object_list': object_list,
-                'message': message,
             })
         return context
 

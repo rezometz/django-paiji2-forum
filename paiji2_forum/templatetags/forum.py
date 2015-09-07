@@ -1,5 +1,6 @@
 from django import template
 from ..models import Message
+from django.db.models import Count
 
 
 register = template.Library()
@@ -11,10 +12,16 @@ register = template.Library()
 )
 def get_forum(context, nb=15):
     return {
-        'messages': Message.objects.exclude(
+        'messages': Message.objects.defer(
+                'text',
+            ).exclude(
                 readers__pk=context['request'].user.pk
             ).order_by(
                 '-pub_date'
-            ).all()[:nb],
-        'user': context['request'].user,
+            ).select_related(
+                'author',
+                'icon',
+            ).annotate(
+                readings=Count('readers'),
+            )[:nb]
     }

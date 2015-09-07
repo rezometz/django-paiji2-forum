@@ -59,23 +59,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	<li>
     {% block message-title %}
 
-    <div {% if msg == message %}id="forum-message"{% elif msg == question %}id="forum-question"{% endif %} {% block entry-class %}class ="{%if msg.is_topic %}topic-entry {% endif %}forum-entry"{% endblock %}
-    title="{{ msg.title }}">
+    <div class="forum-entry" title="{{ msg.title }}">
         <a class="forum-message-title" href="{% url 'forum:message' msg.pk %}#forum-message">
             <img class="forum-icon" src="{% static msg.icon.url %}" alt="{{ msg.icon.name }}"/>
-            {{ msg.title|truncatechars:25 }}
+            {{ msg.title }}
         </a>
 
         <small> 
 
-            {% if request.user not in msg.readers.all %}
+            {% if msg.not_read %}
             <span class="label label-sm label-primary">{% trans 'unread' context 'sing' %}</span>
             {% endif %}
 
             <span
              class="label label-sm{% if msg.is_burning %} label-danger{% elif msg.is_new %} label-warning{% else %} label-default{% endif %}"
-             title="{% blocktrans count nb=msg.readers.count %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}"
-             >{{ msg.readers.count }}</span>
+             title="{% blocktrans count nb=msg.readings %}one reading{% plural %}{{ nb }} readings{% endblocktrans %}"
+             >{{ msg.readings }}</span>
 
         </small>
 
@@ -88,6 +87,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
         {% block topic-name %}
+        {% comment %}
         {% if msg.is_topic %}
             <span class="label label-sm label-info pull-right">
                 {% trans 'topic' %}
@@ -100,6 +100,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 </span>
             ]</span>
         {% endif %}
+        {% endcomment %}
         {% endblock %}
 
     </div>

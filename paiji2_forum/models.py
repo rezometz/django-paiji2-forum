@@ -21,7 +21,9 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from datetime import timedelta
+from django.db.models import Count
 from mptt.models import MPTTModel, TreeForeignKey
+from django.db.models import BooleanField, Case, Value, When
 
 
 class MessageIcon(models.Model):
@@ -109,12 +111,57 @@ class Message(MPTTModel):
         return self.topic().get_next_sibling()
     next_topic.short_description = _('next topic')
 
-    def get_tree(self):
+    def get_tree(self, text=False, user=None, read=False):
         """
         return all the messages of the current topic,
         in tree order
         """
-        return self.topic().get_descendants(include_self=True)
+        if text:
+            qs = self.topic().get_descendants(
+                    include_self=True
+                ).select_related(
+                    'author',
+                    'icon',
+                ).annotate(
+                    readings=Count('readers'),
+                    is_message=Case(
+                        When(
+                            pk=self.pk,
+                            then=Value(True),
+                        ),
+                        default=Value(False),
+                        output_field=BooleanField(),
+                    ),
+                )
+        else:  # if not text
+            qs = self.topic().get_descendants(
+                    include_self=True
+                ).select_related(
+                    'author',
+                    'icon',
+                ).defer(
+                    'text',
+                ).annotate(
+                    readings=Count('readers'),
+                    is_message=Case(
+                        When(
+                            pk=self.pk,
+                            then=Value(True),
+                        ),
+                        default=Value(False),
+                        output_field=BooleanField(),
+                    ),
+                )
+        if user is not None:
+            sel = []
+            for i in qs:
+                if not i.readers.filter(pk=user.pk).exists():
+                    i.not_read = True
+                    if read:
+                        sel += [i]
+            if read:
+                user.read_messages.add(*sel)
+        return qs
 
     def is_topic(self):
         """return if the message is a topic's first message"""

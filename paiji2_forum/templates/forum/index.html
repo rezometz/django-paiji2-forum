@@ -36,8 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% for topic in object_list %}
 
 <ul class="topic">
-    {% recursetree topic.get_tree %}
-        {% include 'forum/recurseli.html' %}
+    {% recursetree topic.tree %}
+        {% include 'forum/listrecursli.html' %}
     {% endrecursetree %}
 </ul>
 
