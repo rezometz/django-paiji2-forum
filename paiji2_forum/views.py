@@ -27,7 +27,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Message, MessageIcon
 from django.db.models import Count
 from django.forms import ModelForm, RadioSelect,\
-    ModelChoiceField, TextInput, Textarea
+    ModelChoiceField, TextInput  # , Textarea
+from django_markdown.widgets import MarkdownWidget
 
 
 class TopicListView(ListView):
@@ -144,7 +145,7 @@ class AnswerForm(ModelForm):
         fields = ['icon', 'title', 'text']
         widgets = {
             'title': TextInput(attrs={'class': 'form-control'}),
-            'text': Textarea(attrs={'class': 'form-control'}),
+            'text': MarkdownWidget(),
         }
 
 

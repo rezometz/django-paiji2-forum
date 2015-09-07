@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load static %}
 {% load mptt_tags %}
 {% load profile %}
-<li>
+<li class="rborder">
     <div {% if node.is_message %}id="forum-message"{% endif %}>
         <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message"
             title="{{ title }}"

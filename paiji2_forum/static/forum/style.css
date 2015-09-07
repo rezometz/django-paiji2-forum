@@ -81,7 +81,7 @@ ul.answers {
 }
 
 
-ul.answers li {
+ul.answers li.rborder {
     border-left-style: dotted;
     border-left-color: #0FFF7A;
     border-left-width: 0.2em;

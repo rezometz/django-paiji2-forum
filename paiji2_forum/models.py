@@ -24,6 +24,7 @@ from datetime import timedelta
 from django.db.models import Count
 from mptt.models import MPTTModel, TreeForeignKey
 from django.db.models import BooleanField, Case, Value, When
+from django_markdown.models import MarkdownField
 
 
 class MessageIcon(models.Model):
@@ -59,7 +60,7 @@ class Message(MPTTModel):
         verbose_name=_('title'),
     )
 
-    text = models.TextField(
+    text = MarkdownField(
         verbose_name=_('text'),
     )
 

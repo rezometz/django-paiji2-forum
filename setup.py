@@ -47,6 +47,7 @@ setup(
         'django-mptt>=0.7',
         'django-bootstrap3>=6',
         'django-paiji2-utils>=0.1',
+        'django-markdown>=0.8',
     ],
     classifiers=[
         'Environment :: Web Environment',

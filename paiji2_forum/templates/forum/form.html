@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load static %}
 {% load bootstrap3 %}
 {% load i18n %}
+{% load django_markdown %}
 
 
 <div class="form-group">
@@ -47,5 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     {% bootstrap_label _('Text') label_for='id_text' %}
     {% bootstrap_field form.text show_label=False %}
+		{% markdown_editor "#id_text" %}
+		{% markdown_media %}
 
 </div>

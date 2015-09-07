@@ -22,8 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load static %}
 {% load mptt_tags %}
 {% load profile %}
+{% load django_markdown %}
 {% with text=node.text readings=node.readings %}
-<li>
+<li class="rborder">
     <div {% if node.is_message %}id="forum-message"{% endif %}>
         <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message"
             title="{{ text|truncatechars:30 }}"
@@ -51,7 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         {% trans 'answer' %}
         </small>
         </a>
-        {{ text|urlize|linebreaks }}
+        {{ text|markdown }}
     </div>
 
     <ul class="answers">
