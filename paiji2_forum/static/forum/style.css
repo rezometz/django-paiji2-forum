@@ -1,3 +1,8 @@
+.markItUpHeader ul a {
+		width: 2em;
+		height: 2em;
+}
+
 .markItUp, .markItUpEditor {
 		width: 100%;
 }
