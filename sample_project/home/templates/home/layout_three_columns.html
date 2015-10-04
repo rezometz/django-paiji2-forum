@@ -29,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <meta charset="utf-8">
         <title>{% trans 'Sample Project' %} | {% block title %}{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.min.css" %}"/>
+        <script src="{% static 'jquery.min.js' %}"></script>
         <!-- TRANSLATIONS -->
         {% for language in languages %}{% if not language.code == LANGUAGE_CODE %}
         <link rel="alternate" hreflang="{{ language.code }}" href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"/>

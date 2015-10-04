@@ -55,8 +55,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'bootstrap3',
     'mptt',
+    'django_markdown',
     'paiji2_forum',
     'home',
     'paiji2_utils',
@@ -119,7 +121,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR + '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
+
+# django_markdown
+MARKDOWN_PROTECT_PREVIEW = False
+MARKDOWN_EXTENSIONS = ['extra', 'codehilite']

@@ -17,7 +17,9 @@
 
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.conf import settings
 
 admin.autodiscover()
 
@@ -28,4 +30,8 @@ urlpatterns = [
     url(r'^', include('home.urls')),
     url(r'^', include('paiji2_forum.urls', namespace='forum')),
     url(r'^admin/', include(admin.site.urls)),
+    url('^md/', include('django_markdown.urls')),
+) + static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT
 )
