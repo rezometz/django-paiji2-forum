@@ -1,3 +1,8 @@
+.forum-text p img {
+    max-width: 100%;
+    height: auto;
+}
+
 .markItUpHeader ul a {
 		width: 2em;
 		height: 2em;
