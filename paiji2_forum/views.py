@@ -52,7 +52,7 @@ class TopicListView(ListView):
 class BurningTopicsView(ListView):
 
     template_name = 'forum/burning.html'
-    paginate_by = 10
+    paginate_by = 30
 
     def get_queryset(self):
         qs = Message.objects\
