@@ -68,7 +68,7 @@ class BurningTopicsView(ListView):
     def get_context_data(self, **kwargs):
         context = super(BurningTopicsView, self).get_context_data(**kwargs)
 
-        topics = set();
+        topics = set()
         for msg in context['object_list']:
             t = msg.topic()
             if t not in topics:
@@ -81,6 +81,7 @@ class BurningTopicsView(ListView):
                 msg.tree = None
 
         return context
+
 
 class NewMessagesView(ListView):
 
