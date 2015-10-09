@@ -108,7 +108,7 @@ class AccessTestCase(MyTest):
     def test_unauthenticated_user(self):
 
         self.access('forum:topic-list', 302)
-        self.access('forum:recent-list', 302)
+        self.access('forum:burning-list', 302)
         self.access('forum:unread', 302)
         self.access('forum:new', 302)
         self.access_url(
@@ -152,7 +152,7 @@ class AccessTestCase(MyTest):
             password='iseult_password',
         )
         self.access('forum:topic-list', 200)
-        self.access('forum:recent-list', 200)
+        self.access('forum:burning-list', 200)
         self.access('forum:unread', 200)
         self.access('forum:new', 200)
         self.access_url(

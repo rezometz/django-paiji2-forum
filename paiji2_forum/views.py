@@ -49,6 +49,39 @@ class TopicListView(ListView):
         return context
 
 
+class BurningTopicsView(ListView):
+
+    template_name = 'forum/burning.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        qs = Message.objects\
+                .defer(
+                    'text',
+                    'author',
+                    'icon',
+                ).order_by(
+                    '-pub_date',
+                )
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(BurningTopicsView, self).get_context_data(**kwargs)
+
+        topics = set();
+        for msg in context['object_list']:
+            t = msg.topic()
+            if t not in topics:
+                msg.tree = msg.get_tree(
+                    user=self.request.user,
+                )
+                topics.add(t)
+            else:
+                # context['object_list'].remove(msg)
+                msg.tree = None
+
+        return context
+
 class NewMessagesView(ListView):
 
     template_name = 'forum/recents.html'

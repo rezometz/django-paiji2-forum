@@ -27,6 +27,11 @@ urlpatterns = [
         name='topic-list',
     ),
     url(
+        r'^burning/$',
+        login_required(views.BurningTopicsView.as_view()),
+        name='burning-list',
+    ),
+    url(
         r'^recent/$',
         login_required(views.NewMessagesView.as_view()),
         name='recent-list',

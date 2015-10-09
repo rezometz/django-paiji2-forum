@@ -1,4 +1,4 @@
-{% extends 'forum/all.html' %}
+{% extends 'forum/index.html' %}
 
 {% comment %}
 
@@ -20,36 +20,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {% endcomment %}
-{% load i18n %}
-{% load mptt_tags %}
-
-{% block class-topics %}active{% endblock %}
+{% block class-topics %}{% endblock %}
 {% block class-unread %}{% endblock %}
-{% block class-recent %}{% endblock %}
+{% block class-recent %}active{% endblock %}
 {% block class-new %}{% endblock %}
-
-{% block forum-top-nav %}{% endblock %}
-{% block forum-bottom-nav %}{% endblock %}
-
-{% block forum-content %}
-
-{% for topic in object_list %}
-{% if topic.tree %}
-
-<ul class="topic">
-    {% recursetree topic.tree %}
-        {% include 'forum/listrecursli.html' %}
-    {% endrecursetree %}
-</ul>
-
-{% endif %}
-
-{% empty %}
-
-<p>
-    <span class="label label-default">{% trans 'no message' %}</span>
-</p>
-
-{% endfor %}
-
-{% endblock %}
