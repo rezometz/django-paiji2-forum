@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
-"Report-Msgid-Bugs-To: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
-"POT-Creation-Date: 2015-08-19 12:52+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-10 01:27+0200\n"
 "PO-Revision-Date: 2015-08-19 13:00+0200\n"
 "Last-Translator: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
 "Language: french\n"
@@ -17,32 +17,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: templates/home/layout_three_columns.html:30
+#: templates/base.html:30 templates/home/layout_three_columns.html:30
 msgid "Sample Project"
 msgstr "Projet exemple"
 
-#: templates/home/layout_three_columns.html:76
+#: templates/base.html:77 templates/home/layout_three_columns.html:77
 msgid "forum"
 msgstr "forum"
 
-#: templates/home/layout_three_columns.html:80 templates/home/login.html:26
-#: templates/home/login.html.py:33
+#: templates/base.html:81 templates/home/layout_three_columns.html:81
+#: templates/home/login.html:26 templates/home/login.html.py:33
 msgid "login"
 msgstr "se connecter"
 
-#: templates/home/layout_three_columns.html:84
+#: templates/base.html:85 templates/home/layout_three_columns.html:85
 msgid "logout"
 msgstr "se déconnecter"
 
-#: templates/home/layout_three_columns.html:87
+#: templates/base.html:88 templates/home/layout_three_columns.html:88
 #: templates/home/password_change.html:26
 #: templates/home/password_change.html:33
 msgid "change password"
 msgstr "modifier le mot de passe"
 
-#: templates/home/layout_three_columns.html:91
+#: templates/base.html:92 templates/home/layout_three_columns.html:92
 msgid "admin"
 msgstr "admin"
+
+#: templates/home/login.html:34
+msgid "lost password ?"
+msgstr "mot de passe oublié ?"
 
 #~ msgid "language"
 #~ msgstr "langue"

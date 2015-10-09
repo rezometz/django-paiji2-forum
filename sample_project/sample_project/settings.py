@@ -26,6 +26,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 from django.conf import global_settings
+from mail_settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -55,6 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'password_reset',
 
     'bootstrap3',
     'mptt',

@@ -28,6 +28,7 @@ urlpatterns = [
 ] + i18n_patterns(
     '',
     url(r'^', include('home.urls')),
+    url(r'^reset/', include('password_reset.urls')),
     url(r'^', include('paiji2_forum.urls', namespace='forum')),
     url(r'^admin/', include(admin.site.urls)),
     url('^md/', include('django_markdown.urls')),
