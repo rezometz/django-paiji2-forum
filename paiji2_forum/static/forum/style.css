@@ -16,6 +16,10 @@
     font-size: 14px;
 }
 
+.forum-icon-selector input[type="radio"] {
+    display:none;
+}
+
 .forum-icon-selector input[type="radio"]:checked + label {
     background-color: #DBFFEB;
     border: 3px solid #FF8400;
