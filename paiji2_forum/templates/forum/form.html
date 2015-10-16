@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             {{ form.icon.errors }}
         </div>
         {% endif %}
-        {% for radio in form.icon %}
+        {% for radio in form.icon|dictsort:"choice_label" %}
             {{ radio.tag }}
             <label for="{{ radio.id_for_label }}">
             <img class="icon" src="{% static radio.choice_label %}" alt="{{ radio.choice_label }}"/> 

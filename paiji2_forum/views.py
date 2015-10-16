@@ -161,11 +161,20 @@ class IconField(ModelChoiceField):
 
 class AnswerForm(ModelForm):
 
-    icon = IconField(
-        queryset=MessageIcon.objects.all(),
-        empty_label=None,
-        widget=RadioSelect,
-    )
+    try:
+        icon = IconField(
+            queryset=MessageIcon.objects.all(),
+            initial=MessageIcon.objects.get(name='neutre.gif'),
+            empty_label=None,
+            widget=RadioSelect,
+        )
+    except Exception as e:
+        icon = IconField(
+            queryset=MessageIcon.objects.all(),
+            empty_label=None,
+            widget=RadioSelect,
+        )
+        print('[AnswerForm]: ', e)
 
     class Meta:
         model = Message
