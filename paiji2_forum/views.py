@@ -31,10 +31,13 @@ from django.forms import ModelForm, RadioSelect,\
 from django_markdown.widgets import MarkdownWidget
 
 
+TOPIC_NB = 20
+
+
 class TopicListView(ListView):
 
     template_name = 'forum/index.html'
-    paginate_by = 10
+    paginate_by = TOPIC_NB
     queryset = Message.objects\
         .root_nodes()\
         .order_by('-pub_date')
@@ -52,7 +55,7 @@ class TopicListView(ListView):
 class BurningTopicsView(ListView):
 
     template_name = 'forum/burning.html'
-    paginate_by = 10
+    paginate_by = TOPIC_NB
 
     def get_queryset(self):
         qs = Message.objects\
@@ -79,7 +82,7 @@ class BurningTopicsView(ListView):
 class NewMessagesView(ListView):
 
     template_name = 'forum/recents.html'
-    paginate_by = 15
+    paginate_by = TOPIC_NB
 
     def get_queryset(self):
         qs = Message.objects\
@@ -105,7 +108,7 @@ class NewMessagesView(ListView):
 class UnreadMessagesView(NewMessagesView):
 
     template_name = 'forum/unread.html'
-    paginate_by = 20
+    paginate_by = 50
 
     def get_queryset(self):
         return Message.objects\
