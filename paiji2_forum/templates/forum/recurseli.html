@@ -52,7 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         {% trans 'answer' %}
         </small>
         </a>
-        {{ text|markdown|removetags:"script" }}
+        {{ text|markdown|removetags:"script iframe" }}
     </div>
 
     <ul class="answers">
