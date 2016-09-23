@@ -1,5 +1,0 @@
-django>=1.10
-django-bootstrap3>=0.7
-django-mptt>=0.7
-django-password-reset>=0.9
-django-html-validator

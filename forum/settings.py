@@ -128,7 +128,6 @@ LOGIN_REDIRECT_URL = 'forum:topic-list'
 LOGOUT_REDIRECT_URL = 'forum:topic-list'
 
 HTMLVALIDATOR_ENABLED = True
-HTMLVALIDATOR_OUTPUT = 'stdout'
 HTMLVALIDATOR_FAILFAST = True
 # HTMLVALIDATOR_VNU_URL = 'http://localhost:8088/'
 HTMLVALIDATOR_VNU_URL = 'https://checker.html5.org'
