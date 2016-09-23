@@ -24,6 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load bootstrap3 %}
 
 {% block title %}{% trans 'Forum' %}{% endblock %}
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'forum/style.css' %}" />
+{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -93,7 +96,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     {% block forum-bottom-nav %}
     {% endblock %}
 
-    <link property="stylesheet" rel="stylesheet" type="text/css" href="{% static 'forum/style.css' %}" />
 </div>
 
 <footer>
