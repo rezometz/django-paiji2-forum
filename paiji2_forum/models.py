@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Louis-Guillaume DUBOIS
+# Copyright (C) 2015-2016 Louis-Guillaume DUBOIS
 #
 # This file is part of paiji2-forum
 #
@@ -15,16 +15,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.db import models
-from django.utils import timezone
-from django.conf import settings
-from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext as _
 from datetime import timedelta
-from django.db.models import Count
+from django.conf import settings
+from django.urls import reverse
+from django.db import models
+from django.db.models import Case, Value, When, Count
+from django.utils import timezone
+from django.utils.translation import ugettext as _
 from mptt.models import MPTTModel, TreeForeignKey
-from django.db.models import BooleanField, Case, Value, When
-from django_markdown.models import MarkdownField
+from django.contrib.auth.models import AnonymousUser
 
 
 class MessageIcon(models.Model):
@@ -60,7 +59,7 @@ class Message(MPTTModel):
         verbose_name=_('title'),
     )
 
-    text = MarkdownField(
+    text = models.TextField(
         verbose_name=_('text'),
     )
 
@@ -131,7 +130,7 @@ class Message(MPTTModel):
                             then=Value(True),
                         ),
                         default=Value(False),
-                        output_field=BooleanField(),
+                        output_field=models.BooleanField(),
                     ),
                 )
         else:  # if not text
@@ -150,10 +149,10 @@ class Message(MPTTModel):
                             then=Value(True),
                         ),
                         default=Value(False),
-                        output_field=BooleanField(),
+                        output_field=models.BooleanField(),
                     ),
                 )
-        if user is not None:
+        if user is not None and not isinstance(user, AnonymousUser):
             sel = []
             for i in qs:
                 if not i.readers.filter(pk=user.pk).exists():
@@ -168,7 +167,7 @@ class Message(MPTTModel):
         """return if the message is a topic's first message"""
         return self.is_root_node()
     is_topic.boolean = True
-    is_topic.short_description = _('Is it a topic ?')
+    is_topic.short_description = _('Is it a topic?')
 
     def is_new(self, hours=48):
         """
@@ -179,7 +178,7 @@ class Message(MPTTModel):
         delta = timedelta(hours=hours)
         return (timezone.now() - self.pub_date) < delta
     is_new.boolean = True
-    is_new.short_description = _('Is it recent ?')
+    is_new.short_description = _('Is it recent?')
 
     def is_burning(self, hours=12):
         """
@@ -189,7 +188,7 @@ class Message(MPTTModel):
         """
         return self.is_new(hours=hours)
     is_burning.boolean = True
-    is_burning.short_description = _('Is it very recent ?')
+    is_burning.short_description = _('Is it very recent?')
 
     def __unicode__(self):
         return self.title

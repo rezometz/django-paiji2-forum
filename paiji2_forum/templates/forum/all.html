@@ -51,8 +51,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% endblock %}
 
 
-
 {% block forum-content %}
+
+{% block profile %}{% endblock %}
 
 <ul class="list-unstyled">
 {% for msg  in object_list %}
@@ -79,7 +80,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </small>
 
 		<span>
-			{% profile_link msg.author %}
+			{% profile_link  msg.author %}
 			<small>
 				<span class="text-muted">{% blocktrans with TimeSince=msg.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
 			</small>

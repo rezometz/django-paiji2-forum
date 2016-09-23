@@ -1,0 +1,46 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-23 16:58+0200\n"
+"PO-Revision-Date: 2015-08-19 13:00+0200\n"
+"Last-Translator: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
+"Language: german\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/home/layout.html:28
+msgid "Sample Project"
+msgstr "Beispiel Projekt"
+
+#: templates/home/layout.html:37
+msgid "forum"
+msgstr "Forum"
+
+#: templates/home/layout.html:41 templates/home/login.html:26
+#: templates/home/login.html:33
+msgid "login"
+msgstr "Anmelden"
+
+#: templates/home/layout.html:45
+msgid "logout"
+msgstr "Abmelden"
+
+#: templates/home/layout.html:48 templates/home/password_change.html:26
+#: templates/home/password_change.html:33
+msgid "change password"
+msgstr "Passwort ändern"
+
+#: templates/home/layout.html:52
+msgid "admin"
+msgstr "Verwaltung"
+
+#: templates/home/login.html:34
+msgid "lost password ?"
+msgstr "vergessenes Passwort ?"
+
+#~ msgid "language"
+#~ msgstr "Sprache"

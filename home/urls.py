@@ -15,26 +15,34 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from . import __path__
-from models import MessageIcon
-from django.core.exceptions import ObjectDoesNotExist,\
-    MultipleObjectsReturned
-from glob import glob
+from django.conf.urls import url
+from django.contrib.auth.views import login, logout, password_change
 
-
-def update_icons_db():
-    path = __path__[0]
-    files = glob(path + '/static/forum/icons/*.jpg')\
-        + glob(path + '/static/forum/icons/*.gif')\
-        + glob(path + '/static/forum/icons/*.png')
-    for j in files:
-        i = j.split('/').pop()
-        try:
-            MessageIcon.objects.get(filename=i)
-        except ObjectDoesNotExist:
-            MessageIcon(name=i, filename=i).save()
-            print "file {} added".format(i)
-        except MultipleObjectsReturned:
-            print "{} is not unique".format(i)
-        except:
-            pass
+app_name='home'
+urlpatterns = [
+    url(
+        r'^login/',
+        login,
+        dict(
+            template_name='home/login.html',
+        ),
+        name='login',
+    ),
+    url(
+        r'^logout/',
+        logout,
+        dict(
+            next_page='/',
+        ),
+        name='logout'
+    ),
+    url(
+        r'^password_change/',
+        password_change,
+        dict(
+            post_change_redirect='/',
+            template_name='home/password_change.html',
+        ),
+        name='password_change',
+    ),
+]

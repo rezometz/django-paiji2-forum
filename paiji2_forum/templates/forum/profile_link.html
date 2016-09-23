@@ -1,0 +1,4 @@
+{% load profile %}
+<a class="profile-link" href="{% profile_url user %}" title="{{ user.first_name }} {{ user.last_name }}">
+    {{ user }}
+</a>

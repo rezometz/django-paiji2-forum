@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015 Louis-Guillaume DUBOIS
+# Copyright (C) 2015-2016 Louis-Guillaume DUBOIS
 #
 # This file is part of paiji2-forum
 #
@@ -20,10 +20,10 @@ from django.test import TestCase
 from django.utils import timezone
 from htmlvalidator.client import ValidatingClient
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from datetime import timedelta
 
-from .models import Message, MessageIcon
+from models import Message, MessageIcon
 
 User = get_user_model()
 
@@ -31,7 +31,8 @@ User = get_user_model()
 class MyTest(TestCase):
 
     def path(self, url):
-        return '/' + '/'.join(url.split('/')[3:])
+        return url
+        # return '/' + '/'.join(url.split('/')[3:])
 
     def setUp(self):
         self.client = ValidatingClient()
@@ -107,20 +108,20 @@ class AccessTestCase(MyTest):
 
     def test_unauthenticated_user(self):
 
-        self.access('forum:topic-list', 302)
-        self.access('forum:burning-list', 302)
+        self.access('forum:topic-list', 200)
+        self.access('forum:burning-list', 200)
         self.access('forum:unread', 302)
         self.access('forum:new', 302)
         self.access_url(
             self.first_message.get_absolute_url(),
-            302,
+            200,
         )
         self.access_url(
             reverse(
                 'forum:message',
                 kwargs={'pk': self.first_message.pk},
             ),
-            302,
+            200,
         )
         self.access_url(
             reverse(
@@ -128,6 +129,13 @@ class AccessTestCase(MyTest):
                 kwargs={'pk': self.first_message.pk},
             ),
             302,
+        )
+        self.access_url(
+            reverse(
+                'forum:profile',
+                kwargs={'pk': self.iseult.pk},
+            ),
+            200,
         )
         # nonexistant message
         self.access_url(
@@ -135,7 +143,7 @@ class AccessTestCase(MyTest):
                 'forum:message',
                 kwargs={'pk': self.first_message.pk + 1000},
             ),
-            302,
+            404,
         )
         self.access_url(
             reverse(
@@ -143,6 +151,13 @@ class AccessTestCase(MyTest):
                 kwargs={'pk': self.first_message.pk + 1000},
             ),
             302,
+        )
+        self.access_url(
+            reverse(
+                'forum:profile',
+                kwargs={'pk': self.iseult.pk + 1000},
+            ),
+            404,
         )
 
     def test_authenticated_user(self):
@@ -173,6 +188,13 @@ class AccessTestCase(MyTest):
             ),
             200,
         )
+        self.access_url(
+            reverse(
+                'forum:profile',
+                kwargs={'pk': self.iseult.pk},
+            ),
+            200,
+        )
         # nonexistant message
         self.access_url(
             reverse(
@@ -185,6 +207,13 @@ class AccessTestCase(MyTest):
             reverse(
                 'forum:answer',
                 kwargs={'pk': self.first_message.pk + 1000},
+            ),
+            404,
+        )
+        self.access_url(
+            reverse(
+                'forum:profile',
+                kwargs={'pk': self.iseult.pk + 1000},
             ),
             404,
         )

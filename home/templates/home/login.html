@@ -1,4 +1,4 @@
-{% extends 'forum/base.html' %}
+{% extends "home/layout.html" %}
 {% comment %}
 
 Copyright (C) 2015 Louis-Guillaume DUBOIS
@@ -19,25 +19,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {% endcomment %}
+{% load bootstrap3 %}
 {% load i18n %}
 
-{% block class-topics %}{% endblock %}
-{% block class-unread %}{% endblock %}
-{% block class-recent %}{% endblock %}
-{% block class-new %}active{% endblock %}
+{% block title %}
+{% trans 'login' %}
+{% endblock %}
 
-{% block forum-content %}
-
-<form action="{{ request.get_full_path }}" method="post">
-
-{% csrf_token %}
-
-{% include 'forum/form.html' %}
-
-<button class="btn btn-primary btn-block" type="submit">
-    {% trans 'publish the message' %}
-</button>
-
+{% block content %}
+<form method="post" action="{{ request.get_full_path }}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input class="btn btn-primary pull-right" type="submit" value="{% trans 'login' %}" />
+    <a class="btn btn-primary btn-warning pull-left" href="{% url 'password_reset_recover' %}">{% trans 'lost password ?' %}</a>
 </form>
-
 {% endblock %}

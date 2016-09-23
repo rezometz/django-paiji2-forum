@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Louis-Guillaume DUBOIS
+# Copyright (C) 2015-2016 Louis-Guillaume DUBOIS
 #
 # This file is part of paiji2-forum
 #
@@ -16,27 +16,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.contrib import admin
+from .models import Message
 from mptt.admin import MPTTModelAdmin
-from .models import Message, MessageIcon
-
-
-class MessageIconAdmin(admin.ModelAdmin):
-    list_display = ('name', 'filename', 'url')
-    search_fields = ['name', 'filename']
 
 
 class MessageAdmin(MPTTModelAdmin):
     list_display = (
-        'title',
-        'author',
-        'pub_date',
-        'text',
+        'title', 'author', 'pub_date',
+        'icon', 'is_topic', 'topic',
+        'is_new', 'is_burning'
     )
-    search_fields = [
-        'title',
-        'author',
-        'text',
-    ]
+    list_filter = ('pub_date', 'author')
+    search_fields = ['title', 'text', 'author__username']
 
-admin.site.register(MessageIcon, MessageIconAdmin)
+
 admin.site.register(Message, MessageAdmin)

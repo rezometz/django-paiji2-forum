@@ -1,0 +1,7 @@
+{% load profile %}
+{% load i18n %}
+<a
+title="{% trans 'Send an email to' %} {{ user }}"
+href="mailto:{{ user.email }}{% if subject %}?subject={{ '[forum] '|add:subject|urlencode }}{% endif %}">
+    <span class="fa fa-envelope"></span> {{ text }}
+</a>

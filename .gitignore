@@ -1,7 +1,8 @@
 *.swp
-**/*.pyc
-**/db.sqlite3
-sample_project/static/*
-**/*.mo
+*.pyc
+*.sqlite3
 *.egg-info
-validation_errors/*
+.coverage
+nohup.out
+validator*
+htmlvalidator/*

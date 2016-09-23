@@ -20,8 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% endcomment %}
 {% load i18n %}
 {% load static %}
-{% load mptt_tags %}
 {% load profile %}
+{% load mptt_tags %}
 <li class="rborder">
     <div {% if node.is_message %}id="forum-message"{% endif %}>
         <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message"

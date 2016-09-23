@@ -22,9 +22,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load static %}
 {% load mptt_tags %}
 {% load profile %}
-{% load django_markdown %}
 {% with text=node.text readings=node.readings %}
 <li class="rborder">
+    {% if node.is_message and update %}
+    <div class="form">
+        <form id="forum-answer" action="{{ request.get_full_path }}" method="post">
+        {% csrf_token %}
+        {% include 'forum/form.html' %}
+        <button class="btn btn-primary btn-block" type="submit">
+            {% trans 'update the message' %}
+        </button>
+        </form>
+    </div>
+    {% else %}
     <div {% if node.is_message %}id="forum-message"{% endif %}>
         <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message"
             title="{{ text|truncatechars:30 }}"
@@ -44,22 +54,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <span class="text-muted">{% blocktrans with TimeSince=node.pub_date|timesince %}{{ TimeSince }} ago{% endblocktrans %}</span>
         </small>
     </div>
-
+    
     <div {% if node.is_message %}id="forum-message-text"{% endif %} class="well well-sm forum-text">
-        <a class="pull-right" href="{% url 'forum:answer' node.pk %}#forum-answer">
-        <small>
-        <span class="glyphicon glyphicon-pencil"></span>
-        {% trans 'answer' %}
-        </small>
-        </a>
-        {{ text|markdown|removetags:"script" }}
+        <a class="pull-right" href="{% url 'forum:answer' node.pk %}#forum-answer"><small><span class="glyphicon glyphicon-pencil"></span> {% trans 'answer' %}</small> </a>
+        {% if node.author == user %}
+        <a class="pull-right" href="{% url 'forum:update' node.pk %}#forum-answer"><small><span class="glyphicon glyphicon-wrench"></span> {% trans 'update' %}</small> </a>
+        {% endif %}
+        {{ text }}
     </div>
+    {% endif %}
 
     <ul class="answers">
 
-        {% if form and node.is_message %}
+        {% if form and node.is_message and not update %}
         <li class="form">
-            <form id="forum-answer" action="{% url 'forum:answer' node.pk %}" method="post">
+            <form id="forum-answer" action="{{ request.get_full_path }}" method="post">
             {% csrf_token %}
             {% include 'forum/form.html' %}
             <button class="btn btn-primary btn-block" type="submit">

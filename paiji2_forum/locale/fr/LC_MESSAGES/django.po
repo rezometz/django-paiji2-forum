@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-06 17:21+0200\n"
+"POT-Creation-Date: 2016-09-23 22:10+0200\n"
 "PO-Revision-Date: 2015-08-24 17:00+0200\n"
 "Last-Translator: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
 "Language: \n"
@@ -16,85 +16,83 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models.py:33
+#: models.py:32
 msgid "message icon"
 msgstr "icône de messages"
 
-#: models.py:34
+#: models.py:33
 msgid "message icons"
 msgstr "icônes de messages"
 
-#: models.py:36
+#: models.py:35
 msgid "name"
 msgstr "nom"
 
-#: models.py:37
+#: models.py:36
 msgid "filename"
 msgstr "nom du fichier"
 
-#: models.py:51
+#: models.py:50
 msgid "message"
 msgstr "message"
 
-#: models.py:52
+#: models.py:51
 msgid "messages"
 msgstr "messages"
 
-#: models.py:60
+#: models.py:59
 msgid "title"
 msgstr "titre"
 
-#: models.py:64
+#: models.py:63
 msgid "text"
 msgstr "texte"
 
-#: models.py:69
+#: models.py:68
 msgid "publication date"
 msgstr "date de publication"
 
-#: models.py:75
+#: models.py:74
 msgid "readers"
 msgstr "lecteurs"
 
-#: models.py:83
+#: models.py:82
 msgid "question"
 msgstr "question"
 
-#: models.py:90
+#: models.py:89
 msgid "author"
 msgstr "auteur"
 
-#: models.py:97
+#: models.py:96
 msgid "icon"
 msgstr "icône"
 
-#: models.py:103
+#: models.py:102
 msgid "current topic"
 msgstr "discussion courante"
 
-#: models.py:108
+#: models.py:107
 msgid "previous topic"
 msgstr "discussion précédente"
 
-#: models.py:113
+#: models.py:112
 msgid "next topic"
 msgstr "discussion suivante"
 
-#: models.py:171
-msgid "Is it a topic ?"
-msgstr "Est-ce un topic ?"
+#: models.py:170
+msgid "Is it a topic?"
+msgstr "Est-ce un topic ?"
 
-#: models.py:182
-#, fuzzy
-#| msgid "Is it a topic ?"
-msgid "Is it recent ?"
-msgstr "Est-ce un topic ?"
+#: models.py:181
+msgid "Is it recent?"
+msgstr "Est-ce récent ?"
 
-#: models.py:192
-msgid "Is it very recent ?"
-msgstr ""
+#: models.py:191
+msgid "Is it very recent?"
+msgstr "Est-ce très récent ?"
 
-#: templates/forum/all.html:34 templates/forum/all.html.py:44
+#: templates/forum/all.html:34 templates/forum/all.html:44
 msgid "topic"
 msgstr "discussion"
 
@@ -102,40 +100,40 @@ msgstr "discussion"
 msgid "bottom"
 msgstr "bas"
 
-#: templates/forum/all.html:71 templates/forum/listrecursli.html:33
-#: templates/forum/recurseli.html:35
+#: templates/forum/all.html:72 templates/forum/listrecursli.html:33
+#: templates/forum/recurseli.html:45
 msgctxt "sing"
 msgid "unread"
 msgstr "non lu"
 
-#: templates/forum/all.html:76 templates/forum/forum_block.html:49
-#: templates/forum/listrecursli.html:37 templates/forum/recurseli.html:39
+#: templates/forum/all.html:77 templates/forum/forum_block.html:49
+#: templates/forum/listrecursli.html:37 templates/forum/recurseli.html:49
 #, python-format
 msgid "one reading"
 msgid_plural "%(nb)s readings"
 msgstr[0] "une lecture"
 msgstr[1] "%(nb)s lectures"
 
-#: templates/forum/all.html:84 templates/forum/listrecursli.html:42
-#: templates/forum/recurseli.html:44
+#: templates/forum/all.html:85 templates/forum/listrecursli.html:42
+#: templates/forum/recurseli.html:54
 #, python-format
 msgid "%(TimeSince)s ago"
 msgstr "il y a %(TimeSince)s"
 
-#: templates/forum/all.html:115 templates/forum/index.html:47
+#: templates/forum/all.html:116 templates/forum/index.html:50
 msgid "no message"
 msgstr "aucun message"
 
-#: templates/forum/all.html:138
+#: templates/forum/all.html:139
 msgid "top"
 msgstr "haut"
 
-#: templates/forum/base.html:26 templates/forum/base.html.py:32
+#: templates/forum/base.html:26 templates/forum/base.html:32
 #: templates/forum/forum_block.html:31
 msgid "Forum"
 msgstr "Forum"
 
-#: templates/forum/base.html:47
+#: templates/forum/base.html:47 templates/forum/forum_block.html:84
 msgid "recents"
 msgstr "récents"
 
@@ -144,7 +142,7 @@ msgctxt "plur"
 msgid "unread"
 msgstr "non lus"
 
-#: templates/forum/base.html:59 templates/forum/forum_block.html:84
+#: templates/forum/base.html:59
 msgid "topics"
 msgstr "discussions"
 
@@ -160,19 +158,13 @@ msgstr "code source du forum"
 msgid "forum license"
 msgstr "licence du forum"
 
-#: templates/forum/form.html:46
+#: templates/forum/form.html:45
 msgid "Title"
 msgstr "Titre"
 
-#: templates/forum/form.html:49
+#: templates/forum/form.html:48
 msgid "Text"
 msgstr "Texte"
-
-#: templates/forum/form.html:53
-msgid ""
-"Click the green tick button on the right of the editor toolbar to preview "
-"your message."
-msgstr "Cliquez sur le bouton en forme de croix verte (à droite dans la barre d'outil de l'éditeur) pour prévisualiser votre message."
 
 #: templates/forum/forum_block.html:68
 msgid "no unread message"
@@ -182,14 +174,41 @@ msgstr "pas de message non lu"
 msgid "Unread"
 msgstr "Non lus"
 
+#: templates/forum/mail_link.html:4
+msgid "Send an email to"
+msgstr "Envoyer un couriel à"
+
 #: templates/forum/new.html:38
 msgid "publish the message"
 msgstr "publier le message"
 
-#: templates/forum/recurseli.html:52
+#: templates/forum/profile.html:35
+msgid "Last messages of "
+msgstr "Derniers messages de "
+
+#: templates/forum/recurseli.html:33
+msgid "update the message"
+msgstr "modifier le message"
+
+#: templates/forum/recurseli.html:59
 msgid "answer"
 msgstr "répondre"
 
-#: templates/forum/recurseli.html:66
+#: templates/forum/recurseli.html:61
+msgid "update"
+msgstr "modifier"
+
+#: templates/forum/recurseli.html:75
 msgid "publish the answer"
 msgstr "publier la réponse"
+
+#: views.py:267
+msgid "You are not the author        of the message you want to update!"
+msgstr "Vous n’êtes pas l’auteur       du message que vous voulez modifier ! "
+
+#~ msgid ""
+#~ "Click the green tick button on the right of the editor toolbar to preview "
+#~ "your message."
+#~ msgstr ""
+#~ "Cliquez sur le bouton en forme de croix verte (à droite dans la barre "
+#~ "d'outil de l'éditeur) pour prévisualiser votre message."

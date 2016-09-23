@@ -1,0 +1,60 @@
+{% comment %}
+
+Copyright (C) 2015 Louis-Guillaume DUBOIS
+
+This file is part of paiji2-forum
+
+paiji2-forum is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+paiji2-forum is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+{% endcomment %}
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta charset="utf-8">
+        <title>{% trans 'Sample Project' %} | {% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/bootstrap@3/dist/css/bootstrap.min.css"/>
+        {% block style %}{% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <div class="navbar navbar-default">
+                <ul class="nav nav-pills nav-justified">
+                    <li>
+                        <a href="/">{% trans 'forum' %}</a>
+                    </li>
+                    {% if not user.is_authenticated %}
+                    <li>
+                        <a href={% url 'home:login' %}>{% trans 'login' %}</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href={% url 'home:logout' %}><i>{{ request.user }}</i> {% trans 'logout' %}</a>
+                    </li>
+                    <li>
+                        <a href={% url 'home:password_change' %}>{% trans 'change password' %}</a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href='/admin'>{% trans 'admin' %}</a>
+                    </li>
+                 </ul>
+            </div>
+
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

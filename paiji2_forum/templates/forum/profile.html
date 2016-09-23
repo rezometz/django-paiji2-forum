@@ -1,4 +1,4 @@
-{% extends 'forum/base.html' %}
+{% extends "forum/all.html" %}
 {% comment %}
 
 Copyright (C) 2015 Louis-Guillaume DUBOIS
@@ -19,25 +19,22 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {% endcomment %}
+
 {% load i18n %}
+{% load profile %}
 
 {% block class-topics %}{% endblock %}
 {% block class-unread %}{% endblock %}
 {% block class-recent %}{% endblock %}
-{% block class-new %}active{% endblock %}
+{% block class-new %}{% endblock %}
 
-{% block forum-content %}
+{% block padding %}{% endblock %}
+{% block entry-class %}{% endblock %}
 
-<form action="{{ request.get_full_path }}" method="post">
-
-{% csrf_token %}
-
-{% include 'forum/form.html' %}
-
-<button class="btn btn-primary btn-block" type="submit">
-    {% trans 'publish the message' %}
-</button>
-
-</form>
-
+{% block profile %}
+<h4><strong>{% trans 'Last messages of ' %}</strong>{% profile_link  author %} :</h4>
 {% endblock %}
+
+{% block forum-top-nav %}{% endblock %}
+{% block forum-bottom-nav %}{% endblock %}
+
