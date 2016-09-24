@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'forum.urls'
+ROOT_URLCONF = 'sample_project.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'forum.wsgi.application'
+WSGI_APPLICATION = 'sample_project.wsgi.application'
 
 
 # Database
@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'fr-fr'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'CET'
 
@@ -123,7 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = 'home:login'
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'forum:topic-list'
 LOGOUT_REDIRECT_URL = 'forum:topic-list'
 

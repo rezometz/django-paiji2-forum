@@ -38,14 +38,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </li>
                     {% if not user.is_authenticated %}
                     <li>
-                        <a href={% url 'home:login' %}>{% trans 'login' %}</a>
+                        <a href={% url 'login' %}>{% trans 'login' %}</a>
                     </li>
                     {% else %}
                     <li>
-                        <a href={% url 'home:logout' %}><i>{{ request.user }}</i> {% trans 'logout' %}</a>
+                        <a href={% url 'logout' %}><i>{{ request.user }}</i> {% trans 'logout' %}</a>
                     </li>
                     <li>
-                        <a href={% url 'home:password_change' %}>{% trans 'change password' %}</a>
+                        <a href={% url 'password_change' %}>{% trans 'change password' %}</a>
                     </li>
                     {% endif %}
                     <li>

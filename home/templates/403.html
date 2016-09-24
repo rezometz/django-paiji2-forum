@@ -1,0 +1,9 @@
+{% extends "home/layout.html" %}
+
+{% block title %}Error 403{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+  Error 403: {% if exception %}{{ exception }}{% endif %}
+</div>
+{% endblock %}

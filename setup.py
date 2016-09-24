@@ -39,7 +39,6 @@ setup(
         'Django>=1.10',
         'django-mptt>=0.7',
         'django-bootstrap3>=6',
-        'django-password-reset>=0.9',
     ],
     classifiers=[
         'Environment :: Web Environment',

@@ -15,34 +15,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.conf.urls import url
-from django.contrib.auth.views import login, logout, password_change
+from django.conf.urls import url, include
+from django.contrib import admin
 
-app_name='home'
 urlpatterns = [
-    url(
-        r'^login/',
-        login,
-        dict(
-            template_name='home/login.html',
-        ),
-        name='login',
-    ),
-    url(
-        r'^logout/',
-        logout,
-        dict(
-            next_page='/',
-        ),
-        name='logout'
-    ),
-    url(
-        r'^password_change/',
-        password_change,
-        dict(
-            post_change_redirect='/',
-            template_name='home/password_change.html',
-        ),
-        name='password_change',
-    ),
+    url(r'^admin/', admin.site.urls),
+    url('^', include('django.contrib.auth.urls')),
 ]

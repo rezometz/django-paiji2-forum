@@ -31,6 +31,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     {% csrf_token %}
     {% bootstrap_form form %}
     <input class="btn btn-primary pull-right" type="submit" value="{% trans 'login' %}" />
-    <a class="btn btn-primary btn-warning pull-left" href="{% url 'password_reset_recover' %}">{% trans 'lost password ?' %}</a>
+    <a class="btn btn-primary btn-warning pull-left" href="{% url 'password_reset' %}">{% trans 'lost password ?' %}</a>
 </form>
 {% endblock %}

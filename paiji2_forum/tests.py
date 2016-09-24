@@ -22,10 +22,23 @@ from htmlvalidator.client import ValidatingClient
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from datetime import timedelta
-
 from models import Message, MessageIcon
+from update_db import update_icons_db
+
 
 User = get_user_model()
+
+
+class UpdateDBTest(TestCase):
+
+    def setUp(self):
+        self.client = ValidatingClient()
+
+    def test_update_db(self):
+        update_icons_db()
+        icon0 = MessageIcon.objects.get(name="1a.gif")
+        icon1 = MessageIcon.objects.get(name="union-jack.png")
+        self.assertFalse(icon0 == icon1)
 
 
 class MyTest(TestCase):
@@ -35,6 +48,10 @@ class MyTest(TestCase):
         # return '/' + '/'.join(url.split('/')[3:])
 
     def setUp(self):
+        update_icons_db()
+        self.icon = MessageIcon.objects.get(name="photo.gif")
+        self.icon0 = MessageIcon.objects.get(name="1a.gif")
+        self.icon1 = MessageIcon.objects.get(name="union-jack.png")
         self.client = ValidatingClient()
         self.iseult = User.objects.create_user(
             username='iseult',
@@ -45,10 +62,6 @@ class MyTest(TestCase):
             username='cesar',
             email='cesar@te.st',
             password='cesar_password',
-        )
-        self.icon = MessageIcon.objects.create(
-            name='test icon',
-            filename='test_icon',
         )
 
         self._post_first_message()
@@ -311,18 +324,33 @@ class CreationTestCase(MyTest):
 
         self.access('forum:new', 200)
 
+        icon = self.icon1
+        title = u'last topic'
+        text = u"""Hi ! How do you do ?"""
         response = self.client.post(
             reverse('forum:new'),
             {
-                'icon': self.icon.pk,
-                'title': 'last topic',
-                'text': """Hi ! How do you do ? """,
+                'icon': icon.pk,
+                'title': title,
+                'text': text,
             }
         )
 
         self.assertEqual(response.status_code, 302)
 
         last_message = Message.objects.get(title='last topic')
+        self.assertEqual(
+            last_message.icon,
+            icon
+        )
+        self.assertEqual(
+            last_message.title,
+            title
+        )
+        self.assertEqual(
+            last_message.text,
+            text
+        )
 
         self.assertEqual(
             self.path(response['Location']),
@@ -333,7 +361,6 @@ class CreationTestCase(MyTest):
         self.assertEqual(Message.objects.count(), 3)
         self.assertEqual(last_message.author, self.cesar)
         self.assertEqual(set(last_message.readers.all()), set((self.cesar,)))
-        self.assertEqual(last_message.icon, self.icon)
         self.assertEqual(last_message.question, None)
         self.assertEqual(last_message.topic(), last_message)
         self.assertEqual(last_message.prev_topic(), message)
@@ -352,6 +379,116 @@ class CreationTestCase(MyTest):
         self.assertEqual(message.next_topic(), last_message)
         self.assertEqual(message.is_topic(), True)
         self.access_url(message.get_absolute_url(), 200)
+
+
+class UpdateTestCase(MyTest):
+
+    def _test_denied_update(self):
+        read_url = self.first_message.get_absolute_url()
+        self.access_url(read_url, 200)
+        update_url = reverse(
+            'forum:update',
+            kwargs={'pk': self.first_message.pk}
+        )
+        get_response = self.client.get(update_url)
+        self.assertEqual(get_response.status_code, 403)
+        old_title = self.first_message.title
+        old_text = self.first_message.text
+        title = u'my braund new title -_- ^^'
+        text = u'''hello this is our new
+                    message ^^
+
+                    æùßþ»/«(bètuidà'''
+        post_response = self.client.post(
+            update_url,
+            {
+                'icon': self.icon0.pk,
+                'text': text,
+                'title': title,
+            }
+        )
+        self.assertEqual(
+            post_response.status_code,
+            403
+        )
+        self.assertEqual(
+            self.first_message.title,
+            old_title
+        )
+        self.assertEqual(
+            unicode(self.first_message.text),
+            unicode(old_text)
+        )
+        self.assertEqual(
+            self.first_message.icon.pk,
+            self.icon.pk
+        )
+
+    def test_anonymous_update(self):
+        self._test_denied_update()
+
+    def test_logged_reader_update(self):
+        self.client.login(
+            username='cesar',
+            password='cesar_password',
+        )
+        self._test_denied_update()
+        self.client.logout()
+
+    def test_author_update(self):
+        self.client.login(
+            username='iseult',
+            password='iseult_password',
+        )
+        update_url = reverse(
+            'forum:update',
+            kwargs={'pk': self.first_message.pk}
+        )
+        self.access_url(update_url, 200)
+        title = u'new title :-) ®®æù>÷|'
+        text = u'''plop this is my new
+                    message ^^
+
+                    æùßþ»/«(bètuidà'''
+        post_response = self.client.post(
+            update_url,
+            {
+                'icon': self.icon1.pk,
+                'title': title,
+                'text': text,
+            }
+        )
+        self.assertEqual(post_response.status_code, 302)
+        message = Message.objects.get(title=title)
+        self.assertEqual(
+            message.pk,
+            self.first_message.pk
+        )
+        self.assertEqual(
+            message.icon.pk,
+            self.icon1.pk
+        )
+        self.assertEqual(
+            message.title,
+            title
+        )
+        self.assertEqual(
+            unicode(message.text),
+            unicode(text)
+        )
+        self.assertEqual(
+            self.path(post_response['Location']),
+            self.first_message.get_absolute_url()
+        )
+        self.assertEqual(
+            self.path(post_response['Location']),
+            reverse(
+                'forum:message',
+                args=[self.first_message.pk]
+            ) + '#forum-message',
+        )
+        self.access_url(self.first_message.get_absolute_url(), 200)
+        self.client.logout()
 
 
 class ReadersTestCase(MyTest):

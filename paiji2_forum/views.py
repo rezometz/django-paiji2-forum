@@ -253,6 +253,7 @@ class AnswerUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Message
     form_class = AnswerForm
     template_name = 'forum/topic.html'
+    raise_exception = True
 
     def test_func(self):
         message = get_object_or_404(
@@ -261,16 +262,10 @@ class AnswerUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         )
         return message.author == self.request.user
 
-    permission_denied_message = _('You are not the author\
-        of the message you want to update!')
-
-    def get_login_url(self):
-        if self.request.user.is_authenticated():
-            return reverse(
-                'forum:message',
-                args=[self.kwargs['pk']],
-            )
-        return None
+    permission_denied_message = _(
+        'You are NOT authenticated as the author \
+        of the message you want to update!'
+    )
 
     def get_context_data(self, **kwargs):
         context = super(AnswerUpdate, self).get_context_data(**kwargs)
