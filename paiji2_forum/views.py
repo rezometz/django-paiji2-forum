@@ -14,6 +14,7 @@ from django.urls import reverse
 
 
 TOPIC_NB = 20
+MESSAGE_NB = 50
 
 
 class TopicListView(ListView):
@@ -61,10 +62,10 @@ class BurningTopicsView(ListView):
         return l
 
 
-class NewMessagesView(LoginRequiredMixin, ListView):
+class NewMessagesView(ListView):
 
     template_name = 'forum/recents.html'
-    paginate_by = TOPIC_NB
+    paginate_by = MESSAGE_NB
 
     def get_queryset(self):
         qs = Message.objects\
@@ -79,33 +80,33 @@ class NewMessagesView(LoginRequiredMixin, ListView):
                readings=Count('readers'),
             )
 
-        for i in qs:
-            if not i.readers.filter(
-                pk=self.request.user.pk
-            ).exists():
-                i.not_read = True
+        if self.request.user.is_authenticated():
+            for i in qs:
+                if not i.readers.filter(
+                    pk=self.request.user.pk
+                ).exists():
+                    i.not_read = True
+
         return qs
 
 
-class ProfileMessagesView(ListView):
+class UnreadMessagesView(LoginRequiredMixin, NewMessagesView):
 
-    template_name = 'forum/profile.html'
-    paginate_by = 50
+    template_name = 'forum/unread.html'
 
     def get_queryset(self):
-        return Message.objects\
-            .defer(
-                'text',
-            ).filter(
-                author__pk=self.kwargs['pk']
-            ).order_by(
-                '-pub_date'
-            ).select_related(
-                'author',
-                'icon',
-            ).annotate(
-                readings=Count('readers'),
-            )
+        qs = super(UnreadMessagesView, self).get_queryset()
+        return qs.exclude(readers__pk=self.request.user.pk)
+
+
+class ProfileMessagesView(NewMessagesView):
+
+    template_name = 'forum/profile.html'
+    paginate_by = MESSAGE_NB
+
+    def get_queryset(self):
+        qs = super(ProfileMessagesView, self).get_queryset()
+        return qs.filter(author__pk=self.kwargs['pk'])
 
     def get_context_data(self, **kwargs):
         context = super(ProfileMessagesView, self).get_context_data(**kwargs)
@@ -116,27 +117,6 @@ class ProfileMessagesView(ListView):
             ),
         })
         return context
-
-
-class UnreadMessagesView(NewMessagesView):
-
-    template_name = 'forum/unread.html'
-    paginate_by = 50
-
-    def get_queryset(self):
-        return Message.objects\
-            .defer(
-                'text',
-            ).exclude(
-                readers__pk=self.request.user.pk
-            ).order_by(
-                '-pub_date'
-            ).select_related(
-                'author',
-                'icon',
-            ).annotate(
-                readings=Count('readers'),
-            )
 
 
 class TopicView(TemplateView):
