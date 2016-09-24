@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-23 22:10+0200\n"
+"POT-Creation-Date: 2016-09-24 19:44+0200\n"
 "PO-Revision-Date: 2015-08-24 17:00+0200\n"
 "Last-Translator: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
 "Language: german\n"
@@ -81,22 +81,16 @@ msgid "next topic"
 msgstr "nächstes Gesprächsthema"
 
 #: models.py:170
-#, fuzzy
-#| msgid "Is it a topic ?"
 msgid "Is it a topic?"
-msgstr "Ist es ein Gesprächsthema ?"
+msgstr "Ist es ein Gesprächsthema?"
 
 #: models.py:181
-#, fuzzy
-#| msgid "Is it a topic ?"
 msgid "Is it recent?"
-msgstr "Ist es ein Gesprächsthema ?"
+msgstr "Ist es neu?"
 
 #: models.py:191
-#, fuzzy
-#| msgid "Is it a topic ?"
 msgid "Is it very recent?"
-msgstr "Ist es ein Gesprächsthema ?"
+msgstr "Ist es sehr neu?"
 
 #: templates/forum/all.html:34 templates/forum/all.html:44
 msgid "topic"
@@ -134,33 +128,33 @@ msgstr "keine Nachricht"
 msgid "top"
 msgstr "oben"
 
-#: templates/forum/base.html:26 templates/forum/base.html:32
+#: templates/forum/base.html:26 templates/forum/base.html:35
 #: templates/forum/forum_block.html:31
 msgid "Forum"
 msgstr "Forum"
 
-#: templates/forum/base.html:47 templates/forum/forum_block.html:84
+#: templates/forum/base.html:50 templates/forum/forum_block.html:84
 msgid "recents"
-msgstr "Neueste"
+msgstr "neuesten"
 
-#: templates/forum/base.html:53
+#: templates/forum/base.html:56
 msgctxt "plur"
 msgid "unread"
-msgstr "Ungelesene"
+msgstr "ungelesenen"
 
-#: templates/forum/base.html:59
+#: templates/forum/base.html:62
 msgid "topics"
 msgstr "Gesprächsthemen"
 
-#: templates/forum/base.html:65
+#: templates/forum/base.html:68
 msgid "new"
-msgstr "Neue"
+msgstr "neue"
 
-#: templates/forum/base.html:103
+#: templates/forum/base.html:105
 msgid "forum source code"
 msgstr "Quellcode des Forums"
 
-#: templates/forum/base.html:108
+#: templates/forum/base.html:110
 msgid "forum license"
 msgstr "Lizenz des Forums"
 
@@ -173,37 +167,28 @@ msgid "Text"
 msgstr "Text"
 
 #: templates/forum/forum_block.html:68
-#, fuzzy
-#| msgid "no message"
 msgid "no unread message"
-msgstr "keine Nachricht"
+msgstr "keine ungelesene Nachricht"
 
 #: templates/forum/forum_block.html:79
-#, fuzzy
-#| msgctxt "sing"
-#| msgid "unread"
 msgid "Unread"
 msgstr "ungelesen"
 
 #: templates/forum/mail_link.html:4
 msgid "Send an email to"
-msgstr ""
+msgstr "E-Mail nach "
 
 #: templates/forum/new.html:38
 msgid "publish the message"
 msgstr "veröffentlichen"
 
 #: templates/forum/profile.html:35
-#, fuzzy
-#| msgid "messages"
 msgid "Last messages of "
-msgstr "Nachrichten"
+msgstr "Letzten Nachrichten von "
 
 #: templates/forum/recurseli.html:33
-#, fuzzy
-#| msgid "publish the answer"
 msgid "update the message"
-msgstr "antworten"
+msgstr "Nachrichte verändern"
 
 #: templates/forum/recurseli.html:59
 msgid "answer"
@@ -211,12 +196,16 @@ msgstr "antworten"
 
 #: templates/forum/recurseli.html:61
 msgid "update"
-msgstr ""
+msgstr "verändern"
 
 #: templates/forum/recurseli.html:75
 msgid "publish the answer"
-msgstr "antworten"
+msgstr "die Antwort veröffentlichen"
 
-#: views.py:267
-msgid "You are not the author        of the message you want to update!"
+#: views.py:266
+msgid ""
+"You are NOT authenticated as the author         of the message you want to "
+"update!"
 msgstr ""
+"Sie werden NICHT als der Autor        der Nachricht identifiziert, "
+"die Sie verändern wollen!"

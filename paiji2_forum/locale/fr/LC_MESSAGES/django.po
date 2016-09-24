@@ -1,5 +1,5 @@
 # Translation of the "paiji2-forum" application
-# Copyright (C) 2015 Louis-Guillaume DUBOIS
+# Copyright (C) 2015-2016 Louis-Guillaume DUBOIS
 # This file is distributed under the same license as the django-paiji2-forum package.
 # Louis-Guillaume DUBOIS <contact@lgdubois.fr>, 2015.
 #
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-23 22:10+0200\n"
-"PO-Revision-Date: 2015-08-24 17:00+0200\n"
+"POT-Creation-Date: 2016-09-24 19:44+0200\n"
+"PO-Revision-Date: 2016-09-24 17:00+0200\n"
 "Last-Translator: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -128,33 +128,33 @@ msgstr "aucun message"
 msgid "top"
 msgstr "haut"
 
-#: templates/forum/base.html:26 templates/forum/base.html:32
+#: templates/forum/base.html:26 templates/forum/base.html:35
 #: templates/forum/forum_block.html:31
 msgid "Forum"
 msgstr "Forum"
 
-#: templates/forum/base.html:47 templates/forum/forum_block.html:84
+#: templates/forum/base.html:50 templates/forum/forum_block.html:84
 msgid "recents"
 msgstr "récents"
 
-#: templates/forum/base.html:53
+#: templates/forum/base.html:56
 msgctxt "plur"
 msgid "unread"
 msgstr "non lus"
 
-#: templates/forum/base.html:59
+#: templates/forum/base.html:62
 msgid "topics"
 msgstr "discussions"
 
-#: templates/forum/base.html:65
+#: templates/forum/base.html:68
 msgid "new"
 msgstr "nouveau"
 
-#: templates/forum/base.html:103
+#: templates/forum/base.html:105
 msgid "forum source code"
 msgstr "code source du forum"
 
-#: templates/forum/base.html:108
+#: templates/forum/base.html:110
 msgid "forum license"
 msgstr "licence du forum"
 
@@ -202,9 +202,13 @@ msgstr "modifier"
 msgid "publish the answer"
 msgstr "publier la réponse"
 
-#: views.py:267
-msgid "You are not the author        of the message you want to update!"
-msgstr "Vous n’êtes pas l’auteur       du message que vous voulez modifier ! "
+#: views.py:266
+msgid ""
+"You are NOT authenticated as the author         of the message you want to "
+"update!"
+msgstr ""
+"Vous n’êtes PAS authentifié comme l’auteur       du message que vous voulez "
+"modifier !"
 
 #~ msgid ""
 #~ "Click the green tick button on the right of the editor toolbar to preview "
