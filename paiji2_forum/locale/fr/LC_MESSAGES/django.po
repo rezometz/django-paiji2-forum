@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-25 15:46+0200\n"
+"POT-Creation-Date: 2016-09-25 19:33+0200\n"
 "PO-Revision-Date: 2016-09-24 17:00+0200\n"
 "Last-Translator: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
 "Language: \n"
@@ -128,47 +128,51 @@ msgstr "aucun message"
 msgid "top"
 msgstr "haut"
 
-#: templates/forum/base.html:26 templates/forum/base.html:34
+#: templates/forum/base.html:26 templates/forum/base.html:35
 #: templates/forum/forum_block.html:31
 msgid "Forum"
 msgstr "Forum"
 
-#: templates/forum/base.html:47
+#: templates/forum/base.html:48
 msgid "search"
 msgstr "chercher"
 
-#: templates/forum/base.html:60 templates/forum/forum_block.html:84
+#: templates/forum/base.html:61 templates/forum/forum_block.html:84
 msgid "recents"
 msgstr "récents"
 
-#: templates/forum/base.html:66
+#: templates/forum/base.html:67
 msgctxt "plur"
 msgid "unread"
 msgstr "non lus"
 
-#: templates/forum/base.html:72
+#: templates/forum/base.html:73
 msgid "topics"
 msgstr "discussions"
 
-#: templates/forum/base.html:78
+#: templates/forum/base.html:79
 msgid "new"
 msgstr "nouveau"
 
-#: templates/forum/base.html:115
+#: templates/forum/base.html:116
 msgid "forum source code"
 msgstr "code source du forum"
 
-#: templates/forum/base.html:120
+#: templates/forum/base.html:121
 msgid "forum license"
 msgstr "licence du forum"
 
-#: templates/forum/form.html:45
+#: templates/forum/form.html:47
 msgid "Title"
 msgstr "Titre"
 
-#: templates/forum/form.html:48
-msgid "Text"
-msgstr "Texte"
+#: templates/forum/form.html:50
+msgid "Text (Markdown format)"
+msgstr "Texte (format Markdown)"
+
+#: templates/forum/form.html:53
+msgid "Text preview"
+msgstr "Prévisualisation du texte"
 
 #: templates/forum/forum_block.html:68
 msgid "no unread message"
@@ -210,7 +214,7 @@ msgstr "modifier"
 msgid "publish the answer"
 msgstr "publier la réponse"
 
-#: views.py:275
+#: views.py:276
 msgid ""
 "You are NOT authenticated as the author         of the message you want to "
 "update!"

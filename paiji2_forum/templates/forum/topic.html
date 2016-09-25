@@ -35,4 +35,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     {% endrecursetree %}
 </ul>
 
+<script>
+function Markdownify(value, index, ar) {
+  value.innerHTML = markdown.toHTML(value.innerHTML);
+};
+var texts = document.getElementsByClassName("forum-text-md");
+var textsList = Array.prototype.slice.call(texts);
+textsList.forEach(Markdownify);
+</script>
+
 {% endblock %}
