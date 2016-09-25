@@ -25,7 +25,9 @@ pip install -U .
 Requirements
 ------------
 
-You must have `django-bootstrap3` and `django-mptt` installed.
+Django >= 1.10
+
+You must also install `django-bootstrap3` and `django-mptt` (pip will do this for you).
 `django-html-validator` is required for testing purposes.
 
 URLconf

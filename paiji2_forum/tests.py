@@ -124,6 +124,7 @@ class AccessTestCase(MyTest):
         self.access('forum:topic-list', 200)
         self.access('forum:burning-list', 200)
         self.access('forum:recent-list', 200)
+        self.access('forum:search-list', 200)
         self.access('forum:unread', 302)
         self.access('forum:new', 302)
         self.access_url(
@@ -135,6 +136,14 @@ class AccessTestCase(MyTest):
                 'forum:message',
                 kwargs={'pk': self.first_message.pk},
             ),
+            200,
+        )
+        self.access_url(
+            reverse('forum:search-list') + '?q=query test',
+            200,
+        )
+        self.access_url(
+            reverse('forum:search-list') + '?q=test',
             200,
         )
         self.access_url(
@@ -183,6 +192,7 @@ class AccessTestCase(MyTest):
         self.access('forum:topic-list', 200)
         self.access('forum:burning-list', 200)
         self.access('forum:recent-list', 200)
+        self.access('forum:search-list', 200)
         self.access('forum:unread', 200)
         self.access('forum:new', 200)
         self.access_url(
@@ -194,6 +204,14 @@ class AccessTestCase(MyTest):
                 'forum:message',
                 kwargs={'pk': self.first_message.pk},
             ),
+            200,
+        )
+        self.access_url(
+            reverse('forum:search-list') + '?q=query test',
+            200,
+        )
+        self.access_url(
+            reverse('forum:search-list') + '?q=test',
             200,
         )
         self.access_url(

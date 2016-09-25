@@ -21,6 +21,11 @@ urlpatterns = [
         name='recent-list',
     ),
     url(
+        r'^search/$',
+        views.SearchMessagesView.as_view(),
+        name='search-list',
+    ),
+    url(
         r'^unread/$',
         views.UnreadMessagesView.as_view(),
         name='unread',

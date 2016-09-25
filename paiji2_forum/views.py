@@ -11,6 +11,7 @@ from django.forms import ModelForm, RadioSelect,\
     ModelChoiceField, TextInput  # , Textarea
 from django.utils.translation import ugettext as _
 from django.urls import reverse
+from django.db.models import Q
 
 
 TOPIC_NB = 20
@@ -90,6 +91,36 @@ class NewMessagesView(ListView):
         return qs
 
 
+class SearchMessagesView(NewMessagesView):
+
+    def get_context_data(self, **kwargs):
+        context =\
+            super(SearchMessagesView, self).get_context_data(**kwargs)
+        context.update({
+            'q': self.request.GET.get('q', ''),
+        })
+        return context
+
+    def get_queryset(self):
+        qs = super(SearchMessagesView, self).get_queryset()
+        if 'q' in self.request.GET:
+            query = self.request.GET['q']
+            words = query.split(' ')
+            Qobj = Q()
+            filtered = False
+            for word in words:
+                if word != '':
+                    filtered = True
+                    Qobj &= (
+                        Q(text__icontains=word) |
+                        Q(title__icontains=word) |
+                        Q(author__username__icontains=word)
+                    )
+            if filtered:
+                qs = qs.filter(Qobj)
+        return qs
+
+
 class UnreadMessagesView(LoginRequiredMixin, NewMessagesView):
 
     template_name = 'forum/unread.html'
@@ -144,7 +175,6 @@ class TopicView(TemplateView):
             'next_topic': message.next_topic,
             'object_list': object_list,
         })
-
         return context
 
 
@@ -205,7 +235,7 @@ class AnswerCreate(LoginRequiredMixin, CreateView):
             context.update({
                 'object_list': object_list,
             })
-        return context
+            return context
 
     def get_success_url(self):
         self.object.readers.add(self.request.user)
@@ -263,7 +293,7 @@ class AnswerUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
                 'object_list': object_list,
                 'update': True,
             })
-        return context
+            return context
 
     def get_success_url(self):
         self.object.readers.add(self.request.user)

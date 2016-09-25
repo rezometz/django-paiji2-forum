@@ -19,6 +19,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {% endcomment %}
+{% load i18n %}
 
 {% block class-topics %}{% endblock %}
 {% block class-unread %}{% endblock %}
@@ -27,6 +28,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {% block padding %}{% endblock %}
 {% block entry-class %}{% endblock %}
+{% block note %}
+<div class="alert alert-info" role="alert">
+  {% trans "Search results:" %} "<strong>{{ q }}</strong>"
+</div>
+{% endblock %}
 
 {% block text %}{% endblock %}
 {% block forum-top-nav %}{% endblock %}
