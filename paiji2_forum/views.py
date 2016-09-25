@@ -235,7 +235,7 @@ class AnswerCreate(LoginRequiredMixin, CreateView):
             context.update({
                 'object_list': object_list,
             })
-            return context
+        return context
 
     def get_success_url(self):
         self.object.readers.add(self.request.user)
@@ -293,7 +293,7 @@ class AnswerUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
                 'object_list': object_list,
                 'update': True,
             })
-            return context
+        return context
 
     def get_success_url(self):
         self.object.readers.add(self.request.user)
