@@ -25,10 +25,12 @@ pip install -U .
 Requirements
 ------------
 
-Django >= 1.10
+`Django>=1.10`
 
 You must also install `django-bootstrap3` and `django-mptt` (pip will do this for you).
 `django-html-validator` is required for testing purposes.
+
+JS library used (via a link to [unpkg.com](https://unpkg.com/markdown@0.5/))for the markdown parsing: [markdown-js](https://github.com/evilstreak/markdown-js) (MIT)
 
 URLconf
 -------
