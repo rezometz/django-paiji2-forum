@@ -7,12 +7,11 @@ env:
   - DJANGO_VERSION=1.10.1
 install:
   - pip install -U pip
-  - pip install -U pep8 pyflakes coveralls django-html-validator
+  - pip install -Ur dev_requirements.txt
   - pip install -U .
   - pip install -q Django==$DJANGO_VERSION
 before_script:
-  - pep8 --exclude=migrations paiji2_forum
-  - pyflakes paiji2_forum
+  - flake8 --exclude=migrations paiji2_forum
 script:
   - coverage run --source=paiji2_forum manage.py test
 after_success:
