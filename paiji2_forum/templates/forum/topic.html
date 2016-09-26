@@ -37,7 +37,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 function Markdownify(value, index, ar) {
-  value.innerHTML = markdown.toHTML(value.innerHTML);
+  value.innerHTML = markdown.toHTML(
+    value.innerHTML
+      .replace(/<br>/g,'\n')
+      .replace(/&gt;/g,'>')
+      .replace(/&lt;/g,'<')
+  );
 };
 var texts = document.getElementsByClassName("forum-text-md");
 var textsList = Array.prototype.slice.call(texts);

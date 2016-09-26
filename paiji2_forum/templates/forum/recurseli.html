@@ -60,7 +60,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         {% if node.author == user %}
         <a class="pull-right" href="{% url 'forum:update' node.pk %}#forum-answer"><small><span class="glyphicon glyphicon-wrench"></span> {% trans 'update' %}</small> </a>
         {% endif %}
-        <div class="forum-text-md">{{ text }}</div>
+        <div class="forum-text-md">{{ text|linebreaksbr }}</div>
     </div>
     {% endif %}
 
