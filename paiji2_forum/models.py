@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (C) 2015-2016 Louis-Guillaume DUBOIS
 #
 # This file is part of paiji2-forum
@@ -15,6 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
+from django.utils.encoding import python_2_unicode_compatible
 from datetime import timedelta
 from django.conf import settings
 from django.urls import reverse
@@ -26,6 +29,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth.models import AnonymousUser
 
 
+@python_2_unicode_compatible
 class MessageIcon(models.Model):
 
     class Meta:
@@ -40,10 +44,11 @@ class MessageIcon(models.Model):
         # return settings.STATIC_URL + 'forum/icons/' + self.filename
         return 'forum/icons/' + self.filename
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class Message(MPTTModel):
 
     class Meta:
@@ -190,7 +195,7 @@ class Message(MPTTModel):
     is_burning.boolean = True
     is_burning.short_description = _('Is it very recent?')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def get_absolute_url(self):

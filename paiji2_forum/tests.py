@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
 from django.test import TestCase
 from django.utils import timezone
 from htmlvalidator.client import ValidatingClient
@@ -27,12 +28,6 @@ from .update_db import update_icons_db
 
 
 User = get_user_model()
-
-try:
-    UNICODE_EXISTS = bool(type(unicode))
-except NameError:
-    def unicode(s):
-        return str(s)
 
 
 class UpdateDBTest(TestCase):
@@ -89,8 +84,8 @@ class MyTest(TestCase):
             reverse('forum:new'),
             {
                 'icon': self.icon.pk,
-                'title': u'test title ®®',
-                'text': u''' tstra auileæ~ǜß®\œù©þðĳþ’ù&æþiàn
+                'title': 'test title ®®',
+                'text': ''' tstra auileæ~ǜß®\œù©þðĳþ’ù&æþiàn
 
                 auieiiausrecpiu t'yx.lmmd
                 =51476415678986451u4àuià,jl(è«épt,i.
@@ -98,7 +93,7 @@ class MyTest(TestCase):
             }
         )
         self.assertEqual(response.status_code, 302)
-        self.first_message = Message.objects.get(title=u'test title ®®')
+        self.first_message = Message.objects.get(title='test title ®®')
         self.assertEqual(
             self.path(response['Location']),
             self.first_message.get_absolute_url(),
@@ -112,15 +107,6 @@ class MyTest(TestCase):
         )
         self.access_url(self.first_message.get_absolute_url(), 200)
         self.client.logout()
-
-
-class NameTestCase(MyTest):
-
-    def test_name(self):
-        self.assertEqual(
-            self.first_message.__unicode__(),
-            unicode(self.first_message.title),
-        )
 
 
 class AccessTestCase(MyTest):
@@ -351,8 +337,8 @@ class CreationTestCase(MyTest):
         self.access('forum:new', 200)
 
         icon = self.icon1
-        title = u'last topic'
-        text = u"""Hi ! How do you do ?"""
+        title = 'last topic'
+        text = """Hi ! How do you do ?"""
         response = self.client.post(
             reverse('forum:new'),
             {
@@ -420,8 +406,8 @@ class UpdateTestCase(MyTest):
         self.assertEqual(get_response.status_code, 403)
         old_title = self.first_message.title
         old_text = self.first_message.text
-        title = u'my braund new title -_- ^^'
-        text = u'''hello this is our new
+        title = 'my braund new title -_- ^^'
+        text = '''hello this is our new
                     message ^^
 
                     æùßþ»/«(bètuidà'''
@@ -442,8 +428,8 @@ class UpdateTestCase(MyTest):
             old_title
         )
         self.assertEqual(
-            unicode(self.first_message.text),
-            unicode(old_text)
+            self.first_message.text,
+            old_text
         )
         self.assertEqual(
             self.first_message.icon.pk,
@@ -471,8 +457,8 @@ class UpdateTestCase(MyTest):
             kwargs={'pk': self.first_message.pk}
         )
         self.access_url(update_url, 200)
-        title = u'new title :-) ®®æù>÷|'
-        text = u'''plop this is my new
+        title = 'new title :-) ®®æù>÷|'
+        text = '''plop this is my new
                     message ^^
 
                     æùßþ»/«(bètuidà'''
@@ -499,8 +485,8 @@ class UpdateTestCase(MyTest):
             title
         )
         self.assertEqual(
-            unicode(message.text),
-            unicode(text)
+            message.text,
+            text
         )
         self.assertEqual(
             self.path(post_response['Location']),

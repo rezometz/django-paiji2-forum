@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (C) 2015-2016 Louis-Guillaume DUBOIS
 #
 # This file is part of paiji2-forum
@@ -16,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
