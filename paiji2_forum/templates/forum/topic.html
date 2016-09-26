@@ -39,6 +39,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 function Markdownify(value, index, ar) {
   value.innerHTML = markdown.toHTML(
     value.innerHTML
+      .replace(/&amp;/g,'&')
+      .replace(/&nbsp;/g,' ')
       .replace(/<br>/g,'\n')
       .replace(/&gt;/g,'>')
       .replace(/&lt;/g,'<')
