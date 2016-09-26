@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin,\
 from .models import Message, MessageIcon
 from django.db.models import Count
 from django.forms import ModelForm, RadioSelect,\
-    ModelChoiceField, TextInput  # , Textarea
+    ModelChoiceField, TextInput, CharField, Textarea
 from django.utils.translation import ugettext as _
 from django.urls import reverse
 from django.db.models import Q
@@ -187,20 +187,26 @@ class IconField(ModelChoiceField):
 
 class AnswerForm(ModelForm):
 
-    try:
-        icon = IconField(
-            queryset=MessageIcon.objects.all(),
-            initial=MessageIcon.objects.get(name='neutre.gif'),
-            empty_label=None,
-            widget=RadioSelect,
-        )
-    except Exception as e:
-        icon = IconField(
-            queryset=MessageIcon.objects.all(),
-            empty_label=None,
-            widget=RadioSelect,
-        )
-        print('[AnswerForm]: ', e)
+    text = CharField(
+        initial=_('''\
+Use the *Markdown* format here…
+
+Cf. [documentation](http://daringfireball.net/projects/markdown/basics).'''),
+        widget=Textarea,
+        strip=False,
+        min_length=5,
+    )
+    title = CharField(
+        widget=TextInput,
+        strip=True,
+        min_length=3,
+    )
+    icon = IconField(
+        queryset=MessageIcon.objects.all(),
+        initial=MessageIcon.objects.get(name='neutre.gif'),
+        empty_label=None,
+        widget=RadioSelect,
+    )
 
     class Meta:
         model = Message
