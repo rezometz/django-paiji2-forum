@@ -22,11 +22,17 @@ from htmlvalidator.client import ValidatingClient
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from datetime import timedelta
-from models import Message, MessageIcon
-from update_db import update_icons_db
+from .models import Message, MessageIcon
+from .update_db import update_icons_db
 
 
 User = get_user_model()
+
+try:
+    UNICODE_EXISTS = bool(type(unicode))
+except NameError:
+    def unicode(s):
+        return str(s)
 
 
 class UpdateDBTest(TestCase):

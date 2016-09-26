@@ -1,10 +1,15 @@
 language: python
 python:
   - "2.7"
+  - "3.5"
+env:
+  - DJANGO_VERSION=1.10
+  - DJANGO_VERSION=1.10.1
 install:
   - pip install -U pip
   - pip install -U pep8 pyflakes coveralls django-html-validator
   - pip install -U .
+  - pip install -q Django==$DJANGO_VERSION
 before_script:
   - pep8 --exclude=migrations paiji2_forum
   - pyflakes paiji2_forum

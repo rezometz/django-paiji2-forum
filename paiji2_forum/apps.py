@@ -7,5 +7,5 @@ class Paiji2ForumConfig(AppConfig):
     name = 'paiji2_forum'
 
     def ready(self):
-        import update_db
+        from . import update_db
         update_db.update_icons_db()

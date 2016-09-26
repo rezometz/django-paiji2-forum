@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from . import __path__
-from models import MessageIcon
+from .models import MessageIcon
 from django.core.exceptions import ObjectDoesNotExist,\
     MultipleObjectsReturned
 from glob import glob
@@ -33,8 +33,8 @@ def update_icons_db():
             MessageIcon.objects.get(filename=i)
         except ObjectDoesNotExist:
             MessageIcon(name=i, filename=i).save()
-            print "file {} added".format(i)
+            print('file {} added'.format(i))
         except MultipleObjectsReturned:
-            print "{} is not unique".format(i)
+            print('{} is not unique'.format(i))
         except:
             pass
