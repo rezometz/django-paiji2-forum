@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-25 19:33+0200\n"
+"POT-Creation-Date: 2016-09-26 17:57+0200\n"
 "PO-Revision-Date: 2016-09-24 17:00+0200\n"
 "Last-Translator: Louis-Guillaume DUBOIS <contact@lgdubois.fr>\n"
 "Language: \n"
@@ -202,11 +202,11 @@ msgstr "Résultats de la recherche :"
 msgid "update the message"
 msgstr "modifier le message"
 
-#: templates/forum/recurseli.html:59
+#: templates/forum/recurseli.html:60
 msgid "answer"
 msgstr "répondre"
 
-#: templates/forum/recurseli.html:61
+#: templates/forum/recurseli.html:62
 msgid "update"
 msgstr "modifier"
 
@@ -214,7 +214,17 @@ msgstr "modifier"
 msgid "publish the answer"
 msgstr "publier la réponse"
 
-#: views.py:276
+#: views.py:192
+msgid ""
+"Use the *Markdown* format here.\n"
+"\n"
+"Cf. [documentation](http://daringfireball.net/projects/markdown/basics)."
+msgstr ""
+"Utilisez ici le format *Markdown*.\n"
+"\n"
+"Cf. [documentation](http://daringfireball.net/projects/markdown/basics)."
+
+#: views.py:283
 msgid ""
 "You are NOT authenticated as the author         of the message you want to "
 "update!"

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, CreateView,\
     TemplateView, UpdateView
@@ -189,7 +190,7 @@ class AnswerForm(ModelForm):
 
     text = CharField(
         initial=_('''\
-Use the *Markdown* format here…
+Use the *Markdown* format here.
 
 Cf. [documentation](http://daringfireball.net/projects/markdown/basics).'''),
         widget=Textarea,
