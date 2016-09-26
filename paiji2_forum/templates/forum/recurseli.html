@@ -56,11 +56,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </div>
     
     <div {% if node.is_message %}id="forum-message-text"{% endif %} class="well well-sm forum-text">
-        <a class="pull-right" href="{% url 'forum:answer' node.pk %}#forum-answer"><small><span class="glyphicon glyphicon-pencil"></span> {% trans 'answer' %}</small> </a>
-        {% if node.author == user %}
-        <a class="pull-right" href="{% url 'forum:update' node.pk %}#forum-answer"><small><span class="glyphicon glyphicon-wrench"></span> {% trans 'update' %}</small> </a>
-        {% endif %}
         <div class="forum-text-md">{{ text|linebreaksbr }}</div>
+        <a href="{% url 'forum:answer' node.pk %}#forum-answer"><small><span class="glyphicon glyphicon-pencil"></span> {% trans 'answer' %}</small> </a>
+        {% if node.author == user %}
+        <a href="{% url 'forum:update' node.pk %}#forum-answer"><small><span class="glyphicon glyphicon-wrench"></span> {% trans 'update' %}</small> </a>
+        {% endif %}
     </div>
     {% endif %}
 
