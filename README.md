@@ -34,25 +34,46 @@ Requirements
 You must also install `django-bootstrap3` and `django-mptt` (pip will do this for you).
 `django-html-validator` is required for testing purposes.
 
-URLconf
--------
+Installation
+------------
 
-For instance, in the `urls.py` of your project:
+### Installed apps
 
+In the `settings.py` file of your project, add the following apps:
+
+```python
+INSTALLED_APPS = [
+    # other apps…
+    'paiji2_forum.apps.Paiji2ForumConfig',
+    'mptt',
+    'bootstrap3',
+    # other apps…
+]
 ```
-  url(r'^forum/', include('paiji2_forum.urls')),
+
+### URLconf
+
+Include `'paiji2_forum.urls'` in the `urlpatterns` of your project.
+For instance:
+
+```python
+from django.conf.urls import url, include
+
+urlpatterns = [
+    # other urls…
+    url(r'^forum/', include('paiji2_forum.urls')),
+]
 ```
 
-Templates
----------
+### Templates
 
 See `paiji2_forum/templates/forum/base.html` for an example.
 
 You should change the name of the extended template (line 1) to fit to your project.
 
-The extended template should have a "title" block, a "style" block to add a css file link, and a "content" block to show the content of the forum.
+The extended template should have a `title` block, a `style` block to add a css file link, and a `content` block to show the content of the forum.
 
-It must also link to "bootstrap.css" or "bootstrap.min.css" (bootstrap version 3), for instance with:
+It must also link to `bootstrap.css` or `bootstrap.min.css` (bootstrap version 3), for instance with:
 
 ```
 <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
