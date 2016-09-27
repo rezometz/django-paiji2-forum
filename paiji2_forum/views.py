@@ -24,13 +24,12 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin,\
     UserPassesTestMixin
-from .models import Message, MessageIcon
 from django.db.models import Count
-from django.forms import ModelForm, RadioSelect,\
-    ModelChoiceField, TextInput, CharField, Textarea
 from django.utils.translation import ugettext as _
 from django.urls import reverse
 from django.db.models import Q
+from .models import Message
+from .forms import AnswerForm
 
 
 TOPIC_NB = 20
@@ -195,44 +194,6 @@ class TopicView(TemplateView):
             'object_list': object_list,
         })
         return context
-
-
-class IconField(ModelChoiceField):
-
-    def label_from_instance(self, obj):
-        # return '<img class="icon" src="'+obj.url()+'" alt="'+obj.name+'"/>'
-        return obj.url()
-
-
-class AnswerForm(ModelForm):
-
-    text = CharField(
-        initial=_('''\
-Use the *Markdown* format here.
-
-Cf. [documentation](http://daringfireball.net/projects/markdown/basics).'''),
-        widget=Textarea,
-        strip=False,
-        min_length=5,
-    )
-    title = CharField(
-        widget=TextInput,
-        strip=True,
-        min_length=3,
-    )
-    icon = IconField(
-        queryset=MessageIcon.objects.all(),
-        initial=MessageIcon.objects.get(name='neutre.gif'),
-        empty_label=None,
-        widget=RadioSelect,
-    )
-
-    class Meta:
-        model = Message
-        fields = ['icon', 'title', 'text']
-        widgets = {
-            'title': TextInput(attrs={'class': 'form-control'}),
-        }
 
 
 class AnswerCreate(LoginRequiredMixin, CreateView):

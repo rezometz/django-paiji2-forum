@@ -26,11 +26,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% block title %}{% trans 'Forum' %}{% endblock %}
 
 {% block style %}
+{{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'forum/style.css' %}" />
 {% comment %}
-<script src="https://unpkg.com/markdown@0.5.0/lib/markdown.js" integrity="sha384-C0UDzjHvDpeuFytfOLC7jguGwES62bw5EnCC4hvw7pesaysadN2nw8KeMujUTDtY" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://unpkg.com/markdown@0.5.0/lib/markdown.js" integrity="sha384-C0UDzjHvDpeuFytfOLC7jguGwES62bw5EnCC4hvw7pesaysadN2nw8KeMujUTDtY" crossorigin="anonymous"></script>
 {% endcomment %}
-<script src="{% static 'forum/markdown.js' %}" integrity="sha384-C0UDzjHvDpeuFytfOLC7jguGwES62bw5EnCC4hvw7pesaysadN2nw8KeMujUTDtY" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'forum/markdown.js' %}" integrity="sha384-C0UDzjHvDpeuFytfOLC7jguGwES62bw5EnCC4hvw7pesaysadN2nw8KeMujUTDtY" crossorigin="anonymous"></script>
+{{ form.media }}
 {% endblock %}
 
 {% block content %}

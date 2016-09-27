@@ -18,18 +18,39 @@
 
 from __future__ import unicode_literals
 from django.contrib import admin
-from .models import Message
+from django.db import models
 from mptt.admin import MPTTModelAdmin
+from .models import Message
+from .forms import Markdownarea
 
 
 class MessageAdmin(MPTTModelAdmin):
+
     list_display = (
         'title', 'author', 'pub_date',
         'icon', 'is_topic', 'topic',
         'is_new', 'is_burning'
     )
+
     list_filter = ('pub_date', 'author')
+
     search_fields = ['title', 'text', 'author__username']
+
+    formfield_overrides = {
+        models.TextField: {
+            'strip': False,
+            'widget': Markdownarea,
+        },
+    }
+
+    class Media:
+        css = {
+            'all': ('forum/style.css',),
+        }
+        js = (
+            'forum/markdown.js',
+            'forum/editor.js',
+        )
 
 
 admin.site.register(Message, MessageAdmin)
