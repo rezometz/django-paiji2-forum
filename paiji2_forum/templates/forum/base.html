@@ -24,9 +24,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {% load bootstrap3 %}
 
 {% block title %}{% trans 'Forum' %}{% endblock %}
+
 {% block style %}
-  <link rel="stylesheet" type="text/css" href="{% static 'forum/style.css' %}" />
-  <script src="https://unpkg.com/markdown@0.5/lib/markdown.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'forum/style.css' %}" />
+{% comment %}
+<script src="https://unpkg.com/markdown@0.5.0/lib/markdown.js" integrity="sha384-C0UDzjHvDpeuFytfOLC7jguGwES62bw5EnCC4hvw7pesaysadN2nw8KeMujUTDtY" crossorigin="anonymous"></script>
+{% endcomment %}
+<script src="{% static 'forum/markdown.js' %}" integrity="sha384-C0UDzjHvDpeuFytfOLC7jguGwES62bw5EnCC4hvw7pesaysadN2nw8KeMujUTDtY" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block content %}

@@ -26,7 +26,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <head>
         <meta charset="utf-8">
         <title>{% trans 'Sample Project' %} | {% block title %}{% endblock %}</title>
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/bootstrap@3/dist/css/bootstrap.min.css"/>
+        {% comment %}
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        {% endcomment %}
+        <link rel="stylesheet" href="{% static 'bootstrap/3.3.7/css/bootstrap.min.css' %}" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         {% block style %}{% endblock %}
     </head>
     <body>
