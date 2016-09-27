@@ -70,12 +70,20 @@ Cf. [documentation](http://daringfireball.net/projects/markdown/basics).'''),
         strip=True,
         min_length=3,
     )
-    icon = IconField(
-        queryset=MessageIcon.objects.all(),
-        initial=MessageIcon.objects.get(name='neutre.gif'),
-        empty_label=None,
-        widget=RadioSelect,
-    )
+    try:
+        icon = IconField(
+            queryset=MessageIcon.objects.all(),
+            initial=MessageIcon.objects.get(name='neutre.gif'),
+            empty_label=None,
+            widget=RadioSelect,
+        )
+    except Exception as e:
+        icon = IconField(
+            queryset=MessageIcon.objects.all(),
+            initial=None,
+            empty_label=None,
+            widget=RadioSelect,
+        )
 
     class Meta:
         model = Message
