@@ -18,4 +18,6 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^', include('home.urls')),
     url(r'^', include('paiji2_forum.urls')),
+    url(r'^api/', include('paiji2_forum.api_urls')),
+    url(r'^api-auth/', include('rest_framework.urls')),
 ]

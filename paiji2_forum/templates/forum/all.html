@@ -63,7 +63,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     <div class="forum-entry" title="{{ msg.title }}">
         <a class="forum-message-title" href="{% url 'forum:message' msg.pk %}#forum-message">
-            <img class="forum-icon" src="{% static msg.icon.url %}" alt="{{ msg.icon.name }}"/>
+            <img class="forum-icon" src="{% static msg.icon.iurl %}" alt="{{ msg.icon.name }}"/>
             {{ msg.title }}
         </a>
 
@@ -97,7 +97,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         {% else %}
             <span class="pull-right"> [
                 <span class="forum-message-title" title="{{ msg.topic.title }}">
-                <img class="forum-icon" src="{% static msg.topic.icon.url %}" alt="{{ msg.topic.icon.name }}"/>
+                <img class="forum-icon" src="{% static msg.topic.icon.iurl %}" alt="{{ msg.topic.icon.name }}"/>
                         {{ msg.topic.title|truncatechars:15 }}
                 </span>
             ]</span>

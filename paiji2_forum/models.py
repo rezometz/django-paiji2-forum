@@ -39,7 +39,7 @@ class MessageIcon(models.Model):
     name = models.CharField(max_length=30, verbose_name=_('name'))
     filename = models.CharField(max_length=100, verbose_name=_('filename'))
 
-    def url(self):
+    def iurl(self):
         """return the icon's url"""
         # return settings.STATIC_URL + 'forum/icons/' + self.filename
         return 'forum/icons/' + self.filename

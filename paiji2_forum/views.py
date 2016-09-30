@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import unicode_literals
+
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, CreateView,\
     TemplateView, UpdateView
@@ -28,12 +29,18 @@ from django.db.models import Count
 from django.utils.translation import ugettext as _
 from django.urls import reverse
 from django.db.models import Q
+
 from .models import Message
 from .forms import AnswerForm
 
 
 TOPIC_NB = 20
 MESSAGE_NB = 50
+
+
+class ReactView(TemplateView):
+
+    template_name = 'forum/react/index.html'
 
 
 class TopicListView(ListView):

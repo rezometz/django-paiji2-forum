@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <div {% if node.is_message %}id="forum-message"{% endif %}>
         <a class="forum-message-title" href="{% url 'forum:message' node.pk %}#forum-message"
             title="{{ title }}"
-            ><img class="forum-icon" src="{% static node.icon.url %}" alt="{{ node.icon.name }}"/> {{ node.title }}</a>
+            ><img class="forum-icon" src="{% static node.icon.iurl %}" alt="{{ node.icon.name }}"/> {{ node.title }}</a>
 
         <small> 
             {% if node.not_read %}

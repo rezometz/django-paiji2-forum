@@ -17,13 +17,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import unicode_literals
+
 from django.conf.urls import url
 
 from . import views
 
+
 app_name = 'forum'
 
 urlpatterns = [
+    url(
+        r'^react/$',
+        views.ReactView.as_view(),
+        name='react',
+    ),
     url(
         r'^$',
         views.TopicListView.as_view(),

@@ -84,64 +84,64 @@ ul.answers {
 
 
 ul.answers li.rborder {
+    border-color: #FF0000;
     border-left-style: dotted;
-    border-left-color: #FF0000;
-    border-left-width: 0.2em;
-    padding-left: 1em;
+    border-left-width: 0.3em;
+    padding-left: 0.3em;
 }
 
 ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #00FF00;
+    border-color: #00FF00;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #0000FF;
+    border-color: #0000FF;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #FF00FF;
+    border-color: #FF00FF;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #FFBB00;
+    border-color: #FFBB00;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #00FFE8;
+    border-color: #00FFE8;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #000000;
+    border-color: #000000;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #CE4700;
+    border-color: #CE4700;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #00FF00;
+    border-color: #00FF00;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #0000FF;
+    border-color: #0000FF;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #FF00FF;
+    border-color: #FF00FF;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #FFBB00;
+    border-color: #FFBB00;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #00FFE8;
+    border-color: #00FFE8;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #000000;
+    border-color: #000000;
 }
 
 ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder ul.answers li.rborder {
-    border-left-color: #CE4700;
+    border-color: #CE4700;
 }

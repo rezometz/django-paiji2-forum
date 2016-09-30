@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'home.apps.HomeConfig',
     'paiji2_forum.apps.Paiji2ForumConfig',
     'mptt',
@@ -130,7 +131,18 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'forum:topic-list'
 LOGOUT_REDIRECT_URL = 'forum:topic-list'
 
+# HTML validation (CI)
 HTMLVALIDATOR_ENABLED = True
 HTMLVALIDATOR_FAILFAST = True
 # HTMLVALIDATOR_VNU_URL = 'http://localhost:8088/'
 HTMLVALIDATOR_VNU_URL = 'https://checker.html5.org'
+
+# Rest framework
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'PAGE_SIZE': 10,
+}

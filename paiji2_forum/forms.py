@@ -30,7 +30,7 @@ class IconField(ModelChoiceField):
 
     def label_from_instance(self, obj):
         # return '<img class="icon" src="'+obj.url()+'" alt="'+obj.name+'"/>'
-        return obj.url()
+        return obj.iurl()
 
 
 class Markdownarea(Textarea):
