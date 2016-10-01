@@ -3,20 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Forum: React interface</title>
+    <title>Forum: interface React</title>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'forum/style.css' %}">
-    <script src="https://unpkg.com/react/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom/dist/react-dom.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script src="https://unpkg.com/jquery@3/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/remarkable@1/dist/remarkable.min.js"></script>
-    <script src="https://unpkg.com/moment@2.15.1/moment.js" integrity="sha384-dpPM2Z0lPx78v+icuIJgSLfM1CCDVH5at9RfQJxxH3fXIB66UCgJPV/FWtE0ygI+" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/moment@2.15.1/locale/fr.js" integrity="sha384-CeNQKF4prwvTuD6jYRC/AhZm7rCvldS1ailkKyGhK8+zkQNHS4gjIH41AqO7kLsl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'forum/react_style.css' %}">
   </head>
   <body>
-    <h1>Forum: React interface</h1>
+    <h1>Forum: interface React</h1>
     <div id="content"></div>
-    <script type="text/babel" src="{% static 'forum/react/scripts/index.js' %}"></script>
+    <script type="text/javascript" src="{% static 'forum/react/scripts/out.js' %}"></script>
   </body>
 </html>

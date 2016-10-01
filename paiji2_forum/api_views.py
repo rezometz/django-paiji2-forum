@@ -78,9 +78,9 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'pk',
             'question',
-            'level',
             'is_burning',
             'is_new',
+            'is_leaf_node',
             'icon',
             'title',
             'pub_date',
@@ -104,6 +104,7 @@ class TopicSerializer(MessageSerializer):
             'url',
             'is_burning',
             'is_new',
+            'is_leaf_node',
             'icon',
             'title',
             'pub_date',

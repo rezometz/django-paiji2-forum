@@ -4,6 +4,7 @@
 *.egg-info
 .coverage
 nohup.out
+*node_modules*
 validator*
 htmlvalidator/*
 TODO
