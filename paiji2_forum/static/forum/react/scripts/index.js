@@ -17,19 +17,22 @@ var Message = React.createClass({
   render: function() {
     var m = moment(this.props.data.pub_date);
     var dateStr = m.fromNow();
+    var message = this.props.data;
     return (
       <div className="message">
-        <h2>
-          {this.props.data.title}
+        <h3>
+          <img src={'/static/forum/icons/'+message.icon.filename} alt={message.icon.filename} />
+          {' '}
+          {message.title}
           <small>
             {' par '}
             <strong>
-              {this.props.data.author.username}
+              {message.author.username}
             </strong>
             {' '}
             {dateStr}
           </small>
-        </h2>
+        </h3>
         <div className="well well-sm forum-text" dangerouslySetInnerHTML={this.rawMarkup()} />
       </div>
     );
@@ -72,7 +75,7 @@ var TopicTitleList = React.createClass({
   render: function() {
     var topicNodes = this.state.topics.map(function(topic) {
       // return ( <TopicTitle key={topic.pk} author={topic.author.username} title={topic.title} />);
-      return( <TopicMessageList key={topic.pk} url={topic.url} pollInterval={10000} /> );
+      return( <TopicMessageList key={topic.pk} url={topic.url} pollInterval={30000} /> );
     });
     return (
       <div className="topicList">
@@ -103,17 +106,23 @@ var TopicMessageList = React.createClass({
       }.bind(this)
     });
   },
-  getAnswers: function(message) {
+  getAnswers: function(message, messageSet) {
     var self = this;
-    var answers = this.state.messages.filter(function(m) {
-      if (m.question == null) return false;
-      return (m.question.pk == message.pk);
-    });
-    if (answers.length == 0) return null;
-    var answerNodes = answers.map(function(a) {
-      var aAnswerNodes = self.getAnswers(a);
-      return (
-        <li key={a.pk} className="rborder children">
+    var answerSet = new Set();
+    for (let item of messageSet.values()) {
+      if ((item.question == null) || (message.pk == item.pk))
+        messageSet.delete(item);
+      else if (item.question.pk == message.pk) {
+        answerSet.add(item);
+        messageSet.delete(item);
+      }
+    }
+    if (answerSet.size == 0) return null;
+    var answerNodes = new Array();
+    answerSet.forEach(function(a) {
+      var aAnswerNodes = self.getAnswers(a, messageSet);
+      answerNodes.push(
+        <li key={a.pk} className="answer rborder children">
           <Message data={a} />
            <ul className="answers children">
             {aAnswerNodes}
@@ -126,10 +135,10 @@ var TopicMessageList = React.createClass({
   render: function() {
     if (this.state.messages.length == 0) return null;
     var rootMessage = this.state.messages[0];
-    var rootAnswers = this.getAnswers(rootMessage);
+    var rootAnswers = this.getAnswers(rootMessage, new Set(this.state.messages));
     return (
       <ul className="answers root">
-        <li className="rborder root">
+        <li className="answers root">
           <Message data={rootMessage} />
           <ul className="answers children">
             {rootAnswers} 
