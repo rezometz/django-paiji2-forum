@@ -40,6 +40,7 @@ setup(
         'django-mptt>=0.7',
         'django-bootstrap3>=6',
         'djangorestframework>=3.4',
+        'django-cors-headers>=1.2',
     ],
     classifiers=[
         'Environment :: Web Environment',

@@ -27,11 +27,6 @@ app_name = 'forum'
 
 urlpatterns = [
     url(
-        r'^react/$',
-        views.ReactView.as_view(),
-        name='react',
-    ),
-    url(
         r'^$',
         views.TopicListView.as_view(),
         name='topic-list',

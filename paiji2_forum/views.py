@@ -38,11 +38,6 @@ TOPIC_NB = 20
 MESSAGE_NB = 50
 
 
-class ReactView(TemplateView):
-
-    template_name = 'forum/react/index.html'
-
-
 class TopicListView(ListView):
 
     template_name = 'forum/index.html'
