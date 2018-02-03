@@ -68,7 +68,7 @@ class BurningTopicsView(ListView):
                 ).order_by(
                     '-pub_date',
                 )
-        l = list()
+        m_list = list()
         tree_ids = set()
         for msg in qs.all():
             tree_id = msg.tree_id
@@ -77,8 +77,8 @@ class BurningTopicsView(ListView):
                     user=self.request.user,
                 )
                 tree_ids.add(tree_id)
-                l += [msg]
-        return l
+                m_list += [msg]
+        return m_list
 
 
 class NewMessagesView(ListView):

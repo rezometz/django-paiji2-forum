@@ -8,7 +8,7 @@ register = template.Library()
 def profile_url(user):
     try:
         return reverse('forum:profile', args=[user.pk])
-    except:
+    except Exception:
         return ''
 
 

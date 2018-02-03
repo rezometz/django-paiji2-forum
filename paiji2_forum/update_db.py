@@ -38,5 +38,5 @@ def update_icons_db():
             print('file {} added'.format(i))
         except MultipleObjectsReturned:
             print('{} is not unique'.format(i))
-        except:
+        except Exception:
             pass

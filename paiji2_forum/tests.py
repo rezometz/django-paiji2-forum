@@ -19,7 +19,7 @@
 from __future__ import unicode_literals
 from django.test import TestCase
 from django.utils import timezone
-from htmlvalidator.client import ValidatingClient
+# from htmlvalidator.client import ValidatingClient
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from datetime import timedelta
@@ -33,7 +33,8 @@ User = get_user_model()
 class UpdateDBTest(TestCase):
 
     def setUp(self):
-        self.client = ValidatingClient()
+        pass
+        # self.client = ValidatingClient()
 
     def test_update_db(self):
         update_icons_db()
@@ -53,7 +54,7 @@ class MyTest(TestCase):
         self.icon = MessageIcon.objects.get(name="photo.gif")
         self.icon0 = MessageIcon.objects.get(name="1a.gif")
         self.icon1 = MessageIcon.objects.get(name="union-jack.png")
-        self.client = ValidatingClient()
+        # self.client = ValidatingClient()
         self.iseult = User.objects.create_user(
             username='iseult',
             email='iseult@te.st',
