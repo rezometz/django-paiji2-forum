@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <div class="navbar navbar-default">
                 <ul class="nav nav-pills nav-justified">
                     <li>
-                        <a href="/">{% trans 'forum' %}</a>
+                      <a href={% url 'forum:topic-list' %}>{% trans 'forum' %}</a>
                     </li>
                     {% if not user.is_authenticated %}
                     <li>
@@ -52,7 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </li>
                     {% endif %}
                     <li>
-                        <a href='/admin'>{% trans 'admin' %}</a>
+                      <a href={% url 'admin:index' %}>{% trans 'admin' %}</a>
                     </li>
                  </ul>
             </div>

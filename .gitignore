@@ -7,4 +7,5 @@ nohup.out
 validator*
 htmlvalidator/*
 manageprod.py
+prod_requirements.txt
 TODO
