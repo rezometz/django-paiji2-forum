@@ -35,8 +35,8 @@ def update_icons_db():
             MessageIcon.objects.get(filename=i)
         except ObjectDoesNotExist:
             MessageIcon(name=i, filename=i).save()
-            print('file {} added'.format(i))
+            print('"{}" added'.format(i), end='-')
         except MultipleObjectsReturned:
-            print('{} is not unique'.format(i))
+            print('"{}" is not unique'.format(i))
         except Exception:
             pass

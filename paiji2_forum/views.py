@@ -99,7 +99,7 @@ class NewMessagesView(ListView):
                readings=Count('readers'),
             )
 
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             for i in qs:
                 if not i.readers.filter(
                     pk=self.request.user.pk

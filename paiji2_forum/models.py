@@ -87,18 +87,21 @@ class Message(MPTTModel):
         verbose_name=_('question'),
         related_name='answers',
         db_index=True,
+        on_delete=models.CASCADE,
     )
 
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('author'),
         related_name='messages',
+        on_delete=models.CASCADE,
     )
 
     icon = models.ForeignKey(
         MessageIcon,
         default=None,
         verbose_name=_('icon'),
+        on_delete=models.CASCADE,
     )
 
     def topic(self):
