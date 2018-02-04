@@ -29,7 +29,7 @@ pip install -U .
 Requirements
 ------------
 
-`Django>=1.10`
+`Django>=1.11` (including Django 2)
 
 You must also install `django-bootstrap3` and `django-mptt` (pip will do this for you).
 `django-html-validator` is required for testing purposes.

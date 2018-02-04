@@ -26,7 +26,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 
 setup(
     name='django-paiji2-forum',
-    version='0.3.0',
+    version='0.4.0',
     packages=['paiji2_forum'],
     include_package_data=True,
     description='A simple forum app',
