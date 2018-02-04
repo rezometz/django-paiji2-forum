@@ -16,7 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals,\
+        print_function
 from . import __path__
 from .models import MessageIcon
 from django.core.exceptions import ObjectDoesNotExist,\
@@ -35,8 +36,8 @@ def update_icons_db():
             MessageIcon.objects.get(filename=i)
         except ObjectDoesNotExist:
             MessageIcon(name=i, filename=i).save()
-            print('file {} added'.format(i))
+            print('"{}" added'.format(i), end='-')
         except MultipleObjectsReturned:
-            print('{} is not unique'.format(i))
+            print('"{}" is not unique'.format(i))
         except Exception:
             pass

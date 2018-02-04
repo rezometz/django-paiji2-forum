@@ -20,9 +20,9 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext as _
 from django.forms import ModelForm, RadioSelect,\
     ModelChoiceField, TextInput, CharField, Textarea
-from django.utils.encoding import force_text
-from django.utils.html import format_html
-from django.forms.utils import flatatt
+# from django.utils.encoding import force_text
+# from django.utils.html import format_html
+# from django.forms.utils import flatatt
 from .models import Message, MessageIcon
 
 
@@ -34,24 +34,7 @@ class IconField(ModelChoiceField):
 
 
 class Markdownarea(Textarea):
-
-    def render(self, name, value, attrs=None):
-        if value is None:
-            value = ''
-        final_attrs = self.build_attrs(attrs, name=name)
-        return format_html(
-            '''
-            <textarea{}>\r\n{}</textarea>
-            <br/><p><strong>{}</strong></p>
-            <div id="id_preview" class="well well-sm forum-text"></div>
-            ''',
-            flatatt(final_attrs),
-            force_text(value),
-            _('Text preview'),
-        )
-
-    class Media:
-        js = ('forum/editor.js',)
+    pass
 
 
 class AnswerForm(ModelForm):

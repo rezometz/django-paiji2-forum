@@ -36,7 +36,7 @@ setup(
     author_email='contact@lgdubois.fr',
     license='Affero GPL v3+',
     install_requires=[
-        'Django>=1.10,<1.11',
+        'Django>=1.11',
         'django-mptt>=0.7',
         'django-bootstrap3>=6',
     ],
